@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @since   JDK1.7
  */
 @Controller
-@RequestMapping("/sample")
+@RequestMapping("/service")
 public class SampleController extends AbstractBaseController {
 
 	final Logger logger = LoggerFactory.getLogger(SampleController.class);
@@ -58,13 +58,23 @@ public class SampleController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-    @RequestMapping(value = {"/", "", "index.sp"}, method=RequestMethod.GET)
+    @RequestMapping(value = {"/", "", "index.do"}, method=RequestMethod.GET)
 	public String index(ModelMap model) throws Exception {
+    	
+		SampleModel sampleModel = new SampleModel();
+
+		// Execute the transaction
+		SampleBean sample = new SampleBean();
+		sample.setName("testName");
+		sample.setPara("para");
+		sampleModel.setSample(sample);
+		model.addAttribute("model", sampleModel);
+
 		return "index";
 	}
 
     /**
-     * Insert some data into the server.
+     * Select some data into the server.
      * 
      * @param  InsertTblPara 
      *         insertTblPara
@@ -85,8 +95,8 @@ public class SampleController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"sample.sp"})
-	public String sample(@Valid SamplePara samplePara, 
+	@RequestMapping(value = {"sample.do"})
+	public String select(@Valid SamplePara samplePara, 
 			BindingResult bindingResult, ModelMap model, 
 			HttpServletResponse response, HttpServletRequest request) throws Exception {
 

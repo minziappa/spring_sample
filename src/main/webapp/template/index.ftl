@@ -10,5 +10,11 @@
 <h1>Index</h1>
 <br/>
 
+<#if model.sample?has_content>
+${model.sample.name?if_exists}
+<#else>
+ No data
+</#if>
+
 </body>
 </html>

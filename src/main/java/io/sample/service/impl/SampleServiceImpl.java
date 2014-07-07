@@ -24,9 +24,9 @@ public class SampleServiceImpl implements SampleService {
 	final Logger logger = LoggerFactory.getLogger(SampleServiceImpl.class);
 
 	@Autowired
-	private SqlSession masterAdminDao;
+	private SqlSession masterDao;
 	@Autowired
-	private SqlSession slaveAdminDao;
+	private SqlSession slaveDao;
 
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	@Override
@@ -40,7 +40,7 @@ public class SampleServiceImpl implements SampleService {
 		mapSample.put("userAge", samplePara.getUserImg());
 
 		try {
-			intResult = masterAdminDao.getMapper(MasterDao.class).insertSample(mapSample);
+			intResult = masterDao.getMapper(MasterDao.class).insertSample(mapSample);
 		} catch (Exception e) {
 			logger.error("Exception error", e);
 		}
@@ -61,7 +61,7 @@ public class SampleServiceImpl implements SampleService {
 		mapSelect.put("userId", userId);
 
 		try {
-			userModel = slaveAdminDao.getMapper(SlaveDao.class).selectSample(mapSelect);
+			userModel = slaveDao.getMapper(SlaveDao.class).selectSample(mapSelect);
 		} catch (Exception e) {
 			logger.error("Exception error", e);
 		}

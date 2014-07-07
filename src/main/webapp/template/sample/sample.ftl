@@ -10,10 +10,8 @@
 <h1>sample</h1>
 <br/>
 
-<#if model.sampleModel?has_content>
-
+<#if model.sample?has_content>
 ${model.sample.name?if_exists}
-
 <#else>
  No data
 </#if>

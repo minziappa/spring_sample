@@ -73,7 +73,7 @@
 				<directory>${basedir}/src/main/webapp/WEB-INF</directory>
 			</testResource>
 		</testResources>
-		<finalName>spring_sample</finalName>
+		<finalName>sample</finalName>
 	</build>
 
 	<profiles>

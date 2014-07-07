@@ -3,8 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-	<display-name>Noe4j Test Api</display-name>
-	<description>Noe4j Test Api</description>
+	<display-name>sample web mvc</display-name>
+	<description>sample web mvc</description>
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

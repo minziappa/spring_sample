@@ -16,7 +16,7 @@
 <!-- Master DB-->
 	<bean id="mysqlMaster" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://${my.master.admin}:3306/sample_db?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" />
+		<property name="url" value="jdbc:mysql://${my.master}:3306/sample_db?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" />
         <property name="username" value="${mysql.id}" />
         <property name="password" value="${mysql.pwd}" /> 
 		<!-- Pool Setting -->
@@ -33,7 +33,7 @@
 <!-- Slave DB 00 -->
 	<bean id="mysqlSlave00" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://${my.slave.admin.00}:3306/sample_db?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" />
+		<property name="url" value="jdbc:mysql://${my.slave.00}:3306/sample_db?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" />
         <property name="username" value="${mysql.id}" />
         <property name="password" value="${mysql.pwd}" />
 		<property name="maxActive" value="5" />

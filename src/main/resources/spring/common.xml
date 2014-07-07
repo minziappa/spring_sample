@@ -13,7 +13,7 @@
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 	    <property name="basenames">
 	        <list>
-	            <value>resources/spMessage</value>
+	            <value>resources/message</value>
 	        </list>
 	    </property>
 	</bean>
@@ -36,7 +36,7 @@
             <list>
                 <bean class="org.apache.commons.configuration.XMLConfiguration">
                     <constructor-arg type="java.net.URL">
-                        <value>classpath:resources/spConfig.xml</value>
+                        <value>classpath:resources/config.xml</value>
                     </constructor-arg>
                 </bean>
             </list>

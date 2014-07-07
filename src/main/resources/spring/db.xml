@@ -3,26 +3,59 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<mongo:mongo host="${db.mongo.master.ip}" port="${db.mongo.master.port}">
-	    <mongo:options connections-per-host="10"
-	                   threads-allowed-to-block-for-connection-multiplier="5"
-	                   connect-timeout="1000"
-	                   max-wait-time="1500"
-	                   auto-connect-retry="true"
-	                   socket-keep-alive="true"
-	                   socket-timeout="1500"
-	                   slave-ok="true"
-	                   write-number="1"
-	                   write-timeout="0"
-	                   write-fsync="true"/>
-	</mongo:mongo>
+	<!-- ############ My SQL##################-->
+
+<!-- Master DB-->
+	<bean id="mysqlMaster" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://${my.master.admin}:3306/sample_db?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" />
+        <property name="username" value="${mysql.id}" />
+        <property name="password" value="${mysql.pwd}" /> 
+		<!-- Pool Setting -->
+		<property name="maxActive" value="5" />
+		<property name="maxIdle" value="5" />
+		<property name="maxWait" value="10000" />
+		<property name="poolPreparedStatements" value="true"/>
+		<!-- Delete when it will release to real searvice -->
+        <property name="validationQuery" value="select 1"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+    </bean>
+
+<!-- Slave DB 00 -->
+	<bean id="mysqlSlave00" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://${my.slave.admin.00}:3306/sample_db?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" />
+        <property name="username" value="${mysql.id}" />
+        <property name="password" value="${mysql.pwd}" />
+		<property name="maxActive" value="5" />
+		<property name="maxIdle" value="5" />
+		<property name="maxWait" value="10000" />
+        <property name="validationQuery" value="select 1"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+    </bean>
+
+<!-- For transaction -->
+	<bean id="sqlSessionMasterFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="mysqlMaster" />  
+		<property name="configLocation" value="classpath:masterMap.xml"/>
+		<!-- <property name="mapperLocations" value="classpath:sqlMap/masterAdminSql.xml" />  -->
+	</bean>
+
+<!-- Slave-->
+	<bean id="sqlSessionSlaveFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="mysqlSlave00" />
+		<property name="configLocation" value="classpath:slaveMap.xml"/>
+		<!-- <property name="mapperLocations" value="classpath:sqlMap/slaveAdminSql.xml" />  -->
+	</bean>
 
 </beans>

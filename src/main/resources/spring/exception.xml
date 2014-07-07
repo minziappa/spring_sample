@@ -21,10 +21,8 @@
 		<property name="defaultErrorView" value="defaultError" />
 		<property name="exceptionMappings">
 			<props>
-				<prop key="NotFoundException">exception/NotFoundExceptionError</prop>
-				<prop key="NullPointerException">exception/NullPointerExceptionError.ftl</prop>
-				<prop key="SQLException">exception/SQLExceptionError</prop>
-				<prop key="Exception">exception/ExceptionError</prop>
+				<prop key="NotFoundException">exception/NotFoundExceptionError.ftl</prop>
+				<prop key="Exception">exception/ExceptionError.ftl</prop>
 			</props>
 		</property>
 		<property name="exceptionAttribute" value="exceptionMsg" />

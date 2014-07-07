@@ -17,5 +17,7 @@
 	<context:component-scan base-package="io.sample" />
 
 	<import resource="classpath:spring/common.xml"/>
+	<import resource="classpath:spring/db.xml"/>
+	<import resource="classpath:spring/dao.xml"/>
 
 </beans>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+
+	<slavedb>
+		<cnt>2</cnt>
+	</slavedb>
+
+	<system>
+		<environment>Staging</environment>
+	</system>
+
+</config>

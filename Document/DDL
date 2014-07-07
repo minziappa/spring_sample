@@ -1,0 +1,18 @@
+GREATE DATABASE sample_db;
+
+GRANT ALL PRIVILEGES ON sample_db.* TO adminUser@localhost IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON sample_db.* TO adminUser@172.28.% IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
+
+GREATE TABLE sample_user
+(
+	user_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	user_name VARCHAR(45) NOT NULL,
+	user_age VARCHAR(3) NULL,
+	user_img BLOB NOT NULL,
+	insert_date TIMESTAMP NOT NULL;
+	update_date TIMESTAMP NOT NULL;
+	PRIMARY KEY (user_id)
+) ENGINE=innoDB DEFAULT CHARSET=utf8;
+
+CREATE INDEX sample_user_idx1 ON sample_user(user_name);

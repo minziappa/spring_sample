@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.sample.dao.SlaveDao">
+
+	<select id="selectSample" parameterType="map" 
+		resultType="io.sample.bean.model.UserModel">
+		SELECT
+			user_id AS userId,
+			user_name AS userName,
+			user_age AS userAge,
+			user_img AS userImg,
+			insert_date AS insertTime,
+			update_date AS updateTime
+		FROM
+			sample_user
+		WHERE
+			user_id = #{userId}
+	</select>
+
+</mapper>

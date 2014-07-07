@@ -9,10 +9,15 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
-		<constructor-arg ref="mongo" />
-		<constructor-arg name="databaseName" value="yourdb" />
-		<constructor-arg name="defaultCollectionName" value="yourCollection" />
+	<!-- start-############be setted Dao Class################## -->
+	<bean id="masterDao" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionMasterFactory" />
 	</bean>
+
+	<bean id="slaveDao" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionSlaveFactory" />
+	</bean>
+
+<!-- <bean id="hBaseDAO" class="jp.ameba.ns.admin.dao.HBaseDAO" />  -->
 
 </beans>

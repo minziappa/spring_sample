@@ -77,3 +77,8 @@ Change name like the following:
 ```
 sample -> project name
 ```
+
+## Deploy
+```
+mvn -U package -p staging
+```

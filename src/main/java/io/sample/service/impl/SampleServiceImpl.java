@@ -5,6 +5,7 @@ import java.util.Map;
 
 import io.sample.bean.SampleBean;
 import io.sample.bean.model.UserModel;
+import io.sample.bean.para.InsertUserPara;
 import io.sample.bean.para.SamplePara;
 import io.sample.dao.MasterDao;
 import io.sample.dao.SlaveDao;
@@ -30,14 +31,14 @@ public class SampleServiceImpl implements SampleService {
 
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	@Override
-	public boolean insertSample(SamplePara samplePara) throws Exception {
+	public boolean insertSample(InsertUserPara insertUserPara) throws Exception {
 
 		int intResult = 0;
 
 		Map<String, Object> mapSample = new HashMap<String, Object>();
-		mapSample.put("userName", samplePara.getUserName());
-		mapSample.put("userAge", samplePara.getUserAge());
-		mapSample.put("userAge", samplePara.getUserImg());
+		mapSample.put("userName", insertUserPara.getUserName());
+		mapSample.put("userAge", insertUserPara.getUserAge());
+		mapSample.put("userImg", insertUserPara.getUserImg());
 
 		try {
 			intResult = masterDao.getMapper(MasterDao.class).insertSample(mapSample);
@@ -45,7 +46,7 @@ public class SampleServiceImpl implements SampleService {
 			logger.error("Exception error", e);
 		}
 		if(intResult < 1) {
-			logger.error("insertSample error, sampleName={}", samplePara.getUserName());
+			logger.error("insertSample error, userName={}", insertUserPara.getUserName());
 			return false;
 		}
 

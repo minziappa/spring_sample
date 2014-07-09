@@ -1,6 +1,7 @@
 package io.sample.bean.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class UserModel implements Serializable {
 
@@ -10,6 +11,9 @@ public class UserModel implements Serializable {
 	private String userName;
 	private String userAge;
 	private byte[] imgAge;
+	private Date insertDate;
+	private Date updateDate;
+	
 
 	public String getUserId() {
 		return userId;
@@ -34,6 +38,18 @@ public class UserModel implements Serializable {
 	}
 	public void setImgAge(byte[] imgAge) {
 		this.imgAge = imgAge;
+	}
+	public Date getInsertDate() {
+		return insertDate;
+	}
+	public void setInsertDate(Date insertDate) {
+		this.insertDate = insertDate;
+	}
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 
 }

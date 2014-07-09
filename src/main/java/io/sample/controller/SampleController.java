@@ -1,12 +1,14 @@
 package io.sample.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import io.sample.bean.SampleBean;
 import io.sample.bean.model.SampleModel;
+import io.sample.bean.model.UserModel;
+import io.sample.bean.para.InsertUserPara;
 import io.sample.bean.para.SamplePara;
+import io.sample.bean.para.SelectUserPara;
 import io.sample.service.SampleService;
 
 import org.apache.commons.configuration.Configuration;
@@ -17,6 +19,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,7 +31,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author  Woong-joon Kim
  * @version 0.1, 12/05/15
  * @see     io.sample.controller.SampleController#index()
- * @see     io.sample.controller.SampleController#sample()
+ * @see     io.sample.controller.SampleController#insertUser()
+ * @see     io.sample.controller.SampleController#selectUser()
  * @since   JDK1.7
  */
 @Controller
@@ -37,6 +41,8 @@ public class SampleController extends AbstractBaseController {
 
 	final Logger logger = LoggerFactory.getLogger(SampleController.class);
 
+    @Autowired
+    private Validator validator;
 	@Autowired
 	private MessageSource message;
 	@Autowired
@@ -74,18 +80,16 @@ public class SampleController extends AbstractBaseController {
 	}
 
     /**
-     * Select some data into the server.
+     * Insert some data into the Mysql.
      * 
-     * @param  InsertTblPara 
-     *         insertTblPara
+     * @param  SamplePara 
+     *         samplePara
      * @param  BindingResult 
      *         bindingResult
      * @param  ModelMap 
      *         model
      * @param  HttpServletResponse 
      *         response
-     * @param  HttpServletRequest 
-     *         request
      *         
      * @throws  Exception
      *          If a error occur, ...
@@ -95,10 +99,56 @@ public class SampleController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"sample.do"})
-	public String select(@Valid SamplePara samplePara, 
+	@RequestMapping(value = {"insertUser.do"})
+	public String insertUser(@Valid InsertUserPara insertUserPara, 
 			BindingResult bindingResult, ModelMap model, 
-			HttpServletResponse response, HttpServletRequest request) throws Exception {
+			HttpServletResponse response) throws Exception {
+
+		SampleModel sampleModel = new SampleModel();
+
+		// If it occurs a error, set the default value.
+		if (bindingResult.hasErrors()) {
+			logger.error("insertUser.sp - it is occured a parameter error.");
+			response.setStatus(400);
+			handleValidator(bindingResult.getAllErrors());
+			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
+			model.addAttribute("model", sampleModel);
+			return "error/error";
+		}
+
+		// Execute the transaction
+		if(!sampleService.insertSample(insertUserPara)) {
+			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
+			model.addAttribute("model", sampleModel);
+			return "error/error";
+		}
+
+		return "redirect:index.do";
+	}
+
+    /**
+     * Select some data from the Mysql.
+     * 
+     * @param  SamplePara 
+     *         samplePara
+     * @param  BindingResult 
+     *         bindingResult
+     * @param  ModelMap 
+     *         model
+     * @param  HttpServletResponse 
+     *         response
+     *         
+     * @throws  Exception
+     *          If a error occur, ...
+     *
+     * @return String
+     * 		   a file name of FTL.
+     * 
+     * @since  1.7
+     */
+	@RequestMapping(value = {"selectUser.do"})
+	public String selectUser(@Valid SelectUserPara selectUserPara, BindingResult bindingResult, 
+			ModelMap model, HttpServletResponse response) throws Exception {
 
 		SampleModel sampleModel = new SampleModel();
 
@@ -106,16 +156,16 @@ public class SampleController extends AbstractBaseController {
 		if (bindingResult.hasErrors()) {
 			logger.error("insertTestTbl.sp - it is occured a parameter error.");
 			response.setStatus(400);
-			model.addAttribute("errorMessage", message.getMessage("test.error.400.message", null, LOCALE));
+			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
 			return "error/error";
 		}
 
 		// Execute the transaction
-		SampleBean sample = sampleService.getSampleData(samplePara);
-		sampleModel.setSample(sample);
+		UserModel userModel = sampleService.selectSample(selectUserPara.getUserId());
+		sampleModel.setUserModel(userModel);
 		model.addAttribute("model", sampleModel);
 
-		return "sample/sample";
+		return "index";
 	}
 
 }

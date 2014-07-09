@@ -41,20 +41,58 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. 
-           It includes a large callout called a jumbotron and three supporting pieces of content. 
-           Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
-        <p>
-
-<#if model.sample?has_content>
-${model.sample.name?if_exists}
+				<div>
+					<form action="/sample/sample/service/selectUser.do" method="POST">
+	            <fieldset>
+	                <legend>Sample</legend>
+	                <b style="color:red" >${errorMessage?if_exists}</b>
+									<table>
+										<tr>
+											<td>User Id</td><td><input type="text" name="userId" size="45"></td><td>例)tomcluse</td>
+										</tr>
+										<tr>
+											<td><input type="submit" value="Search" style="width:60pt;height:20pt;background-color:#566D7E;color:white;" /></td><td></td><td></td>
+										</tr>
+									</table>
+	            </fieldset>
+					</form>
+				</div>
+        <h1>
+<#if model.userModel?has_content>
+${model.userModel.userId?if_exists} |
+${model.userModel.userName?if_exists} |
+${model.userModel.userAge?if_exists} |
 <#else>
  No data
 </#if>
+				</h1>
+				<hr/>
+				<div>
+					<form action="/sample/sample/service/insertUser.do" enctype="multipart/form-data" method="POST">
+	            <fieldset>
+	                <legend>Sample</legend>
+	                <b style="color:red" >${errorMessage?if_exists}</b>
+									<table>
+										<tr>
+											<td>User Name</td><td><input type="text" name="userName" size="45"></td><td>例)tomcluse</td>
+										</tr>
+										<tr>
+											<td>User Age</td><td><input type="text" name="userAge" size="45"></td><td>例)20</td>
+										</tr>
+										<tr>
+											<td>Image File</td><td><input type="file" name="userImg"></td><td>例)image.png</td>
+										</tr>
+										<tr>
+											<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+										</tr>
+										<tr>
+											<td><input type="submit" value="Register" style="width:60pt;height:20pt;background-color:#566D7E;color:white;" /></td><td></td><td></td>
+										</tr>
+									</table>
+	            </fieldset>
+					</form>
+				</div>
 
-				</p>
       </div>
     </div>
 

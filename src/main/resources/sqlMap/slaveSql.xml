@@ -11,8 +11,8 @@
 			user_name AS userName,
 			user_age AS userAge,
 			user_img AS userImg,
-			insert_date AS insertTime,
-			update_date AS updateTime
+			insert_date AS insertDate,
+			update_date AS updateDate
 		FROM
 			sample_user
 		WHERE

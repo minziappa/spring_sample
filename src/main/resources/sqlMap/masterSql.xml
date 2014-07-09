@@ -5,15 +5,13 @@
 <mapper namespace="io.sample.dao.MasterDao">
 
 	<insert id="insertSample" parameterType="map">
-		INSERT INTO dual_admin (
-			user_id,
+		INSERT INTO sample_user (
 			user_name,
 			user_age,
 			user_img,
-			insert_time,
-			update_time
+			insert_date,
+			update_date
 		) VALUES (
-			#{userId},
 			#{userName},
 			#{userAge},
 			#{userImg},

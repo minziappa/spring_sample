@@ -5,11 +5,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class SamplePara {
+public class InsertUserPara {
 
-    @NotNull(message = "userId")
-    @Size(min = 1, max = 45 ,message = "userId")
-	private String userId;
     @NotNull(message = "userName")
     @Size(min = 1, max = 45 ,message = "userName")
 	private String userName;
@@ -18,14 +15,6 @@ public class SamplePara {
 	private String userAge;
 
 	private MultipartFile userImg;
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 
 	public String getUserName() {
 		return userName;

@@ -7,7 +7,6 @@ import io.sample.bean.SampleBean;
 import io.sample.bean.model.SampleModel;
 import io.sample.bean.model.UserModel;
 import io.sample.bean.para.InsertUserPara;
-import io.sample.bean.para.SamplePara;
 import io.sample.bean.para.SelectUserPara;
 import io.sample.service.SampleService;
 

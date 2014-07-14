@@ -33,7 +33,7 @@
 
 	<context:component-scan base-package="io.sample.controller" />
 
-	<!-- Set the emojiInterceptor - spring 3.0 -->
+	<!-- Set the Interceptor - spring 3.0 -->
 	<mvc:interceptors>
 		<bean id="loginInterceptor" class="io.sample.interceptor.OauthInterceptor" />
 	</mvc:interceptors>

@@ -15,14 +15,16 @@ kim_woongjoon@cyberagent.co.jp
 
 ## Requirements environment 
 
-* Java7
-* Tomcat7
-* Maven3
+* [Java7](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* [Tomcat7](http://tomcat.apache.org/download-70.cgi)
+* [Maven3](http://maven.apache.org/docs/3.2.2/release-notes.html)
+
+Create the settings.xml and Settings Details
+/Users/kim_woongjoon/.m2/settings.xml
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
   <servers>
     <server>
       <id>stg-common-mvn01</id>
@@ -30,7 +32,6 @@ kim_woongjoon@cyberagent.co.jp
       <password>password</password>
     </server>
   </servers>
-
   <profiles>
     <profile>
       <repositories>
@@ -47,23 +48,19 @@ kim_woongjoon@cyberagent.co.jp
           <name>libs-snapshots</name>
           <url>http://172.28.238.69:8081/artifactory/libs-snapshots</url>
         </repository>
-
         <repository>
             <id>maven3-repository.dev.java.net</id>
             <name>Java.net Repository for Maven</name>
             <url>http://download.java.net/maven/3/</url>
             <layout>default</layout>
         </repository>
-
       </repositories>
-
       <id>artifactory</id>
     </profile>
   </profiles>
   <activeProfiles>
     <activeProfile>artifactory</activeProfile>
   </activeProfiles>
-
 </settings>
 ```
 
@@ -73,12 +70,17 @@ Change the path of Log like the following:
 ```
 /Users/[user account]/tomcat/logs/sample.log
 ```
-Change name like the following:
+Change a project name like the following:
 ```
 sample -> project name
 ```
 
 ## Deploy
+Junit Test & compile & make a war file
 ```
-mvn -U package -p staging
+mvn -U clean package -P staging
+```
+Only skip Junit Test
+```
+mvn -U clean package -P staging -Dmaven.test.skip=true
 ```

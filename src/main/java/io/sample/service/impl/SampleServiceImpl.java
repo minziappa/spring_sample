@@ -67,19 +67,45 @@ public class SampleServiceImpl implements SampleService {
 			logger.error("Exception error", e);
 		}
 
+		logger.info("userId >> " + userId);
+
 		return userModel;
 	}
 
 	@Override
-	public SampleBean getSampleData(SamplePara samplePara) throws Exception {
+	public UserModel selectSampleByName(String name) throws Exception {
+		UserModel userModel = null;
 
-		SampleBean sampleBean = new SampleBean();
-		sampleBean.setName("Joon");
-		sampleBean.setPara("test");
+		Map<String, Object> mapSelect = new HashMap<String, Object>();
+		mapSelect.put("userName", name);
 
-		logger.info("SampleId >> " + sampleBean.getPara());
-		
-		return sampleBean;
+		try {
+			userModel = slaveDao.getMapper(SlaveDao.class).selectSampleByName(mapSelect);
+		} catch (Exception e) {
+			logger.error("Exception error", e);
+		}
+
+		return userModel;
+	}
+
+	@Override
+	public boolean deleteSampleByName(String name) throws Exception {
+		int intResult = 0;
+
+		Map<String, Object> mapSample = new HashMap<String, Object>();
+		mapSample.put("userName", name);
+
+		try {
+			intResult = masterDao.getMapper(MasterDao.class).deleteSampleByName(mapSample);
+		} catch (Exception e) {
+			logger.error("Exception error", e);
+		}
+		if(intResult < 1) {
+			logger.error("deleteSampleByName error, userName={}", name);
+			return false;
+		}
+
+		return true;
 	}
 
 }

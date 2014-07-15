@@ -7,4 +7,5 @@ import java.util.Map;
 
 public interface SlaveDao {
 	public UserModel selectSample(Map<String, Object> map) throws SQLException;
+	public UserModel selectSampleByName(Map<String, Object> map) throws SQLException;
 }

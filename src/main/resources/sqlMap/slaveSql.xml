@@ -19,4 +19,19 @@
 			user_id = #{userId}
 	</select>
 
+	<select id="selectSampleByName" parameterType="map" 
+		resultType="io.sample.bean.model.UserModel">
+		SELECT
+			user_id AS userId,
+			user_name AS userName,
+			user_age AS userAge,
+			user_img AS userImg,
+			insert_date AS insertDate,
+			update_date AS updateDate
+		FROM
+			sample_user
+		WHERE
+			user_name = #{userName}
+	</select>
+
 </mapper>

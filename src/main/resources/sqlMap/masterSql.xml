@@ -20,4 +20,10 @@
 		)
 	</insert>
 
+	<delete id="deleteSampleByName" parameterType="map">
+		DELETE FROM sample_user 
+		WHERE 
+			user_name = #{userName}
+	</delete>
+
 </mapper>

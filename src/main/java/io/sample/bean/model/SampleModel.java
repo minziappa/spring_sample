@@ -6,7 +6,6 @@ public class SampleModel {
 
 	private SampleBean sample;
 	private UserModel userModel;
-	private String userImage;
 
     /** Show the message to page.**/
     private String errorMessage;
@@ -33,14 +32,6 @@ public class SampleModel {
 
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
-	}
-
-	public String getUserImage() {
-		return userImage;
-	}
-
-	public void setUserImage(String userImage) {
-		this.userImage = userImage;
 	}
 
 }

@@ -44,7 +44,7 @@
 				<div>
 					<form action="/sample/sample/service/selectUser.do" method="POST">
 	            <fieldset>
-	                <legend>Sample</legend>
+	                <legend>Select Data</legend>
 	                <b style="color:red" >${errorMessage?if_exists}</b>
 									<table>
 										<tr>
@@ -58,20 +58,24 @@
 					</form>
 				</div>
         <h1>
-<#if model.userModel?has_content>
-${model.userModel.userId?if_exists} |
-${model.userModel.userName?if_exists} |
-${model.userModel.userAge?if_exists} |
-<img alt="user image" src="${model.userImage}" />
+<#if model??>
+	<#if model.sample?has_content>
+		${model.sample.userModel.userId?if_exists} |
+		${model.sample.userModel.userName?if_exists} |
+		${model.sample.userModel.userAge?if_exists} |
+		<img alt="user image" src="${model.sample.userImage}" />
+	<#else>
+	 No data
+	</#if>
 <#else>
- No data
+ This is index page
 </#if>
 				</h1>
 				<hr/>
 				<div>
 					<form action="/sample/sample/service/insertUser.do" enctype="multipart/form-data" method="POST">
 	            <fieldset>
-	                <legend>Sample</legend>
+	                <legend>Insert Data</legend>
 	                <b style="color:red" >${errorMessage?if_exists}</b>
 									<table>
 										<tr>

@@ -66,16 +66,6 @@ public class SampleController extends AbstractBaseController {
      */
     @RequestMapping(value = {"/", "", "index.do"}, method=RequestMethod.GET)
 	public String index(ModelMap model) throws Exception {
-    	
-		SampleModel sampleModel = new SampleModel();
-
-		// Execute the transaction
-		SampleBean sample = new SampleBean();
-		sample.setName("testName");
-		sample.setPara("para");
-		sampleModel.setSample(sample);
-		model.addAttribute("model", sampleModel);
-
 		return "index";
 	}
 
@@ -161,16 +151,8 @@ public class SampleController extends AbstractBaseController {
 		}
 
 		// Execute the transaction
-		UserModel userModel = sampleService.selectSampleByName(selectUserPara.getUserName());
-
-		if(userModel != null && userModel.getUserImg() != null) {
-			logger.error("userModel is not null");
-			byte[] imgBytesAsBase64 = Base64.encodeBase64(userModel.getUserImg());
-			String imgDataAsBase64 = new String(imgBytesAsBase64);
-			String imgAsBase64 = "data:image/png;base64," + imgDataAsBase64;
-			sampleModel.setUserImage(imgAsBase64);
-		}
-		sampleModel.setUserModel(userModel);
+		SampleBean sampleBean = sampleService.selectSampleByName(selectUserPara.getUserName());
+		sampleModel.setSample(sampleBean);
 
 		model.addAttribute("model", sampleModel);
 

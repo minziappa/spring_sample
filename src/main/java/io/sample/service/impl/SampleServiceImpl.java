@@ -3,12 +3,14 @@ package io.sample.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.sample.bean.SampleBean;
 import io.sample.bean.model.UserModel;
 import io.sample.bean.para.InsertUserPara;
 import io.sample.dao.MasterDao;
 import io.sample.dao.SlaveDao;
 import io.sample.service.SampleService;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,26 +63,8 @@ public class SampleServiceImpl implements SampleService {
 	}
 
 	@Override
-	public UserModel selectSample(String userId) throws Exception {
-
-		UserModel userModel = null;
-
-		Map<String, Object> mapSelect = new HashMap<String, Object>();
-		mapSelect.put("userId", userId);
-
-		try {
-			userModel = slaveDao.getMapper(SlaveDao.class).selectSample(mapSelect);
-		} catch (Exception e) {
-			logger.error("Exception error", e);
-		}
-
-		logger.info("userId >> " + userId);
-
-		return userModel;
-	}
-
-	@Override
-	public UserModel selectSampleByName(String name) throws Exception {
+	public SampleBean selectSampleByName(String name) throws Exception {
+		SampleBean sample = null;
 		UserModel userModel = null;
 
 		Map<String, Object> mapSelect = new HashMap<String, Object>();
@@ -92,7 +76,18 @@ public class SampleServiceImpl implements SampleService {
 			logger.error("Exception error", e);
 		}
 
-		return userModel;
+		if(userModel != null) {
+			sample = new SampleBean();
+			sample.setUserModel(userModel);
+			if(userModel.getUserImg() != null) {
+				byte[] imgBytesAsBase64 = Base64.encodeBase64(userModel.getUserImg());
+				String imgDataAsBase64 = new String(imgBytesAsBase64);
+				String imgAsBase64 = "data:image/png;base64," + imgDataAsBase64;
+				sample.setUserImage(imgAsBase64);
+			}
+		}
+
+		return sample;
 	}
 
 	@Override

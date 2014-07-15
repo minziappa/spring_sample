@@ -44,6 +44,14 @@
         <property name="timeBetweenEvictionRunsMillis" value="7200000"/>
     </bean>
 
+	
+	<!-- Annotation Transaction -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="mysqlMaster" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
 <!-- For transaction -->
 	<bean id="sqlSessionMasterFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="mysqlMaster" />  

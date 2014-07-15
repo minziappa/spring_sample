@@ -3,10 +3,8 @@ package io.sample.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.sample.bean.SampleBean;
 import io.sample.bean.model.UserModel;
 import io.sample.bean.para.InsertUserPara;
-import io.sample.bean.para.SamplePara;
 import io.sample.dao.MasterDao;
 import io.sample.dao.SlaveDao;
 import io.sample.service.SampleService;
@@ -18,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class SampleServiceImpl implements SampleService {
@@ -34,11 +33,19 @@ public class SampleServiceImpl implements SampleService {
 	public boolean insertSample(InsertUserPara insertUserPara) throws Exception {
 
 		int intResult = 0;
+		byte[] byteName = null;
+
+		MultipartFile file = insertUserPara.getUserImg();
+		if(file != null) {
+			String strName = file.getOriginalFilename();
+			logger.info("Image name >>> " + strName);
+			byteName = file.getBytes();			
+		}
 
 		Map<String, Object> mapSample = new HashMap<String, Object>();
 		mapSample.put("userName", insertUserPara.getUserName());
 		mapSample.put("userAge", insertUserPara.getUserAge());
-		mapSample.put("userImg", insertUserPara.getUserImg());
+		mapSample.put("userImg", byteName);
 
 		try {
 			intResult = masterDao.getMapper(MasterDao.class).insertSample(mapSample);

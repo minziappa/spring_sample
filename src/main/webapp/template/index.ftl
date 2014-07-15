@@ -48,7 +48,7 @@
 	                <b style="color:red" >${errorMessage?if_exists}</b>
 									<table>
 										<tr>
-											<td>User Id</td><td><input type="text" name="userId" size="45"></td><td>例)tomcluse</td>
+											<td>User Name</td><td><input type="text" name="userName" size="45"></td><td>例)tomcluse</td>
 										</tr>
 										<tr>
 											<td><input type="submit" value="Search" style="width:60pt;height:20pt;background-color:#566D7E;color:white;" /></td><td></td><td></td>
@@ -62,6 +62,7 @@
 ${model.userModel.userId?if_exists} |
 ${model.userModel.userName?if_exists} |
 ${model.userModel.userAge?if_exists} |
+<img alt="user image" src="${model.userImage}" />
 <#else>
  No data
 </#if>

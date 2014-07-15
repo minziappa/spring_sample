@@ -10,6 +10,7 @@ import io.sample.bean.para.InsertUserPara;
 import io.sample.bean.para.SelectUserPara;
 import io.sample.service.SampleService;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -160,8 +161,17 @@ public class SampleController extends AbstractBaseController {
 		}
 
 		// Execute the transaction
-		UserModel userModel = sampleService.selectSample(selectUserPara.getUserId());
+		UserModel userModel = sampleService.selectSampleByName(selectUserPara.getUserName());
+
+		if(userModel != null && userModel.getUserImg() != null) {
+			logger.error("userModel is not null");
+			byte[] imgBytesAsBase64 = Base64.encodeBase64(userModel.getUserImg());
+			String imgDataAsBase64 = new String(imgBytesAsBase64);
+			String imgAsBase64 = "data:image/png;base64," + imgDataAsBase64;
+			sampleModel.setUserImage(imgAsBase64);
+		}
 		sampleModel.setUserModel(userModel);
+
 		model.addAttribute("model", sampleModel);
 
 		return "index";

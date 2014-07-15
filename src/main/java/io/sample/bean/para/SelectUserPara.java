@@ -5,16 +5,16 @@ import javax.validation.constraints.Size;
 
 public class SelectUserPara {
 
-    @NotNull(message = "userId")
-    @Size(min = 1, max = 45 ,message = "userId")
-	private String userId;
+    @NotNull(message = "userName")
+    @Size(min = 1, max = 45 ,message = "userName")
+	private String userName;
 
-	public String getUserId() {
-		return userId;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

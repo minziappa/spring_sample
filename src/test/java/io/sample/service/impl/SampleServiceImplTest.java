@@ -41,7 +41,7 @@ public class SampleServiceImplTest {
 
 	@Test
 	public void testSelectSample() throws Exception {
-		UserModel userModel = sampleService.selectSample("1");
+		UserModel userModel = sampleService.selectSampleByName("TestName");
 		assertNotNull(userModel);
 	}
 

@@ -10,10 +10,9 @@ public class UserModel implements Serializable {
 	private String userId;
 	private String userName;
 	private String userAge;
-	private byte[] imgAge;
+	private byte[] userImg;
 	private Date insertDate;
 	private Date updateDate;
-	
 
 	public String getUserId() {
 		return userId;
@@ -33,11 +32,11 @@ public class UserModel implements Serializable {
 	public void setUserAge(String userAge) {
 		this.userAge = userAge;
 	}
-	public byte[] getImgAge() {
-		return imgAge;
+	public byte[] getUserImg() {
+		return userImg;
 	}
-	public void setImgAge(byte[] imgAge) {
-		this.imgAge = imgAge;
+	public void setUserImg(byte[] userImg) {
+		this.userImg = userImg;
 	}
 	public Date getInsertDate() {
 		return insertDate;

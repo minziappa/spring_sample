@@ -32,6 +32,7 @@
 			sample_user
 		WHERE
 			user_name = #{userName}
+		Limit 1
 	</select>
 
 </mapper>

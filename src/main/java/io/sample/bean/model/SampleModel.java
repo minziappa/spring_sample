@@ -6,6 +6,7 @@ public class SampleModel {
 
 	private SampleBean sample;
 	private UserModel userModel;
+	private String navi;
 
     /** Show the message to page.**/
     private String errorMessage;
@@ -24,6 +25,14 @@ public class SampleModel {
 
 	public void setUserModel(UserModel userModel) {
 		this.userModel = userModel;
+	}
+
+	public String getNavi() {
+		return navi;
+	}
+
+	public void setNavi(String navi) {
+		this.navi = navi;
 	}
 
 	public String getErrorMessage() {

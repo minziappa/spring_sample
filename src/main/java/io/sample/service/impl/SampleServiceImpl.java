@@ -15,6 +15,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,8 @@ public class SampleServiceImpl implements SampleService {
 	private SqlSession masterDao;
 	@Autowired
 	private SqlSession slaveDao;
+	@Autowired
+	private Md5PasswordEncoder passwordEncoder;
 
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	@Override
@@ -46,6 +49,8 @@ public class SampleServiceImpl implements SampleService {
 
 		Map<String, Object> mapSample = new HashMap<String, Object>();
 		mapSample.put("userName", insertUserPara.getUserName());
+		mapSample.put("userPwd", passwordEncoder.encodePassword(insertUserPara.getUserPwd(), null));
+		mapSample.put("userStatus", insertUserPara.getUserStatus());
 		mapSample.put("userAge", insertUserPara.getUserAge());
 		mapSample.put("userImg", byteName);
 

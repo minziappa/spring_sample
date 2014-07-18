@@ -6,6 +6,16 @@
 	<display-name>sample web mvc</display-name>
 	<description>sample web mvc</description>
 
+	<!-- Set the Security -->
+	<filter>
+	        <filter-name>springSecurityFilterChain</filter-name>
+	        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+	        <filter-name>springSecurityFilterChain</filter-name>
+	        <url-pattern>/sample/*</url-pattern>
+	</filter-mapping>
+
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -48,21 +58,21 @@
 		<url-pattern>/sample/*</url-pattern>
 	</filter-mapping>
 
-    <error-page>
-      <error-code>404</error-code>
-      <location>/htdocs/error/404error.html</location>
-    </error-page>
-    <error-page>
-      <error-code>500</error-code>
-      <location>/htdocs/error/500error.html</location>
-    </error-page>
-    <error-page>
-      <error-code>503</error-code>
-      <location>/htdocs/error/503error.html</location>
-    </error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/htdocs/error/404error.html</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/htdocs/error/500error.html</location>
+	</error-page>
+	<error-page>
+	<error-code>503</error-code>
+		<location>/htdocs/error/503error.html</location>
+	</error-page>
 
-   <welcome-file-list>
-      <welcome-file>/</welcome-file>
-    </welcome-file-list>
+	<welcome-file-list>
+		<welcome-file>/</welcome-file>
+	</welcome-file-list>
 
 </web-app>

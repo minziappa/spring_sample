@@ -7,12 +7,16 @@
 	<insert id="insertSample" parameterType="map">
 		INSERT INTO sample_user (
 			user_name,
+			user_pwd,
+			user_status,
 			user_age,
 			user_img,
 			insert_date,
 			update_date
 		) VALUES (
 			#{userName},
+			#{userPwd},
+			#{userStatus},
 			#{userAge},
 			#{userImg},
 			now(),

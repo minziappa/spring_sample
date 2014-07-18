@@ -10,6 +10,12 @@ public class InsertUserPara {
     @NotNull(message = "userName")
     @Size(min = 1, max = 45 ,message = "userName")
 	private String userName;
+    @NotNull(message = "userPwd")
+    @Size(min = 1, max = 45 ,message = "userPwd")
+	private String userPwd;
+    @NotNull(message = "userStatus")
+    @Size(min = 1, max = 45 ,message = "userStatus")
+	private String userStatus;
     @NotNull(message = "userAge")
     @Size(min = 1, max = 3 ,message = "userAge")
 	private String userAge;
@@ -30,6 +36,22 @@ public class InsertUserPara {
 
 	public void setUserAge(String userAge) {
 		this.userAge = userAge;
+	}
+
+	public String getUserPwd() {
+		return userPwd;
+	}
+
+	public void setUserPwd(String userPwd) {
+		this.userPwd = userPwd;
+	}
+
+	public String getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
 	}
 
 	public MultipartFile getUserImg() {

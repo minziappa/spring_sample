@@ -1,5 +1,7 @@
 package io.sample.controller;
 
+import io.sample.bean.ExtendUser;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Enumeration;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -19,6 +22,18 @@ public abstract class AbstractBaseController {
 
 	final Locale LOCALE = Locale.JAPAN;
 	final Logger logger = LoggerFactory.getLogger(AbstractBaseController.class);
+
+	public void handleLogin(HttpSession session) throws Exception {
+
+		Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if(obj instanceof ExtendUser) {
+			ExtendUser extendUser = (ExtendUser) obj;
+			session.setAttribute("user", extendUser.getUsername());
+			session.setMaxInactiveInterval(100*60);
+		}
+
+	}
 
 	public void handleValidator(List<ObjectError> errorList) throws IOException {
 

@@ -9,6 +9,8 @@ public class UserModel implements Serializable {
 
 	private String userId;
 	private String userName;
+	private String userPwd;
+	private String userStatus;
 	private String userAge;
 	private byte[] userImg;
 	private Date insertDate;
@@ -25,6 +27,18 @@ public class UserModel implements Serializable {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public String getUserPwd() {
+		return userPwd;
+	}
+	public void setUserPwd(String userPwd) {
+		this.userPwd = userPwd;
+	}
+	public String getUserStatus() {
+		return userStatus;
+	}
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
 	}
 	public String getUserAge() {
 		return userAge;

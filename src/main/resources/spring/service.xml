@@ -10,6 +10,6 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-<!-- <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />  -->		
+		<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />	
 
 </beans>

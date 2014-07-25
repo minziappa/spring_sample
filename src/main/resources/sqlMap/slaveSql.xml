@@ -9,6 +9,8 @@
 		SELECT
 			user_id AS userId,
 			user_name AS userName,
+			user_pwd AS userPwd,
+			user_status AS userStatus,
 			user_age AS userAge,
 			user_img AS userImg,
 			insert_date AS insertDate,
@@ -24,6 +26,8 @@
 		SELECT
 			user_id AS userId,
 			user_name AS userName,
+			user_pwd AS userPwd,
+			user_status AS userStatus,
 			user_age AS userAge,
 			user_img AS userImg,
 			insert_date AS insertDate,

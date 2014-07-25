@@ -10,11 +10,11 @@
 
 	<http auto-config='true' use-expressions="true" access-denied-page="/sample/login/denied.do">
 
-	    <!-- You can add the Intercept-Url like the following this 
+	    <!-- You can add the Intercept-Url like the following this -->
 			<intercept-url pattern="/sample/admin/**" access="hasRole('ROLE_ADMIN')" />
 			<intercept-url pattern="/sample/user/**" access="hasRole('ROLE_ADMIN')" />
 			<intercept-url pattern="/sample/user/**" access="hasRole('ROLE_USER')" />
--->
+
 	    <logout logout-url="/sample/auth/logout" logout-success-url="/sample/index/"/>
 	    <form-login
             login-page="/sample/login/login.do"
@@ -31,12 +31,16 @@
         class="org.springframework.security.authentication.ProviderManager">
         <beans:property name="providers">
             <beans:list>
+                <beans:ref local="defaultAuthenticationProvider" />
                 <beans:ref local="daoAuthenticationProvider" />
             </beans:list>
         </beans:property>
     </beans:bean>
 
 	<authentication-manager>
+	  <!-- Custom Check1-->
+	  <authentication-provider ref="defaultAuthenticationProvider" />
+	  <!-- Custom Check2 -->
 		<authentication-provider user-service-ref="userDetailsService">
 			<password-encoder ref="passwordEncoder"/>
 		</authentication-provider>

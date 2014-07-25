@@ -1,7 +1,6 @@
 package io.sample.service;
 
 import io.sample.bean.SlaveDbMappingBean;
-import io.sample.dao.SlaveDao;
 
 import java.util.Map;
 

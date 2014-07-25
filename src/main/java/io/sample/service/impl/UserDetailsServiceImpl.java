@@ -13,10 +13,15 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -42,8 +47,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		try {
 			// Get a user information form DB.
-
-			// Or Get the true/false from Active Directory
 			Map<String, Object> mapSelect = new HashMap<String, Object>();
 			mapSelect.put("userName", userName);
 
@@ -54,7 +57,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			}
 
 			if(userModel == null) {
-				return null;
+				throw new UsernameNotFoundException( userName + " is not found." );
 			}
 
 	        Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
@@ -74,26 +77,25 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	        boolean accountNonExpired = true;
 	        boolean credentialsNonExpired = true;
 	        boolean accountNonLocked = true;
-	
-	        // Add a user's the game Id.
-	        user = new ExtendUser(userModel.getUserId(), userModel.getUserPwd(), enabled, 
+
+//	        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//	        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(userModel.getUserName(), "test", auth.getAuthorities());
+//	        SecurityContextHolder.getContext().setAuthentication(authRequest);
+//	        auth.setAuthenticated(false);
+	        
+	        SecurityContext securityContext = SecurityContextHolder.getContext();
+	        Authentication authentication = securityContext.getAuthentication();
+	        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(userModel.getUserName(), "test");
+	        securityContext.setAuthentication(authRequest);
+	        
+	        // Add a user's the game Id. userModel.getUserPwd()
+	        user = new ExtendUser(userModel.getUserName(), "test", enabled, 
 	        		accountNonExpired, credentialsNonExpired, accountNonLocked, authorities, userModel);
 
-			logger.info("userId >> " + userName);
-
-//			sample = new SampleBean();
-//			// Set a user information
-//			sample.setUserModel(userModel);
-//			// Set a user's image
-//			if(userModel.getUserImg() != null) {
-//				byte[] imgBytesAsBase64 = Base64.encodeBase64(userModel.getUserImg());
-//				String imgDataAsBase64 = new String(imgBytesAsBase64);
-//				String imgAsBase64 = "data:image/png;base64," + imgDataAsBase64;
-//				sample.setUserImage(imgAsBase64);
-//			}
-
-			
+			logger.info("UserDetailsService >> userId >> " + userName);
+			// logger.info("UserDetailsService >> passowrd >> " + passowrd);
 		} catch (Exception e) {
+			logger.error("Select error, userName={}, userStatus={}", userModel.getUserName(), userModel.getUserStatus());
 			logger.error("Exception >> ", e);
 		}
 

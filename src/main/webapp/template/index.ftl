@@ -7,11 +7,15 @@
 
     <div class="container">
       <!-- Example row of columns -->
-      <div class="row">
+			<div>
+<#if admin?exists >
+				<h2><a href="/sample/index/">Welcome to Sample Project</a></h2>
+<#else>
+      <!-- Example row of columns -->
+<#include "common/login.ftl">
+</#if>
 
-Index
-
-      </div>
+			</div>
 <#include "common/foot.ftl">
     </div> <!-- /container -->
 

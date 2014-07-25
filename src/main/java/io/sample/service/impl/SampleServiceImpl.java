@@ -47,9 +47,12 @@ public class SampleServiceImpl implements SampleService {
 			byteName = file.getBytes();			
 		}
 
+		String encodedPwd = passwordEncoder.encodePassword(insertUserPara.getUserPwd(), null);
+		logger.info("encodedPwd is >>> " + encodedPwd);
+
 		Map<String, Object> mapSample = new HashMap<String, Object>();
 		mapSample.put("userName", insertUserPara.getUserName());
-		mapSample.put("userPwd", passwordEncoder.encodePassword(insertUserPara.getUserPwd(), null));
+		mapSample.put("userPwd", encodedPwd);
 		mapSample.put("userStatus", insertUserPara.getUserStatus());
 		mapSample.put("userAge", insertUserPara.getUserAge());
 		mapSample.put("userImg", byteName);

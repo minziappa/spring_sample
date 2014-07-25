@@ -21,7 +21,7 @@
             authentication-failure-url="/sample/login/login.do?error=true"
             default-target-url="/sample/index/"/>
 	</http>
-
+  <!--
     <beans:bean id="daoAuthenticationProvider"
         class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
         <beans:property name="userDetailsService" ref="userDetailsService"/>
@@ -31,19 +31,21 @@
         class="org.springframework.security.authentication.ProviderManager">
         <beans:property name="providers">
             <beans:list>
-                <beans:ref local="defaultAuthenticationProvider" />
                 <beans:ref local="daoAuthenticationProvider" />
             </beans:list>
         </beans:property>
     </beans:bean>
-
+    
+-->
 	<authentication-manager>
+  <!-- Custom Check2
+	<authentication-provider user-service-ref="userDetailsService">
+		<password-encoder ref="passwordEncoder"/>
+	</authentication-provider>
+	 -->
 	  <!-- Custom Check1-->
 	  <authentication-provider ref="defaultAuthenticationProvider" />
-	  <!-- Custom Check2 -->
-		<authentication-provider user-service-ref="userDetailsService">
-			<password-encoder ref="passwordEncoder"/>
-		</authentication-provider>
+
 	</authentication-manager>
 
 </beans:beans>

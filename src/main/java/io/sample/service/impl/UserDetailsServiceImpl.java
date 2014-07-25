@@ -46,6 +46,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		UserModel userModel = null;
 
 		try {
+			logger.info("UserDetailsService >> userId >> " + userName);
+
 			// Get a user information form DB.
 			Map<String, Object> mapSelect = new HashMap<String, Object>();
 			mapSelect.put("userName", userName);
@@ -78,22 +80,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	        boolean credentialsNonExpired = true;
 	        boolean accountNonLocked = true;
 
-//	        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//	        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(userModel.getUserName(), "test", auth.getAuthorities());
-//	        SecurityContextHolder.getContext().setAuthentication(authRequest);
-//	        auth.setAuthenticated(false);
-	        
-	        SecurityContext securityContext = SecurityContextHolder.getContext();
-	        Authentication authentication = securityContext.getAuthentication();
-	        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(userModel.getUserName(), "test");
-	        securityContext.setAuthentication(authRequest);
-	        
 	        // Add a user's the game Id. userModel.getUserPwd()
-	        user = new ExtendUser(userModel.getUserName(), "test", enabled, 
+	        user = new ExtendUser(userModel.getUserName(), passwordEncoder.encodePassword("test", null), enabled, 
 	        		accountNonExpired, credentialsNonExpired, accountNonLocked, authorities, userModel);
 
-			logger.info("UserDetailsService >> userId >> " + userName);
-			// logger.info("UserDetailsService >> passowrd >> " + passowrd);
 		} catch (Exception e) {
 			logger.error("Select error, userName={}, userStatus={}", userModel.getUserName(), userModel.getUserStatus());
 			logger.error("Exception >> ", e);

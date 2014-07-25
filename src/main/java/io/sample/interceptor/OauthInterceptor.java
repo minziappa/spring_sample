@@ -38,6 +38,7 @@ public class OauthInterceptor implements HandlerInterceptor {
 		Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		if(obj instanceof ExtendUser) {
+			logger.info("There is ExtendUser");
 			ExtendUser extendUser = (ExtendUser) obj;
 			session.setAttribute("admin", extendUser.getUsername());
 			session.setMaxInactiveInterval(100*60);

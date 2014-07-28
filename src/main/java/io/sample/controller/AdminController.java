@@ -1,6 +1,7 @@
 package io.sample.controller;
 
 import io.sample.bean.model.SampleModel;
+import io.sample.bean.para.CsvFilePara;
 import io.sample.bean.para.InsertUserPara;
 import io.sample.service.SampleService;
 
@@ -103,6 +104,53 @@ public class AdminController extends AbstractBaseController {
 		}
 
 		return "redirect:/sample/index/index.do";
+	}
+
+    /**
+     * Upload a CSV file for testing.
+     * 
+     * @param  SamplePara 
+     *         samplePara
+     * @param  BindingResult 
+     *         bindingResult
+     * @param  ModelMap 
+     *         model
+     * @param  HttpServletResponse 
+     *         response
+     *         
+     * @throws  Exception
+     *          If a error occur, ...
+     *
+     * @return String
+     * 		   a file name of FTL.
+     * 
+     * @since  1.7
+     */
+	@RequestMapping(value = {"csvFile.do"})
+	public String csvFile(@Valid CsvFilePara csvFilePara, 
+			BindingResult bindingResult, ModelMap model, 
+			HttpServletResponse response) throws Exception {
+
+		SampleModel sampleModel = new SampleModel();
+
+		// If it occurs a error, set the default value.
+		if (bindingResult.hasErrors()) {
+			logger.error("insertUser.sp - it is occured a parameter error.");
+			response.setStatus(400);
+			handleValidator(bindingResult.getAllErrors());
+			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
+			model.addAttribute("model", sampleModel);
+			return "sample/csvFile";
+		}
+
+		// Execute the transaction
+		if(!sampleService.readCsvFile(csvFilePara)) {
+			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
+			model.addAttribute("model", sampleModel);
+			return "sample/csvFile";
+		}
+
+		return "redirect:/sample/admin/csvFile.do";
 	}
 
 }

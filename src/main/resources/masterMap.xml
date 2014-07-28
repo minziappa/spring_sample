@@ -10,6 +10,7 @@
 
 	<settings>
 		<setting name="defaultStatementTimeout" value="5000" />
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
  	</settings>
 
 	<mappers>

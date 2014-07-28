@@ -1,10 +1,14 @@
 package io.sample.service.impl;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.util.HashMap;
 import java.util.Map;
 
 import io.sample.bean.SampleBean;
 import io.sample.bean.model.UserModel;
+import io.sample.bean.para.CsvFilePara;
 import io.sample.bean.para.InsertUserPara;
 import io.sample.dao.MasterDao;
 import io.sample.dao.SlaveDao;
@@ -41,6 +45,7 @@ public class SampleServiceImpl implements SampleService {
 		byte[] byteName = null;
 
 		MultipartFile file = insertUserPara.getUserImg();
+
 		if(file != null) {
 			String strName = file.getOriginalFilename();
 			logger.info("Image name >>> " + strName);
@@ -113,6 +118,48 @@ public class SampleServiceImpl implements SampleService {
 		if(intResult < 1) {
 			logger.error("deleteSampleByName error, userName={}", name);
 			return false;
+		}
+
+		return true;
+	}
+
+	public boolean readCsvFile(CsvFilePara csvFilePara) throws Exception {
+
+		String strReadResult = null;
+
+		MultipartFile file = csvFilePara.getCsvFile();
+		InputStream in = null;
+		InputStreamReader isr = null;
+		LineNumberReader lnReader = null;
+
+		if(file == null) {
+			return false;
+		}
+
+		try {
+			in = file.getInputStream();
+			isr = new InputStreamReader(in);
+			lnReader = new LineNumberReader(isr);
+
+			while((strReadResult = lnReader.readLine()) != null) {
+				for(String cell : strReadResult.split(",")) {
+					logger.info(cell + " ");
+				}
+				logger.info("");
+			}
+		} catch (Exception e) {
+			logger.error("Exception error", e);
+			return false;
+		} finally {
+			if(lnReader != null) {
+				lnReader.close();
+			}
+			if(isr != null) {
+				isr.close();
+			}
+			if(in != null) {
+				in.close();
+			}
 		}
 
 		return true;

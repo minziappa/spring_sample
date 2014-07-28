@@ -7,14 +7,14 @@
 	<select id="selectSample" parameterType="map" 
 		resultType="io.sample.bean.model.UserModel">
 		SELECT
-			user_id AS userId,
-			user_name AS userName,
-			user_pwd AS userPwd,
-			user_status AS userStatus,
-			user_age AS userAge,
-			user_img AS userImg,
-			insert_date AS insertDate,
-			update_date AS updateDate
+			user_id,
+			user_name,
+			user_pwd,
+			user_status,
+			user_age,
+			user_img,
+			insert_date,
+			update_date
 		FROM
 			sample_user
 		WHERE
@@ -24,14 +24,14 @@
 	<select id="selectSampleByName" parameterType="map" 
 		resultType="io.sample.bean.model.UserModel">
 		SELECT
-			user_id AS userId,
-			user_name AS userName,
-			user_pwd AS userPwd,
-			user_status AS userStatus,
-			user_age AS userAge,
-			user_img AS userImg,
-			insert_date AS insertDate,
-			update_date AS updateDate
+			user_id,
+			user_name,
+			user_pwd,
+			user_status,
+			user_age,
+			user_img,
+			insert_date,
+			update_date
 		FROM
 			sample_user
 		WHERE

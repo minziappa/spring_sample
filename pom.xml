@@ -84,7 +84,7 @@
 			<build>
 				<resources>
 					<resource>
-						<directory>config/staging/resources</directory>
+						<directory>config/develop/resources</directory>
 					</resource>
 					<resource>
 						<directory>src/main/resources</directory>
@@ -112,7 +112,7 @@
 			<build>
 				<resources>
 					<resource>
-						<directory>config/honban/resources</directory>
+						<directory>config/product/resources</directory>
 					</resource>
 					<resource>
 						<directory>src/main/resources</directory>

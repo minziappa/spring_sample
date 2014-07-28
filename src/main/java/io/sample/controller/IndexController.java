@@ -50,6 +50,7 @@ public class IndexController extends AbstractBaseController {
 	public String index(HttpSession session, ModelMap model) throws Exception {
 
     	this.handleLogin(session);
+    	logger.info("index >>>>>>> ");
 
 		return "index";
 	}

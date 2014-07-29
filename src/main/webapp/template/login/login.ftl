@@ -7,9 +7,7 @@
 
     <div class="container">
       <!-- Example row of columns -->
-			<div>
 <#include "../common/login.ftl">
-			</div>
 
 <#include "../common/foot.ftl">
     </div> <!-- /container -->

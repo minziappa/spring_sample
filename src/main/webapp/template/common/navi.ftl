@@ -9,16 +9,10 @@
           </button>
           <a class="navbar-brand" href="#">Sample Project</a>
         </div>
-        <div class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
+<#if user??>
+	<#include "naviLogin.ftl">
+<#else>
+	<#include "naviLogout.ftl">
+</#if>
       </div>
     </div><!--/navigation -->

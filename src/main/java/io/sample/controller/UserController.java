@@ -85,6 +85,9 @@ public class UserController extends AbstractBaseController {
 
 		SampleModel sampleModel = new SampleModel();
 
+		// Custom Validate
+		new UserValidator().validate(selectUserPara, bindingResult);
+		
 		// If it occurs a error, set the default value.
 		if (bindingResult.hasErrors()) {
 			logger.error("insertTestTbl.sp - it is occured a parameter error.");

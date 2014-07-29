@@ -7,15 +7,11 @@
 
     <div class="container">
       <!-- Example row of columns -->
-			<div>
-<#if admin?exists >
-				<h2><a href="/sample/index/">Welcome to Sample Project</a></h2>
-<#else>
-      <!-- Example row of columns -->
-<#include "common/login.ftl">
-</#if>
-
-			</div>
+			<div class="jumbotron">
+        <h1>Welcome to Sample Project</h1>
+        <p class="lead">This is a sample for quick start a project.</p>
+        <p><a role="button" href="https://github.com/minziappa/spring_sample" class="btn btn-lg btn-success">Go to Github</a></p>
+      </div>
 <#include "common/foot.ftl">
     </div> <!-- /container -->
 

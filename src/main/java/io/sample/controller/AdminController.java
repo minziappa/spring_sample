@@ -5,6 +5,7 @@ import io.sample.bean.para.CsvFilePara;
 import io.sample.bean.para.InsertUserPara;
 import io.sample.service.SampleService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -82,7 +83,7 @@ public class AdminController extends AbstractBaseController {
 	@RequestMapping(value = {"insertUser.do"})
 	public String insertUser(@Valid InsertUserPara insertUserPara, 
 			BindingResult bindingResult, ModelMap model, 
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response, HttpServletRequest request) throws Exception {
 
 		SampleModel sampleModel = new SampleModel();
 

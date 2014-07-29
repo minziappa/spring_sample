@@ -20,7 +20,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
@@ -30,8 +29,6 @@ public class DefaultAuthenticationProvider implements AuthenticationProvider {
 	final Logger logger = LoggerFactory.getLogger(DefaultAuthenticationProvider.class);
 	@Autowired
 	private SqlSession slaveDao;
-	@Autowired
-	private UserDetailsService userDetailsService;
 	@Autowired
 	private Md5PasswordEncoder passwordEncoder;
 

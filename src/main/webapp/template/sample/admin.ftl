@@ -43,7 +43,7 @@
 								<tr>
 									<td style="padding: 3px;">Image File</td>
 									<td style="padding: 3px;"><input type="file" name="userImg"/></td>
-									<td style="padding: 3px;">例)image.png</td>
+									<td style="padding: 3px;">Example)image.png</td>
 								</tr>
 								<tr>
 									<td style="padding: 3px;"><input class="btn btn-sm btn-primary" type="submit" value="Register" /></td>

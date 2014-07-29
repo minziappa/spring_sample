@@ -19,6 +19,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -123,6 +124,7 @@ public class SampleServiceImpl implements SampleService {
 		return true;
 	}
 
+	// @Async
 	public boolean readCsvFile(CsvFilePara csvFilePara) throws Exception {
 
 		String strReadResult = null;

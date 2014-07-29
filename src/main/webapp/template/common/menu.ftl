@@ -6,7 +6,6 @@
 					<li><a href="/sample/admin/admin.do">Admin Page</a></li>
 					<li><a href="/sample/admin/csvFile.do">Upload csv file</a></li>
 					<li><a href="/sample/user/user.do">User Page</a></li>
-					<li><a href="/sample/auth/logout">logout</a></li>
 				</ul>
       </div>
     </div>

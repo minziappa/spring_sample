@@ -14,6 +14,11 @@
 		<constructor-arg index="0" ref="sqlSessionMasterFactory" />
 	</bean>
 
+	<bean id="masterBatchDao" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionMasterFactory" />
+		<constructor-arg index="1" value="BATCH" />
+	</bean>
+
 	<bean id="slaveDao" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionSlaveFactory" />
 	</bean>

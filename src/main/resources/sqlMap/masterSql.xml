@@ -24,6 +24,24 @@
 		)
 	</insert>
 
+	<insert id="insertData" parameterType="map">
+		INSERT INTO sample_data (
+			data_title,
+			data_dummy1,
+			data_dummy2,
+			data_dummy3,
+			insert_date,
+			update_date
+		) VALUES (
+			#{dataTitle},
+			#{dataDummy1},
+			#{dataDummy2},
+			#{dataDummy3},
+			now(),
+			now()
+		)
+	</insert>
+	
 	<delete id="deleteSampleByName" parameterType="map">
 		DELETE FROM sample_user 
 		WHERE 

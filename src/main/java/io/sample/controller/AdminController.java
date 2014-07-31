@@ -18,6 +18,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /***
  * The <code>AdminController</code> class represents action controller.
@@ -110,8 +111,24 @@ public class AdminController extends AbstractBaseController {
     /**
      * Upload a CSV file for testing.
      * 
-     * @param  SamplePara 
-     *         samplePara
+     * @throws  Exception
+     *          If a error occur, ...
+     *
+     * @return String
+     * 		   a file name of FTL.
+     * 
+     * @since  1.7
+     */
+	@RequestMapping(value = {"uploadCsvFile.do"})
+	public String uploadCsvFile() throws Exception {
+		return "sample/csvFile";
+	}
+
+    /**
+     * Handle a CSV file for testing.
+     * 
+     * @param  CsvFilePara 
+     *         csvFilePara
      * @param  BindingResult 
      *         bindingResult
      * @param  ModelMap 
@@ -127,10 +144,10 @@ public class AdminController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"csvFile.do"})
-	public String csvFile(@Valid CsvFilePara csvFilePara, 
+	@RequestMapping(value = {"handleCsvFile.do"})
+	public String handleCsvFile(@Valid CsvFilePara csvFilePara, 
 			BindingResult bindingResult, ModelMap model, 
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response, RedirectAttributes redirect) throws Exception {
 
 		SampleModel sampleModel = new SampleModel();
 
@@ -144,14 +161,23 @@ public class AdminController extends AbstractBaseController {
 			return "sample/csvFile";
 		}
 
-		// Execute the transaction
-		if(!sampleService.readCsvFile(csvFilePara)) {
-			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
-			model.addAttribute("model", sampleModel);
-			return "sample/csvFile";
+		// Add parameter for Redirect URL
+		redirect.addFlashAttribute("errorMessage", message.getMessage("sample.parameter.insert.ok.message", null, LOCALE));
+
+		if (csvFilePara.getOption().equals("0")) {
+			// The method for Async
+			sampleService.asyncSaveCsvFile(csvFilePara);
+		} else {
+			// Not Async
+			// Execute the transaction
+			if(!sampleService.syncSaveCsvFile(csvFilePara)) {
+				model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
+				model.addAttribute("model", sampleModel);
+				return "sample/csvFile";
+			}
 		}
 
-		return "redirect:/sample/admin/csvFile.do";
+		return "redirect:/sample/admin/uploadCsvFile.do";
 	}
 
 }

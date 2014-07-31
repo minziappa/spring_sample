@@ -1,5 +1,6 @@
 package io.sample.service.impl;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,9 +36,64 @@ public class SampleServiceImpl implements SampleService {
 	@Autowired
 	private SqlSession masterDao;
 	@Autowired
+	private SqlSession masterBatchDao;
+	@Autowired
 	private SqlSession slaveDao;
 	@Autowired
 	private Md5PasswordEncoder passwordEncoder;
+
+
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+	private boolean saveCsvFile(CsvFilePara csvFilePara) throws Exception {
+
+		String strReadResult = null;
+
+		MultipartFile file = csvFilePara.getCsvFile();
+		InputStream in = null;
+		InputStreamReader isr = null;
+		LineNumberReader lnReader = null;
+
+		if(file == null) {
+			return false;
+		}
+		
+		try {
+			in = file.getInputStream();
+			isr = new InputStreamReader(in);
+			lnReader = new LineNumberReader(isr);
+
+			int i=0;
+			while((strReadResult = lnReader.readLine()) != null) {
+				String [] strCell = strReadResult.split(",");
+				Map<String, Object> mapData = new HashMap<String, Object>();
+
+				mapData.put("dataTitle", file.getOriginalFilename());
+				mapData.put("dataDummy1", strCell[0]);
+				mapData.put("dataDummy2", strCell[1]);
+				mapData.put("dataDummy3", strCell[2]);
+
+				masterBatchDao.getMapper(MasterDao.class).insertData(mapData);
+				logger.info(" count = > " + i);
+				i++;
+			}
+
+		} catch (IOException e) {
+			logger.error("Exception error", e);
+			// masterBatchDao.rollback();
+		} finally {
+			if(lnReader != null) {
+				lnReader.close();
+			}
+			if(isr != null) {
+				isr.close();
+			}
+			if(in != null) {
+				in.close();
+			}
+		}
+		
+		return true;
+	}
 
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	@Override
@@ -124,47 +181,15 @@ public class SampleServiceImpl implements SampleService {
 		return true;
 	}
 
-	// @Async
-	public boolean readCsvFile(CsvFilePara csvFilePara) throws Exception {
+	@Override
+	public boolean syncSaveCsvFile(CsvFilePara csvFilePara) throws Exception {
+		return saveCsvFile(csvFilePara);
+	}
 
-		String strReadResult = null;
-
-		MultipartFile file = csvFilePara.getCsvFile();
-		InputStream in = null;
-		InputStreamReader isr = null;
-		LineNumberReader lnReader = null;
-
-		if(file == null) {
-			return false;
-		}
-
-		try {
-			in = file.getInputStream();
-			isr = new InputStreamReader(in);
-			lnReader = new LineNumberReader(isr);
-
-			while((strReadResult = lnReader.readLine()) != null) {
-				for(String cell : strReadResult.split(",")) {
-					logger.info(cell + " ");
-				}
-				logger.info("");
-			}
-		} catch (Exception e) {
-			logger.error("Exception error", e);
-			return false;
-		} finally {
-			if(lnReader != null) {
-				lnReader.close();
-			}
-			if(isr != null) {
-				isr.close();
-			}
-			if(in != null) {
-				in.close();
-			}
-		}
-
-		return true;
+	@Async
+	@Override
+	public void asyncSaveCsvFile(CsvFilePara csvFilePara) throws Exception {
+		saveCsvFile(csvFilePara);
 	}
 
 }

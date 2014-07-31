@@ -4,7 +4,7 @@
 				<ul role="tablist" class="nav nav-tabs">
 					<li class="active"><a href="/sample/index/">Welcome to Sample Project</a></li>
 					<li><a href="/sample/admin/admin.do">Admin Page</a></li>
-					<li><a href="/sample/admin/csvFile.do">Upload csv file</a></li>
+					<li><a href="/sample/admin/uploadCsvFile.do">Upload csv file</a></li>
 					<li><a href="/sample/user/user.do">User Page</a></li>
 				</ul>
       </div>

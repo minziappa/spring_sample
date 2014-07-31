@@ -42,8 +42,6 @@ public class SampleServiceImpl implements SampleService {
 	@Autowired
 	private Md5PasswordEncoder passwordEncoder;
 
-
-	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
 	private boolean saveCsvFile(CsvFilePara csvFilePara) throws Exception {
 
 		String strReadResult = null;
@@ -182,12 +180,14 @@ public class SampleServiceImpl implements SampleService {
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
 	public boolean syncSaveCsvFile(CsvFilePara csvFilePara) throws Exception {
 		return saveCsvFile(csvFilePara);
 	}
 
 	@Async
 	@Override
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
 	public void asyncSaveCsvFile(CsvFilePara csvFilePara) throws Exception {
 		saveCsvFile(csvFilePara);
 	}

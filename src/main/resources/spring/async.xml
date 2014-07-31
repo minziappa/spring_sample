@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
     <bean id="executer" class="java.util.concurrent.Executors" factory-method="newFixedThreadPool">
-			<constructor-arg value="3" />
+			<constructor-arg value="2" />
     </bean>
 
     <task:executor id="threadPoolTaskExecutor" pool-size="2" queue-capacity="3"/>

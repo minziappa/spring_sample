@@ -2,6 +2,7 @@ package io.sample.controller;
 
 import io.sample.bean.SampleBean;
 import io.sample.bean.model.SampleModel;
+import io.sample.bean.para.DownLoadFilePara;
 import io.sample.bean.para.SelectUserPara;
 import io.sample.service.SampleService;
 
@@ -62,8 +63,8 @@ public class UserController extends AbstractBaseController {
     /**
      * Select some data from the Mysql.
      * 
-     * @param  SamplePara 
-     *         samplePara
+     * @param  SelectUserPara 
+     *         a user name
      * @param  BindingResult 
      *         bindingResult
      * @param  ModelMap 
@@ -103,6 +104,34 @@ public class UserController extends AbstractBaseController {
 		model.addAttribute("model", sampleModel);
 
 		return "sample/user";
+	}
+
+    /**
+     * Select some data from the Mysql.
+     * 
+     * @param  SelectUserPara 
+     *         a user name
+     * @param  BindingResult 
+     *         bindingResult
+     * @param  ModelMap 
+     *         model
+     * @param  HttpServletResponse 
+     *         response
+     *         
+     * @throws  Exception
+     *          If a error occur, ...
+     *
+     * @return String
+     * 		   a file name of FTL.
+     * 
+     * @since  1.7
+     */
+	@RequestMapping(value = {"downLoadCSV.do"})
+	public void downLoadCSV(@Valid DownLoadFilePara downLoadFilePara,
+			HttpServletResponse response) throws Exception {
+
+		// Down Load file
+		this.handleWrite(downLoadFilePara.getFileName(), sampleService.downLoadCsvFile(), response);
 	}
 
 }

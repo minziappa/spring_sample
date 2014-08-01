@@ -15,9 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jp.ameba.sg2.common.cipher.CryptoException;
-import jp.ameba.sg2.common.utility.AESCryptorAndCompressUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,11 +39,21 @@ public abstract class AbstractBaseController {
 
 	}
 
-	public void handleWrite(String jsonAdmin, String key, HttpServletResponse response) throws IOException, CryptoException {
+	public void handleWrite(String fileName, byte[] byteOut, HttpServletResponse response) throws IOException {
 
-		byte[] byteOut = AESCryptorAndCompressUtil.encryptAfterGzip(jsonAdmin, key);
+		if(fileName == null) {
+			fileName = "default.csv";
+		} else {
+			StringBuffer sb = new StringBuffer();
+			String [] arrayFileName = fileName.split(".");
+			if(arrayFileName.length < 2) {
+				sb.append(fileName).append(".").append("csv");
+				fileName = sb.toString();
+			}
+		}
 
 		response.setHeader("Content-Length", String.valueOf(byteOut.length));
+		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
 		response.setContentType("application/octet-stream");
         OutputStream os = response.getOutputStream();
         InputStream in = new ByteArrayInputStream(byteOut);

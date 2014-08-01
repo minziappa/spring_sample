@@ -1,5 +1,7 @@
 package io.sample.service.impl;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -190,6 +192,20 @@ public class SampleServiceImpl implements SampleService {
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
 	public void asyncSaveCsvFile(CsvFilePara csvFilePara) throws Exception {
 		saveCsvFile(csvFilePara);
+	}
+
+	@Override
+	public byte[] downLoadCsvFile() throws Exception {
+		StringBuffer sb = new StringBuffer();
+
+		for(int i=0; i<10; i++) {
+			sb.append(i).append("aaaaaaaaaaaaa,")
+				.append(i).append("bbbbbbbbbbbbb,")
+				.append(i).append("cccccccccceee")
+				.append("\n");
+		}
+
+		return sb.toString().getBytes();
 	}
 
 }

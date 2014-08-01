@@ -2,7 +2,10 @@ package io.sample.controller;
 
 import io.sample.bean.ExtendUser;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.List;
@@ -11,6 +14,9 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import jp.ameba.sg2.common.cipher.CryptoException;
+import jp.ameba.sg2.common.utility.AESCryptorAndCompressUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +40,23 @@ public abstract class AbstractBaseController {
 			session.setMaxInactiveInterval(100*60);
 		}
 
+	}
+
+	public void handleWrite(String jsonAdmin, String key, HttpServletResponse response) throws IOException, CryptoException {
+
+		byte[] byteOut = AESCryptorAndCompressUtil.encryptAfterGzip(jsonAdmin, key);
+
+		response.setHeader("Content-Length", String.valueOf(byteOut.length));
+		response.setContentType("application/octet-stream");
+        OutputStream os = response.getOutputStream();
+        InputStream in = new ByteArrayInputStream(byteOut);
+        int n = -1;
+        while((n = in.read(byteOut)) > 0) {
+        	os.write(byteOut, 0, n);
+        }
+        in.close();
+        os.flush();
+        os.close();
 	}
 
 	public void handleValidator(List<ObjectError> errorList) throws IOException {

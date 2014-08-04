@@ -7,11 +7,6 @@
 
     <div class="container">
 
-      	<!-- Example row of columns -->
-      	<form action="/sample/user/downLoadCSV.do" method="POST">
-	      	Download File Name : <input type="text" name="fileName" size="45">
-	      	<input class="btn btn-success" type="submit" value="CSV File DownLoad"/>
-				</form>
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">Select Data</h3>

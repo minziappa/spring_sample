@@ -3,6 +3,8 @@ package io.sample.controller;
 import io.sample.bean.ExtendUser;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -26,8 +28,22 @@ public abstract class AbstractBaseController {
 	final Locale LOCALE = Locale.JAPAN;
 	final Logger logger = LoggerFactory.getLogger(AbstractBaseController.class);
 
-	public void handleLogin(HttpSession session) throws Exception {
+	private String getFileName(String fileName) {
+		if(fileName == null) {
+			fileName = "default.csv";
+		} else {
+			StringBuffer sb = new StringBuffer();
+			String [] arrayFileName = fileName.split("\\.");
+			if(arrayFileName.length < 2) {
+				sb.append(fileName).append(".").append("csv");
+				fileName = sb.toString();
+			}
+		}
+		
+		return fileName;
+	}
 
+	public void handleLogin(HttpSession session) throws Exception {
 		Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		if(obj instanceof ExtendUser) {
@@ -36,26 +52,33 @@ public abstract class AbstractBaseController {
 			logger.info("handle loging >>>>>>> user = " + extendUser.getUsername());
 			session.setMaxInactiveInterval(100*60);
 		}
-
 	}
 
-	public void handleWrite(String fileName, byte[] byteOut, HttpServletResponse response) throws IOException {
+	public void handleFileDownload(String fileName, byte[] byteOut, HttpServletResponse response) throws IOException {
 
-		if(fileName == null) {
-			fileName = "default.csv";
-		} else {
-			StringBuffer sb = new StringBuffer();
-			String [] arrayFileName = fileName.split(".");
-			if(arrayFileName.length < 2) {
-				sb.append(fileName).append(".").append("csv");
-				fileName = sb.toString();
-			}
-		}
+		fileName = this.getFileName(fileName);
 
 		response.setHeader("Content-Length", String.valueOf(byteOut.length));
 		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
 		response.setContentType("application/octet-stream");
         OutputStream os = response.getOutputStream();
+        InputStream in = new ByteArrayInputStream(byteOut);
+        int n = -1;
+        while((n = in.read(byteOut)) > 0) {
+        	os.write(byteOut, 0, n);
+        }
+        in.close();
+        os.flush();
+        os.close();
+	}
+
+	public void handleFileSave(String fileName, byte[] byteOut, String path) throws IOException {
+
+		fileName = this.getFileName(fileName);
+
+		File file = new File(path + fileName);
+		logger.info("saving path = " + file.getPath());
+		OutputStream os = new FileOutputStream(file);
         InputStream in = new ByteArrayInputStream(byteOut);
         int n = -1;
         while((n = in.read(byteOut)) > 0) {

@@ -6,6 +6,7 @@ public class SampleModel {
 
 	private SampleBean sample;
 	private UserModel userModel;
+	private String filePath;
 	private String navi;
 
     /** Show the message to page.**/
@@ -41,6 +42,14 @@ public class SampleModel {
 
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 
 }

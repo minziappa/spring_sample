@@ -1,7 +1,6 @@
 package io.sample.controller;
 
 import io.sample.bean.model.SampleModel;
-import io.sample.bean.para.CsvFilePara;
 import io.sample.bean.para.InsertUserPara;
 import io.sample.service.SampleService;
 
@@ -18,7 +17,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /***
  * The <code>AdminController</code> class represents action controller.
@@ -27,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author  Woong-joon Kim
  * @version 0.1, 14/07/17
  * @see     io.sample.controller.AdminController#admin()
+ * @see     io.sample.controller.AdminController#insertUser()
  * @since   JDK1.7
  */
 @Controller
@@ -106,78 +105,6 @@ public class AdminController extends AbstractBaseController {
 		}
 
 		return "redirect:/sample/index/index.do";
-	}
-
-    /**
-     * Upload a CSV file for testing.
-     * 
-     * @throws  Exception
-     *          If a error occur, ...
-     *
-     * @return String
-     * 		   a file name of FTL.
-     * 
-     * @since  1.7
-     */
-	@RequestMapping(value = {"uploadCsvFile.do"})
-	public String uploadCsvFile() throws Exception {
-		return "sample/csvFile";
-	}
-
-    /**
-     * Handle a CSV file for testing.
-     * 
-     * @param  CsvFilePara 
-     *         csvFilePara
-     * @param  BindingResult 
-     *         bindingResult
-     * @param  ModelMap 
-     *         model
-     * @param  HttpServletResponse 
-     *         response
-     *         
-     * @throws  Exception
-     *          If a error occur, ...
-     *
-     * @return String
-     * 		   a file name of FTL.
-     * 
-     * @since  1.7
-     */
-	@RequestMapping(value = {"handleCsvFile.do"})
-	public String handleCsvFile(@Valid CsvFilePara csvFilePara, 
-			BindingResult bindingResult, ModelMap model, 
-			HttpServletResponse response, RedirectAttributes redirect) throws Exception {
-
-		SampleModel sampleModel = new SampleModel();
-
-		// If it occurs a error, set the default value.
-		if (bindingResult.hasErrors()) {
-			logger.error("insertUser.sp - it is occured a parameter error.");
-			response.setStatus(400);
-			handleValidator(bindingResult.getAllErrors());
-			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
-			model.addAttribute("model", sampleModel);
-			return "sample/csvFile";
-		}
-
-		// Add parameter for Redirect URL
-		redirect.addFlashAttribute("errorMessage", message.getMessage("sample.parameter.insert.ok.message", null, LOCALE));
-
-		if (csvFilePara.getOption().equals("0")) {
-			// The method for Async
-			sampleService.asyncSaveCsvFile(csvFilePara);
-		} else {
-			// Not Async
-			// Execute the transaction
-			if(!sampleService.syncSaveCsvFile(csvFilePara)) {
-				model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
-				model.addAttribute("model", sampleModel);
-				return "sample/csvFile";
-			}
-		}
-
-		return "redirect:/sample/admin/uploadCsvFile.do";
 	}
 
 }

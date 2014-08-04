@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author  Woong-joon Kim
  * @version 0.1, 14/07/17
  * @see     io.sample.controller.UserController#user()
+ * @see     io.sample.controller.UserController#selectUser()
  * @since   JDK1.7
  */
 @Controller
@@ -88,7 +89,7 @@ public class UserController extends AbstractBaseController {
 
 		// Custom Validate
 		new UserValidator().validate(selectUserPara, bindingResult);
-		
+
 		// If it occurs a error, set the default value.
 		if (bindingResult.hasErrors()) {
 			logger.error("insertTestTbl.sp - it is occured a parameter error.");
@@ -104,34 +105,6 @@ public class UserController extends AbstractBaseController {
 		model.addAttribute("model", sampleModel);
 
 		return "sample/user";
-	}
-
-    /**
-     * Select some data from the Mysql.
-     * 
-     * @param  SelectUserPara 
-     *         a user name
-     * @param  BindingResult 
-     *         bindingResult
-     * @param  ModelMap 
-     *         model
-     * @param  HttpServletResponse 
-     *         response
-     *         
-     * @throws  Exception
-     *          If a error occur, ...
-     *
-     * @return String
-     * 		   a file name of FTL.
-     * 
-     * @since  1.7
-     */
-	@RequestMapping(value = {"downLoadCSV.do"})
-	public void downLoadCSV(@Valid DownLoadFilePara downLoadFilePara,
-			HttpServletResponse response) throws Exception {
-
-		// Down Load file
-		this.handleWrite(downLoadFilePara.getFileName(), sampleService.downLoadCsvFile(), response);
 	}
 
 }

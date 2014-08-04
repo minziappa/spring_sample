@@ -12,29 +12,26 @@
 						<h3 class="panel-title">CSV File</h3>
 					</div>
 					<div class="panel-body">
-						<form action="/sample/admin/handleCsvFile.do" enctype="multipart/form-data" method="POST">
-              <b style="color:red" >${errorMessage?if_exists}</b>
+		      	<form action="/sample/file/handleDownloadFiles.do" method="POST">
+
+							<a href="${filePath?if_exists}">${filePath?if_exists}</a>
+
 							<table style="border-collapse: collapse;">
 								<tr>
 									<td style="padding: 3px;">File Name</td>
-									<td style="padding: 3px;"><input type="text" name="csvName" size="45"/></td>
-									<td style="padding: 3px;">Example)tomcluse</td>
-								</tr>
-								<tr>
-									<td style="padding: 3px;">Image File</td>
-									<td style="padding: 3px;"><input type="file" name="csvFile"/></td>
-									<td style="padding: 3px;">Example)file.csv</td>
+									<td style="padding: 3px;"><input type="text" name="fileName" size="45"></td>
+									<td style="padding: 3px;">Example) tomcluse</td>
 								</tr>
 								<tr>
 									<td style="padding: 3px;">Option</td>
 									<td style="padding: 3px;">
-										<input type="radio" name="option" value="0" checked="checked"/>Asynchronous
-										<input type="radio" name="option" value="1"/>Synchronous
+										<input type="radio" name="option" value="0" checked="checked"/>Download directly
+										<input type="radio" name="option" value="1"/>Download from link
 									</td>
-									<td style="padding: 3px;">Example)tomcluse</td>
+									<td style="padding: 3px;"></td>
 								</tr>
 								<tr>
-									<td style="padding: 3px;"><input class="btn btn-sm btn-primary" type="submit" value="Register" /></td>
+									<td style="padding: 3px;"><input class="btn btn-success" type="submit" value="DownLoad"/></td>
 									<td style="padding: 3px;"></td>
 									<td style="padding: 3px;"></td>
 								</tr>

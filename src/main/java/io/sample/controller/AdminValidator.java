@@ -81,5 +81,4 @@ public class AdminValidator implements Validator, BaseValidator {
 		return mapErrorMsg;
 	}
 
-
 }

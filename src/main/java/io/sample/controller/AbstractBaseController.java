@@ -19,15 +19,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Case;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 
 public abstract class AbstractBaseController {
 
@@ -98,7 +95,6 @@ public abstract class AbstractBaseController {
 	public void handleValidator(List<ObjectError> errorList) throws IOException {
 
         for(int i=0; i< errorList.size();i++) {
-
             ObjectError error = errorList.get(i);
             logger.error("DefaultMessage = " + error.getDefaultMessage());
             logger.error("ObjectName = " + error.getObjectName());
@@ -109,7 +105,20 @@ public abstract class AbstractBaseController {
             	logger.error("codes = " + str);
             }
         }
+	}
 
+	public Map<String, String> handleErrorMessages(List<ObjectError> errorList, Object object) throws IOException {
+
+		Map<String, String> mapErrorMsg = new HashMap<String, String>();
+
+		for (Object objectError : errorList) {
+		    FieldError fieldError = (FieldError) objectError;
+            mapErrorMsg.put(fieldError.getField(), fieldError.getDefaultMessage());
+			logger.error("field name = " + fieldError.getField());
+            logger.error("error message = " + fieldError.getDefaultMessage());
+        }
+
+		return mapErrorMsg;
 	}
 
 	public boolean handleIphone(HttpSession session) throws Exception {

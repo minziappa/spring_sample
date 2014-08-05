@@ -41,7 +41,7 @@
 			now()
 		)
 	</insert>
-	
+
 	<delete id="deleteSampleByName" parameterType="map">
 		DELETE FROM sample_user 
 		WHERE 

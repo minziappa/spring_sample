@@ -26,7 +26,7 @@ public class UserValidator implements Validator {
 			SelectUserPara selectUserPara = (SelectUserPara) object;
 
 	        if(selectUserPara != null) {
-	    		if(selectUserPara.getUserName() == null){
+	    		if(selectUserPara.getUserData() == null){
 					errors.rejectValue("validate", "sample.parameter.error.message");
 					logger.warn("the start date is error.");
 					// If you want to set the default value, remove the comment

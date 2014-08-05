@@ -39,4 +39,21 @@
 		Limit 1
 	</select>
 
+	<select id="selectSampleListByName" parameterType="map" 
+		resultType="io.sample.bean.model.UserModel">
+		SELECT
+			user_id,
+			user_name,
+			user_pwd,
+			user_status,
+			user_age,
+			user_img,
+			insert_date,
+			update_date
+		FROM
+			sample_user
+		WHERE
+			insert_date <![CDATA[<=]]> #{insertDate}
+	</select>
+
 </mapper>

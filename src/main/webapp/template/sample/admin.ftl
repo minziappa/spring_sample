@@ -20,16 +20,6 @@
 	${errorMessage["userPwd"]?if_exists} <br/>
 	${errorMessage["userAge"]?if_exists} <br/>
 </#if>
-
-<#--
----------------------------<br/>
-<#if errorMessage??>
-	<#list errorMessage?keys as key>
-	    ${key} = ${errorMessage[key]} <br/>
-	</#list>
-</#if>
--->
-
               </b>
 							<table style="border-collapse: collapse;">
 								<tr>

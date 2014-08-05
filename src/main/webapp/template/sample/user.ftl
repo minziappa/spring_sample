@@ -13,12 +13,20 @@
 					</div>
 					<div class="panel-body">
 						<form action="/sample/user/selectUser.do" method="POST">
-		          <b style="color:red" >${errorMessage?if_exists}</b>
+		          <b style="color:red" >
+
+<#if errorMessage??>
+	<#list errorMessage?keys as key>
+	    ${errorMessage[key]} <br/>
+	</#list>
+</#if>
+
+		          </b>
 							<table style="border-collapse: collapse;">
 								<tr>
 									<td style="padding: 3px;">User Name</td>
-									<td style="padding: 3px;"><input type="text" name="userName" size="45"></td>
-									<td style="padding: 3px;">Example)tomcluse</td>
+									<td style="padding: 3px;"><input type="text" name="userData" size="10" maxlength="14"></td>
+									<td style="padding: 3px;">Example) 2014-07-01</td>
 								</tr>
 								<tr>
 									<td style="padding: 3px;"><input class="btn btn-sm btn-primary" type="submit" value="Search"/></td>
@@ -41,14 +49,16 @@
           <tbody>
 
 <#if model??>
-	<#if model.sample?has_content>
+	<#if model.sampleList?has_content>
+		<#list model.sampleList as sample>
             <tr>
-              <td>${model.sample.userModel.userId?if_exists}</td>
-              <td>${model.sample.userModel.userName?if_exists}</td>
-              <td>${model.sample.userModel.userStatus?if_exists}</td>
-              <td>${model.sample.userModel.userAge?if_exists}</td>
-              <td><img alt="user image" src="${model.sample.userImage}" /></td>
+              <td>${sample.userModel.userId?if_exists}</td>
+              <td>${sample.userModel.userName?if_exists}</td>
+              <td>${sample.userModel.userStatus?if_exists}</td>
+              <td>${sample.userModel.userAge?if_exists}</td>
+              <td><img alt="user image" src="${sample.userImage}" /></td>
             </tr>
+    </#list>
 	<#else>
 	 No data
 	</#if>

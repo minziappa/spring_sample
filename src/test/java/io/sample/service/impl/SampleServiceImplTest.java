@@ -1,8 +1,12 @@
 package io.sample.service.impl;
 
 import static org.junit.Assert.*;
+
+import java.util.List;
+
 import io.sample.bean.SampleBean;
 import io.sample.bean.para.InsertUserPara;
+import io.sample.bean.para.SelectUserPara;
 import io.sample.service.SampleService;
 
 import org.junit.AfterClass;
@@ -41,8 +45,11 @@ public class SampleServiceImplTest {
 
 	@Test
 	public void testSelectSample() throws Exception {
-		SampleBean sampleBean = sampleService.selectSampleByName("TestName");
-		assertNotNull(sampleBean);
+		SelectUserPara selectUser = new SelectUserPara();
+		selectUser.setUserName("admin");
+		selectUser.setUserData("2014-08-10");
+		List<SampleBean> userList = sampleService.selectSampleByName(selectUser);
+		assertNotNull(userList);
 	}
 
 	@Test

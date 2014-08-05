@@ -1,10 +1,13 @@
 package io.sample.bean.model;
 
+import java.util.List;
+
 import io.sample.bean.SampleBean;
 
 public class SampleModel {
 
 	private SampleBean sample;
+	private List<SampleBean> sampleList;
 	private UserModel userModel;
 	private String filePath;
 	private String navi;
@@ -18,6 +21,14 @@ public class SampleModel {
 
 	public void setSample(SampleBean sample) {
 		this.sample = sample;
+	}
+
+	public List<SampleBean> getSampleList() {
+		return sampleList;
+	}
+
+	public void setSampleList(List<SampleBean> sampleList) {
+		this.sampleList = sampleList;
 	}
 
 	public UserModel getUserModel() {

@@ -1,8 +1,9 @@
 package io.sample.controller;
 
+import java.util.Map;
+
 import io.sample.bean.SampleBean;
 import io.sample.bean.model.SampleModel;
-import io.sample.bean.para.DownLoadFilePara;
 import io.sample.bean.para.SelectUserPara;
 import io.sample.service.SampleService;
 
@@ -92,15 +93,15 @@ public class UserController extends AbstractBaseController {
 
 		// If it occurs a error, set the default value.
 		if (bindingResult.hasErrors()) {
-			logger.error("insertTestTbl.sp - it is occured a parameter error.");
+			logger.error("selectUser.do - it is occured a parameter error.");
+			Map<String, String> mapErrorMessage = this.handleErrorMessages(bindingResult.getAllErrors());
 			response.setStatus(400);
-			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
-			return "error/error";
+			model.addAttribute("errorMessage", mapErrorMessage);
+			return "sample/user";
 		}
 
 		// Execute the transaction
-		SampleBean sampleBean = sampleService.selectSampleByName(selectUserPara.getUserName());
-		sampleModel.setSample(sampleBean);
+		sampleModel.setSampleList(sampleService.selectSampleByName(selectUserPara));
 
 		model.addAttribute("model", sampleModel);
 

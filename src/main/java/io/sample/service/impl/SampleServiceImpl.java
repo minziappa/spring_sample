@@ -1,11 +1,11 @@
 package io.sample.service.impl;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,9 +14,11 @@ import io.sample.bean.SampleBean;
 import io.sample.bean.model.UserModel;
 import io.sample.bean.para.CsvFilePara;
 import io.sample.bean.para.InsertUserPara;
+import io.sample.bean.para.SelectUserPara;
 import io.sample.dao.MasterDao;
 import io.sample.dao.SlaveDao;
 import io.sample.service.SampleService;
+import io.sample.utility.DateUtility;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.ibatis.session.SqlSession;
@@ -29,8 +31,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -137,20 +137,26 @@ public class SampleServiceImpl implements SampleService {
 	}
 
 	@Override
-	public SampleBean selectSampleByName(String name) throws Exception {
+	public List<SampleBean> selectSampleByName(SelectUserPara selectUserPara) throws Exception {
 		SampleBean sample = null;
-		UserModel userModel = null;
+		Date userDate = null;
+		List<UserModel> userList = new ArrayList<UserModel>();
+		List<SampleBean> sampleList = new ArrayList<SampleBean>();
+
+		String [] arrayDate = selectUserPara.getUserData().split("-");
+		userDate = DateUtility.getEndToday(Integer.parseInt(arrayDate[0]), 
+				Integer.parseInt(arrayDate[1]), Integer.parseInt(arrayDate[2]), 0);
 
 		Map<String, Object> mapSelect = new HashMap<String, Object>();
-		mapSelect.put("userName", name);
+		mapSelect.put("insertDate", userDate);
 
 		try {
-			userModel = slaveDao.getMapper(SlaveDao.class).selectSampleByName(mapSelect);
+			userList = slaveDao.getMapper(SlaveDao.class).selectSampleListByName(mapSelect);
 		} catch (Exception e) {
 			logger.error("Exception error", e);
 		}
 
-		if(userModel != null) {
+		for (UserModel userModel : userList) {
 			sample = new SampleBean();
 			sample.setUserModel(userModel);
 			if(userModel.getUserImg() != null) {
@@ -159,9 +165,10 @@ public class SampleServiceImpl implements SampleService {
 				String imgAsBase64 = "data:image/png;base64," + imgDataAsBase64;
 				sample.setUserImage(imgAsBase64);
 			}
+			sampleList.add(sample);
 		}
 
-		return sample;
+		return sampleList;
 	}
 
 	@Override

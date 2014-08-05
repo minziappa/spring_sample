@@ -1,4 +1,4 @@
-# The sample for quick start a project
+# The sample for quick start project
 
 By Kim woong joon
 kim_woongjoon@cyberagent.co.jp

@@ -1,5 +1,7 @@
 package io.sample.controller;
 
+import java.util.Map;
+
 import io.sample.bean.model.SampleModel;
 import io.sample.bean.para.InsertUserPara;
 import io.sample.service.SampleService;
@@ -93,8 +95,9 @@ public class AdminController extends AbstractBaseController {
 			response.setStatus(400);
 			// handleValidator(bindingResult.getAllErrors());
 
-			AdminValidator validator = new AdminValidator();
-			model.addAttribute("errorMessage", validator.handleValidator2(bindingResult.getAllErrors(), insertUserPara));
+			//AdminValidator validator = new AdminValidator();
+			Map<String, String> mapErrorMessage = this.handleErrorMessages(bindingResult.getAllErrors());
+			model.addAttribute("errorMessage",  mapErrorMessage);
 			model.addAttribute("model", sampleModel);
 			return "sample/admin";
 		}

@@ -107,7 +107,7 @@ public abstract class AbstractBaseController {
         }
 	}
 
-	public Map<String, String> handleErrorMessages(List<ObjectError> errorList, Object object) throws IOException {
+	public Map<String, String> handleErrorMessages(List<ObjectError> errorList) throws IOException {
 
 		Map<String, String> mapErrorMsg = new HashMap<String, String>();
 

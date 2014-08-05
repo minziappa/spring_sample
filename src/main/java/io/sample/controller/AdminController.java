@@ -1,5 +1,7 @@
 package io.sample.controller;
 
+import java.util.Map;
+
 import io.sample.bean.model.SampleModel;
 import io.sample.bean.para.InsertUserPara;
 import io.sample.service.SampleService;
@@ -91,17 +93,19 @@ public class AdminController extends AbstractBaseController {
 		if (bindingResult.hasErrors()) {
 			logger.error("insertUser.sp - it is occured a parameter error.");
 			response.setStatus(400);
-			handleValidator(bindingResult.getAllErrors());
-			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
+			// handleValidator(bindingResult.getAllErrors());
+
+			AdminValidator validator = new AdminValidator();
+			model.addAttribute("errorMessage", validator.handleValidator2(bindingResult.getAllErrors(), insertUserPara));
 			model.addAttribute("model", sampleModel);
-			return "error/error";
+			return "sample/admin";
 		}
 
 		// Execute the transaction
 		if(!sampleService.insertSample(insertUserPara)) {
 			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
 			model.addAttribute("model", sampleModel);
-			return "error/error";
+			return "sample/admin";
 		}
 
 		return "redirect:/sample/index/index.do";

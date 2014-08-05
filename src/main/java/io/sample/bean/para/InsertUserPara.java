@@ -8,16 +8,16 @@ import org.springframework.web.multipart.MultipartFile;
 public class InsertUserPara {
 
     @NotNull(message = "userName")
-    @Size(min = 1, max = 45 ,message = "userName")
+    @Size(min = 1, max = 45 ,message = "userName must not exceed {max} characters")
 	private String userName;
     @NotNull(message = "userPwd")
-    @Size(min = 1, max = 45 ,message = "userPwd")
+    @Size(min = 1, max = 45 ,message = "userPwd must not exceed {max} characters")
 	private String userPwd;
     @NotNull(message = "userStatus")
-    @Size(min = 1, max = 45 ,message = "userStatus")
+    @Size(min = 1, max = 2 ,message = "userStatus must not exceed {max} characters")
 	private String userStatus;
     @NotNull(message = "userAge")
-    @Size(min = 1, max = 3 ,message = "userAge")
+    @Size(min = 1, max = 3 ,message = "userAge must not exceed {max} characters")
 	private String userAge;
 
 	private MultipartFile userImg;

@@ -13,6 +13,8 @@
 	    <!-- You can add the Intercept-Url like the following this -->
 			<intercept-url pattern="/sample/admin/**" access="hasRole('ROLE_ADMIN')" />
 			<intercept-url pattern="/sample/user/**" access="hasRole('ROLE_ADMIN')" />
+			<intercept-url pattern="/sample/file/**" access="hasRole('ROLE_ADMIN')" />
+			<intercept-url pattern="/sample/file/**" access="hasRole('ROLE_USER')" />
 			<intercept-url pattern="/sample/user/**" access="hasRole('ROLE_USER')" />
 
 	    <logout logout-url="/sample/auth/logout" logout-success-url="/sample/index/"/>

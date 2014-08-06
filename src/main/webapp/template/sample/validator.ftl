@@ -9,10 +9,10 @@
 
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="panel-title">Select Data</h3>
+						<h3 class="panel-title">Annotation Validate</h3>
 					</div>
 					<div class="panel-body">
-						<form action="/sample/user/selectUser.do" method="POST">
+						<form action="/sample/index/validator.do" method="POST">
 		          <b style="color:red" >
 
 <#if errorMessage??>
@@ -29,22 +29,22 @@
 									<td style="padding: 3px;">Example) 2014-07-01</td>
 								</tr>
 								<tr>
-									<td style="padding: 3px;">User Name</td>
+									<td style="padding: 3px;">aaName</td>
 									<td style="padding: 3px;"><input type="text" name="aaName.aa" size="10" maxlength="14"></td>
 									<td style="padding: 3px;"> aaName.aa </td>
 								</tr>
 								<tr>
-									<td style="padding: 3px;">User Name</td>
+									<td style="padding: 3px;">aaName</td>
 									<td style="padding: 3px;"><input type="text" name="aaName.aa" size="10" maxlength="14"></td>
 									<td style="padding: 3px;"> aaName.aa </td>
 								</tr>
 								<tr>
-									<td style="padding: 3px;">User Name</td>
+									<td style="padding: 3px;">bbName</td>
 									<td style="padding: 3px;"><input type="text" name="bbName.bb" size="10" maxlength="14"></td>
 									<td style="padding: 3px;"> bbName.bb </td>
 								</tr>
 								<tr>
-									<td style="padding: 3px;">User Name</td>
+									<td style="padding: 3px;">bbName</td>
 									<td style="padding: 3px;"><input type="text" name="bbName.bb" size="10" maxlength="14"></td>
 									<td style="padding: 3px;"> bbName.bb </td>
 								</tr>
@@ -62,36 +62,6 @@
 						</form>
 					</div>
 				</div> <!-- /panel panel-primary -->
-				<table class="table table-striped">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>User Name</th>
-              <th>User Status</th>
-              <th>User Age</th>
-            </tr>
-          </thead>
-          <tbody>
-
-<#if model??>
-	<#if model.sampleList?has_content>
-		<#list model.sampleList as sample>
-            <tr>
-              <td>${sample.userModel.userId?if_exists}</td>
-              <td>${sample.userModel.userName?if_exists}</td>
-              <td>${sample.userModel.userStatus?if_exists}</td>
-              <td>${sample.userModel.userAge?if_exists}</td>
-              <td><img alt="user image" src="${sample.userImage}" /></td>
-            </tr>
-    </#list>
-	<#else>
-	 No data
-	</#if>
-<#else>
- No data
-</#if>
-          </tbody>
-        </table>
 
       </div>
 <#include "../common/foot.ftl">

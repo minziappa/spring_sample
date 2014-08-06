@@ -57,7 +57,6 @@ public class AdminValidator implements Validator, BaseValidator {
 		        		mapErrorMsg.put(fieldError.getField(), fieldError.getDefaultMessage());
 		        	}
 		        }
-
 			}
 		} else if(object instanceof CsvFilePara) {
 			//...

@@ -17,7 +17,7 @@
 
 <#if errorMessage??>
 	<#list errorMessage?keys as key>
-	    ${errorMessage[key]} <br/>
+	    ●${errorMessage[key]} <br/>
 	</#list>
 </#if>
 
@@ -31,27 +31,27 @@
 								<tr>
 									<td style="padding: 3px;">aaName</td>
 									<td style="padding: 3px;"><input type="text" name="aaName.aa" size="10" maxlength="14"></td>
-									<td style="padding: 3px;"> aaName.aa </td>
+									<td style="padding: 3px;">Example) aaName.aa </td>
 								</tr>
 								<tr>
 									<td style="padding: 3px;">aaName</td>
 									<td style="padding: 3px;"><input type="text" name="aaName.aa" size="10" maxlength="14"></td>
-									<td style="padding: 3px;"> aaName.aa </td>
+									<td style="padding: 3px;">Example) aaName.aa </td>
 								</tr>
 								<tr>
 									<td style="padding: 3px;">bbName</td>
 									<td style="padding: 3px;"><input type="text" name="bbName.bb" size="10" maxlength="14"></td>
-									<td style="padding: 3px;"> bbName.bb </td>
+									<td style="padding: 3px;">Example) bbName.bb </td>
 								</tr>
 								<tr>
 									<td style="padding: 3px;">bbName</td>
 									<td style="padding: 3px;"><input type="text" name="bbName.bb" size="10" maxlength="14"></td>
-									<td style="padding: 3px;"> bbName.bb </td>
+									<td style="padding: 3px;">Example) bbName.bb </td>
 								</tr>
 								<tr>
 									<td style="padding: 3px;">Phone Number</td>
 									<td style="padding: 3px;"><input type="text" name="phoneNumber" size="20" maxlength="20"></td>
-									<td style="padding: 3px;"> 81-080-1234-6789 </td>
+									<td style="padding: 3px;">Example) 81-080-1234-6789 </td>
 								</tr>
 								<tr>
 									<td style="padding: 3px;"><input class="btn btn-sm btn-primary" type="submit" value="Search"/></td>

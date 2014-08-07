@@ -1,7 +1,5 @@
 package io.sample.bean.para;
 
-import java.util.Date;
-
 import io.sample.annotation.Phone;
 import io.sample.bean.para.embed.AaName;
 import io.sample.bean.para.embed.BbName;
@@ -10,17 +8,14 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class ValidatorPara {
 
 	@NotNull
 	@Size(min = 1, max = 10 ,message = "userName must not exceed {max} characters")
 	private String userName;
 
-//    @NotNull(message = "userData")
-//    @DateTimeFormat(pattern="yyyy-MM-dd")
-//    private Date userData;
+    @NotNull(message = "userData")
+    private String userData;
 
     @NotNull(message = "aaName must be datas.")
     @Phone(message = "the phone number is wrong.")

@@ -1,9 +1,5 @@
 package io.sample.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import io.sample.bean.model.SampleModel;
 import io.sample.bean.para.CsvFilePara;
 import io.sample.bean.para.DownLoadFilePara;
@@ -11,7 +7,6 @@ import io.sample.service.SampleService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -23,7 +18,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /***
@@ -175,6 +169,7 @@ public class FileController extends AbstractBaseController {
 
 		return "redirect:/sample/file/downloadFiles.do";
 	}
+
 
 //	@RequestMapping(value = {"filesample.do"})
 //	public String filesample(@Valid CsvFilePara csvFilePara, BindingResult bindingResult, 

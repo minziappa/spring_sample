@@ -47,6 +47,13 @@ public class SampleServiceImpl implements SampleService {
 	@Autowired
 	private Md5PasswordEncoder passwordEncoder;
 
+	private String removeQuotes(String source) {
+    	if(source.contains("\"")) {
+    		source = source.replace("\"", "");
+    	}
+    	return source;
+	}
+
 	private boolean saveCsvFile(CsvFilePara csvFilePara) throws Exception {
 
 		String strReadResult = null;
@@ -67,12 +74,14 @@ public class SampleServiceImpl implements SampleService {
 
 			int i=0;
 			while((strReadResult = lnReader.readLine()) != null) {
-				String [] strCell = strReadResult.split(",");
+				// String [] strCell = strReadResult.split(",");
+				// Handle for this string like "aaa,bbb"
+				String [] strCell = strReadResult.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 				Map<String, Object> mapData = new HashMap<String, Object>();
 
 				mapData.put("dataTitle", file.getOriginalFilename());
-				mapData.put("dataDummy1", strCell[0]);
-				mapData.put("dataDummy2", strCell[1]);
+				mapData.put("dataDummy1", removeQuotes(strCell[0]));
+				mapData.put("dataDummy2", removeQuotes(strCell[1]));
 				mapData.put("dataDummy3", strCell[2]);
 
 				masterBatchDao.getMapper(MasterDao.class).insertData(mapData);

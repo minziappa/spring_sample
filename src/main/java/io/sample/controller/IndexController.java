@@ -78,7 +78,7 @@ public class IndexController extends AbstractBaseController {
      * @since  1.7
      */
     @RequestMapping(value = {"vali.do"})
-	public String validator() throws Exception {
+	public String vali() throws Exception {
 		return "sample/validator";
 	}
 
@@ -111,6 +111,11 @@ public class IndexController extends AbstractBaseController {
 		}
 
 		return "sample/validator";
+	}
+
+    @RequestMapping(value = {"layout.do"})
+	public String layout() throws Exception {
+		return "layout/home";
 	}
 
 }

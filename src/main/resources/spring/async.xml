@@ -15,7 +15,7 @@
 			<constructor-arg value="2" />
     </bean>
 
-    <task:executor id="threadPoolTaskExecutor" pool-size="2" queue-capacity="3"/>
+    <task:executor id="threadPoolTaskExecutor" pool-size="2" queue-capacity="2"/>
     <task:annotation-driven executor="executer" /> 
 
 </beans>

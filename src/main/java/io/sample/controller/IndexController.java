@@ -2,10 +2,8 @@ package io.sample.controller;
 
 import java.util.Map;
 
-import io.sample.bean.para.SelectUserPara;
 import io.sample.bean.para.ValidatorPara;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 

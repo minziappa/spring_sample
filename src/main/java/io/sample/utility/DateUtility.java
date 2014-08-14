@@ -273,6 +273,12 @@ public class DateUtility {
 		return calDay.get(Calendar.YEAR);
 	}
 
+	public static int getNowYear(long timeMillis) {
+		Calendar calDay = Calendar.getInstance();
+		calDay.setTimeInMillis(timeMillis);
+		return calDay.get(Calendar.YEAR);
+	}
+
 	public static int getNowMonth() {
 		Calendar calDay = Calendar.getInstance();
 		return calDay.get(Calendar.MONTH) + 1;

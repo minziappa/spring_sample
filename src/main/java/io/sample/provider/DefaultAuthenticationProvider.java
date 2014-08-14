@@ -46,6 +46,8 @@ public class DefaultAuthenticationProvider implements AuthenticationProvider {
 		try {
 			logger.info("UserDetailsService >> userId >1> " + userName);
 
+			/////////////// You can make another authentication/////////////
+
 			// Get a user information form DB.
 			Map<String, Object> mapSelect = new HashMap<String, Object>();
 			mapSelect.put("userName", userName);
@@ -61,7 +63,6 @@ public class DefaultAuthenticationProvider implements AuthenticationProvider {
 			}
 
 	        Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-	        logger.info("UserDetailsService >> userId >2> " + userName);
 	        // For java1.6
 	        switch(Integer.valueOf(userModel.getUserStatus())) {
 	            case 1:
@@ -72,14 +73,12 @@ public class DefaultAuthenticationProvider implements AuthenticationProvider {
 	                authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 	            break;
 	        }
-	        logger.info("UserDetailsService >> userId >3> " + userName);
 
 	        boolean enabled = true;
 	        boolean accountNonExpired = true;
 	        boolean credentialsNonExpired = true;
 	        boolean accountNonLocked = true;
 
-	        // Add a user's the game Id. userModel.getUserPwd()
 	        user = new ExtendUser(userModel.getUserName(),  passwordEncoder.encodePassword("test", null), enabled, 
 	        		accountNonExpired, credentialsNonExpired, accountNonLocked, authorities, userModel);
 

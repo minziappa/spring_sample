@@ -2,7 +2,6 @@ package io.sample.controller;
 
 import java.util.Map;
 
-import io.sample.bean.SampleBean;
 import io.sample.bean.model.SampleModel;
 import io.sample.bean.para.SelectUserPara;
 import io.sample.service.SampleService;

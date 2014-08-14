@@ -74,7 +74,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	        boolean credentialsNonExpired = true;
 	        boolean accountNonLocked = true;
 
-	        // Add a user's the game Id. userModel.getUserPwd()
 	        user = new ExtendUser(userModel.getUserName(), passwordEncoder.encodePassword("test", null), enabled, 
 	        		accountNonExpired, credentialsNonExpired, accountNonLocked, authorities, userModel);
 

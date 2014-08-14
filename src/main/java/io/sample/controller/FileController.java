@@ -160,7 +160,6 @@ public class FileController extends AbstractBaseController {
 			this.handleFileDownload(downLoadFilePara.getFileName(), sampleService.downLoadCsvFile(), response);			
 		} else {
 			realPath  = request.getSession().getServletContext().getRealPath("/");
-			logger.info("path >>> " + realPath);
 			this.handleFileSave(downLoadFilePara.getFileName(), sampleService.downLoadCsvFile(), realPath);			
 		}
 

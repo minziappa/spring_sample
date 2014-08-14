@@ -52,7 +52,6 @@ public abstract class AbstractBaseController {
 		if(obj instanceof ExtendUser) {
 			ExtendUser extendUser = (ExtendUser) obj;
 			session.setAttribute("user", extendUser.getUsername());
-			logger.info("handle loging >>>>>>> user = " + extendUser.getUsername());
 			session.setMaxInactiveInterval(100*60);
 		}
 	}
@@ -161,8 +160,6 @@ public abstract class AbstractBaseController {
             String value = request.getParameter(name);
             logger.error("SQLException:" + i + " parameter is name=" + name + ", value=" + value);
         }
-
-        logger.error("SQLException's trace:", e);
 
 		response.setContentLength(0);
 		response.setStatus(500);

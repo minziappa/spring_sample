@@ -93,9 +93,7 @@ public class AdminController extends AbstractBaseController {
 		if (bindingResult.hasErrors()) {
 			logger.error("insertUser.sp - it is occured a parameter error.");
 			response.setStatus(400);
-			// handleValidator(bindingResult.getAllErrors());
 
-			//AdminValidator validator = new AdminValidator();
 			Map<String, String> mapErrorMessage = this.handleErrorMessages(bindingResult.getAllErrors());
 			model.addAttribute("errorMessage",  mapErrorMessage);
 			model.addAttribute("model", sampleModel);

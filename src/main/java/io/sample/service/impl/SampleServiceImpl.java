@@ -1,9 +1,9 @@
 package io.sample.service.impl;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -61,7 +61,8 @@ public class SampleServiceImpl implements SampleService {
 		MultipartFile file = csvFilePara.getCsvFile();
 		InputStream in = null;
 		InputStreamReader isr = null;
-		LineNumberReader lnReader = null;
+		BufferedReader bfReader = null;
+		// LineNumberReader lnReader = null;
 
 		if(file == null) {
 			return false;
@@ -69,13 +70,13 @@ public class SampleServiceImpl implements SampleService {
 		
 		try {
 			in = file.getInputStream();
-			isr = new InputStreamReader(in);
-			lnReader = new LineNumberReader(isr);
+			// For supporting UTF-8
+			isr = new InputStreamReader(in,"UTF-8");
+			bfReader = new BufferedReader(isr);
 
 			int i=0;
-			while((strReadResult = lnReader.readLine()) != null) {
-				// String [] strCell = strReadResult.split(",");
-				// Handle for this string like "aaa,bbb"
+			while((strReadResult = bfReader.readLine()) != null) {
+
 				String [] strCell = strReadResult.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 				Map<String, Object> mapData = new HashMap<String, Object>();
 
@@ -93,8 +94,8 @@ public class SampleServiceImpl implements SampleService {
 			logger.error("Exception error", e);
 			// masterBatchDao.rollback();
 		} finally {
-			if(lnReader != null) {
-				lnReader.close();
+			if(bfReader != null) {
+				bfReader.close();
 			}
 			if(isr != null) {
 				isr.close();
@@ -123,7 +124,6 @@ public class SampleServiceImpl implements SampleService {
 		}
 
 		String encodedPwd = passwordEncoder.encodePassword(insertUserPara.getUserPwd(), null);
-		logger.info("encodedPwd is >>> " + encodedPwd);
 
 		Map<String, Object> mapSample = new HashMap<String, Object>();
 		mapSample.put("userName", insertUserPara.getUserName());
@@ -208,7 +208,7 @@ public class SampleServiceImpl implements SampleService {
 
 	@Async
 	@Override
-	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	public void asyncSaveCsvFile(CsvFilePara csvFilePara) throws Exception {
 		saveCsvFile(csvFilePara);
 	}

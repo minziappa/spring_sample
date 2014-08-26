@@ -302,6 +302,11 @@
 			<artifactId>spring-modules-jakarta-commons</artifactId>
 			<version>0.9</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt-spring31</artifactId>
+			<version>1.9.2</version>
+		</dependency>
 	</dependencies>
 
 </project>

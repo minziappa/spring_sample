@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+ <!-- Configuration for encryptor, based on environment variables.         -->
+ <!-- In this example, the encryption password will be read from an        -->
+ <!-- environment variable called "APP_ENCRYPTION_PASSWORD" which, once    --> 
+ <!-- the application has been started, could be safely unset.             -->
+ <bean id="environmentVariablesConfiguration"
+     class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
+   <property name="algorithm" value="PBEWithMD5AndDES" />
+   <property name="passwordEnvName" value="jasypt" />
+ </bean>
+
+ <!-- The will be the encryptor used for decrypting configuration values.  -->
+ <bean id="configurationEncryptor"
+     class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+   <property name="config" ref="environmentVariablesConfiguration" />
+ </bean>
+
+ <!-- The EncryptablePropertyPlaceholderConfigurer will read the           -->
+ <!-- .properties files and make their values accessible as ${var}.        -->
+ <!-- Our "configurationEncryptor" bean (which implements                  --> 
+ <!-- org.jasypt.encryption.StringEncryptor) is set as a constructor arg.  -->
+ <bean id="propertyConfigurer"
+     class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+   <constructor-arg ref="configurationEncryptor" />
+   <property name="locations">
+     <list>
+       <value>/WEB-INF/classes/application.properties</value>
+     </list>
+   </property>
+   
+ </bean>
+</beans>

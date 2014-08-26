@@ -62,7 +62,7 @@ dependencies {
 }
 
 jettyRun {
-	httpPort = 9001
+	httpPort = 8080
 	reload = 'automatic'
 	scanIntervalSeconds = 2
 	/* Change context path (base url). otherwise defaults to name of project */
@@ -70,7 +70,7 @@ jettyRun {
 }
 
 /* Multi-users environment */
-// -Pprofile=develop
+// gradle jettyRun -Pprofile=develop
 final String DEFAULT_PROFILE = 'develop'
 allprojects {
 	if (!project.hasProperty('profile') || !profile) {

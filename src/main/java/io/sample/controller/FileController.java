@@ -149,26 +149,56 @@ public class FileController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"handleDownloadFiles.do"})
-	public String handleDownloadFiles(@Valid DownLoadFilePara downLoadFilePara,
+	@RequestMapping(value = {"downloadCsvFile.do"})
+	public void downloadCsvFile(@Valid DownLoadFilePara downLoadFilePara,
 			HttpServletResponse response, HttpServletRequest request, 
 			RedirectAttributes redirect) throws Exception {
 
 		String realPath  = null;
 		if(downLoadFilePara.getOption() == null || downLoadFilePara.getOption().equals("0")) {
 			// Down Load file
-			this.handleFileDownload(downLoadFilePara.getFileName(), sampleService.downLoadCsvFile(), response);			
+			this.handleFileDownload(downLoadFilePara.getFileName(), "csv", sampleService.makeCsvFile(), response);			
 		} else {
 			realPath  = request.getSession().getServletContext().getRealPath("/");
-			this.handleFileSave(downLoadFilePara.getFileName(), sampleService.downLoadCsvFile(), realPath);			
+			this.handleFileSave(downLoadFilePara.getFileName(), "csv", sampleService.makeCsvFile(), realPath);			
 		}
 
 		// Add parameter for Redirect URL
-		redirect.addFlashAttribute("filePath", "/" + downLoadFilePara.getFileName());
-
-		return "redirect:/sample/file/downloadFiles.do";
+		// redirect.addFlashAttribute("filePath", "/" + downLoadFilePara.getFileName());
+		//return "redirect:/sample/file/downloadFiles.do";
 	}
 
+    /**
+     * Handle a PDF file for downloading.
+     * 
+     * @param  DownLoadFilePara 
+     *         A file name
+     * @param  HttpServletResponse 
+     *         response
+     *         
+     * @throws  Exception
+     *          If a error occur, ...
+     *
+     * @return String
+     * 		   a file name of FTL.
+     * 
+     * @since  1.7
+     */
+	@RequestMapping(value = {"downloadPdfFile.do"})
+	public void downloadPdfFile(@Valid DownLoadFilePara downLoadFilePara,
+			HttpServletResponse response, HttpServletRequest request, 
+			RedirectAttributes redirect) throws Exception {
+
+		String realPath  = null;
+		if(downLoadFilePara.getOption() == null || downLoadFilePara.getOption().equals("0")) {
+			// Down Load file
+			this.handleFileDownload(downLoadFilePara.getFileName(), "pdf", sampleService.makePdfFile(), response);			
+		} else {
+			realPath  = request.getSession().getServletContext().getRealPath("/");
+			this.handleFileSave(downLoadFilePara.getFileName(), "pdf", sampleService.makePdfFile(), realPath);			
+		}
+
+	}
 
 //	@RequestMapping(value = {"filesample.do"})
 //	public String filesample(@Valid CsvFilePara csvFilePara, BindingResult bindingResult, 

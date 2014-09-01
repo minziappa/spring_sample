@@ -15,6 +15,7 @@ public interface SampleService {
 
 	public boolean syncSaveCsvFile(CsvFilePara csvFilePara) throws Exception;
 	public void asyncSaveCsvFile(CsvFilePara csvFilePara) throws Exception;
-	public byte[] downLoadCsvFile() throws Exception;
+	public byte[] makeCsvFile() throws Exception;
+	public byte[] makePdfFile() throws Exception;
 
 }

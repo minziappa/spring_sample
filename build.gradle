@@ -57,8 +57,8 @@ dependencies {
 	compile "org.hibernate:hibernate-validator:4.3.0.Final"
 	compile "org.mybatis:mybatis:3.2.2"
 	compile "org.mybatis:mybatis-spring:1.2.0"
-	compile "org.springmodules:spring-modules-jakarta-commons:0.8"	
-	compile "org.jasypt:jasypt-spring31:1.9.2"
+	compile "org.springmodules:spring-modules-jakarta-commons:0.8"
+	compile "org.apache.pdfbox:pdfbox:1.8.6"
 }
 
 jettyRun {

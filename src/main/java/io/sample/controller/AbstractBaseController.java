@@ -31,18 +31,15 @@ public abstract class AbstractBaseController {
 	final Locale LOCALE = Locale.JAPAN;
 	final Logger logger = LoggerFactory.getLogger(AbstractBaseController.class);
 
-	private String getFileName(String fileName) {
-		if(fileName == null) {
-			fileName = "default.csv";
-		} else {
-			StringBuffer sb = new StringBuffer();
-			String [] arrayFileName = fileName.split("\\.");
-			if(arrayFileName.length < 2) {
-				sb.append(fileName).append(".").append("csv");
-				fileName = sb.toString();
-			}
+	private String getFileName(String fileName, String extend) {
+
+		StringBuffer sb = new StringBuffer();
+		String [] arrayFileName = fileName.split("\\.");
+		if(arrayFileName.length < 2) {
+			sb.append(fileName).append(".").append(extend);
+			fileName = sb.toString();
 		}
-		
+
 		return fileName;
 	}
 
@@ -56,9 +53,9 @@ public abstract class AbstractBaseController {
 		}
 	}
 
-	public void handleFileDownload(String fileName, byte[] byteOut, HttpServletResponse response) throws IOException {
+	public void handleFileDownload(String fileName, String extend, byte[] byteOut, HttpServletResponse response) throws IOException {
 
-		fileName = this.getFileName(fileName);
+		fileName = this.getFileName(fileName, extend);
 
 		response.setHeader("Content-Length", String.valueOf(byteOut.length));
 		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
@@ -74,9 +71,9 @@ public abstract class AbstractBaseController {
         os.close();
 	}
 
-	public void handleFileSave(String fileName, byte[] byteOut, String path) throws IOException {
+	public void handleFileSave(String fileName, String extend, byte[] byteOut, String path) throws IOException {
 
-		fileName = this.getFileName(fileName);
+		fileName = this.getFileName(fileName, extend);
 
 		File file = new File(path + fileName);
 		logger.info("saving path = " + file.getPath());

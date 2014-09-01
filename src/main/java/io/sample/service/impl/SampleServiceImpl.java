@@ -1,6 +1,7 @@
 package io.sample.service.impl;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -22,6 +23,11 @@ import io.sample.utility.DateUtility;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -214,7 +220,7 @@ public class SampleServiceImpl implements SampleService {
 	}
 
 	@Override
-	public byte[] downLoadCsvFile() throws Exception {
+	public byte[] makeCsvFile() throws Exception {
 		StringBuffer sb = new StringBuffer();
 
 		for(int i=0; i<10; i++) {
@@ -225,6 +231,42 @@ public class SampleServiceImpl implements SampleService {
 		}
 
 		return sb.toString().getBytes();
+	}
+
+	@Override
+	public byte[] makePdfFile() throws Exception {
+
+		ByteArrayOutputStream output = new ByteArrayOutputStream(); 
+
+		// Create a document and add a page to it
+		PDDocument document = new PDDocument();
+		PDPage page = new PDPage();
+		document.addPage( page );
+
+		// Create a new font object selecting one of the PDF base fonts
+		PDFont font = PDType1Font.HELVETICA_BOLD;
+
+		// Start a new content stream which will "hold" the to be created content
+		PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+		// Define a text content stream using the selected font, moving the cursor and drawing the text "Hello World"
+		contentStream.beginText();
+		contentStream.setFont( font, 12 );
+		contentStream.moveTextPositionByAmount( 100, 700 );
+		contentStream.drawString( "Hello World" );
+		contentStream.endText();
+
+		// Make sure that the content stream is closed:
+		contentStream.close();
+		//document.
+
+		// Save the results and ensure that the document is properly closed:
+		// document.save( "Hello World.pdf");
+		// Save the results in memory
+		document.save(output);
+		document.close();
+		
+		return output.toByteArray();
 	}
 
 }

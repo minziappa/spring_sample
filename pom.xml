@@ -303,10 +303,11 @@
 			<version>0.9</version>
 		</dependency>
 		<dependency>
-			<groupId>org.jasypt</groupId>
-			<artifactId>jasypt-spring31</artifactId>
-			<version>1.9.2</version>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>1.8.6</version>
 		</dependency>
+
 	</dependencies>
 
 </project>

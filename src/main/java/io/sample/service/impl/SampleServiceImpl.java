@@ -114,6 +114,24 @@ public class SampleServiceImpl implements SampleService {
 		return true;
 	}
 
+	private void encodeImgAsBase64(List<UserModel> userList, List<SampleBean> sampleList) {
+
+		SampleBean sample = null;
+
+		for (UserModel userModel : userList) {
+			sample = new SampleBean();
+			sample.setUserModel(userModel);
+			if(userModel.getUserImg() != null) {
+				byte[] imgBytesAsBase64 = Base64.encodeBase64(userModel.getUserImg());
+				String imgDataAsBase64 = new String(imgBytesAsBase64);
+				String imgAsBase64 = "data:image/png;base64," + imgDataAsBase64;
+				sample.setUserImage(imgAsBase64);
+			}
+			sampleList.add(sample);
+		}
+
+	}
+	
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	@Override
 	public boolean insertSample(InsertUserPara insertUserPara) throws Exception {
@@ -152,7 +170,61 @@ public class SampleServiceImpl implements SampleService {
 	}
 
 	@Override
+	public List<SampleBean> selectSampleList() throws Exception {
+
+		List<UserModel> userList = new ArrayList<UserModel>();
+		List<SampleBean> sampleList = new ArrayList<SampleBean>();
+
+		try {
+			userList = slaveDao.getMapper(SlaveDao.class).selectSampleList();
+		} catch (Exception e) {
+			logger.error("Exception error", e);
+		}
+
+		this.encodeImgAsBase64(userList, sampleList);
+
+		return sampleList;
+	}
+
+	@Override
+	public UserModel selectSampleByName(String name) throws Exception {
+
+		UserModel user = new UserModel();
+
+		Map<String, Object> mapSelect = new HashMap<String, Object>();
+		mapSelect.put("userName", name);
+
+		try {
+			user = slaveDao.getMapper(SlaveDao.class).selectSampleByName(mapSelect);
+		} catch (Exception e) {
+			logger.error("Exception error", e);
+		}
+
+		return user;
+	}
+
+	@Override
 	public List<SampleBean> selectSampleByName(SelectUserPara selectUserPara) throws Exception {
+
+		List<UserModel> userList = new ArrayList<UserModel>();
+		List<SampleBean> sampleList = new ArrayList<SampleBean>();
+
+		Map<String, Object> mapSelect = new HashMap<String, Object>();
+		mapSelect.put("userName", selectUserPara.getUserName());
+
+		try {
+			userList = slaveDao.getMapper(SlaveDao.class).selectSampleListByName(mapSelect);
+		} catch (Exception e) {
+			logger.error("Exception error", e);
+		}
+
+		this.encodeImgAsBase64(userList, sampleList);
+
+		return sampleList;
+	}
+
+	@Override
+	public List<SampleBean> selectSampleByDate(SelectUserPara selectUserPara) throws Exception {
 		SampleBean sample = null;
 		Date userDate = null;
 		List<UserModel> userList = new ArrayList<UserModel>();
@@ -166,22 +238,12 @@ public class SampleServiceImpl implements SampleService {
 		mapSelect.put("insertDate", userDate);
 
 		try {
-			userList = slaveDao.getMapper(SlaveDao.class).selectSampleListByName(mapSelect);
+			userList = slaveDao.getMapper(SlaveDao.class).selectSampleListByDate(mapSelect);
 		} catch (Exception e) {
 			logger.error("Exception error", e);
 		}
 
-		for (UserModel userModel : userList) {
-			sample = new SampleBean();
-			sample.setUserModel(userModel);
-			if(userModel.getUserImg() != null) {
-				byte[] imgBytesAsBase64 = Base64.encodeBase64(userModel.getUserImg());
-				String imgDataAsBase64 = new String(imgBytesAsBase64);
-				String imgAsBase64 = "data:image/png;base64," + imgDataAsBase64;
-				sample.setUserImage(imgAsBase64);
-			}
-			sampleList.add(sample);
-		}
+		this.encodeImgAsBase64(userList, sampleList);
 
 		return sampleList;
 	}

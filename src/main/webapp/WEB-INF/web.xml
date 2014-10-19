@@ -60,15 +60,15 @@
 
 	<error-page>
 		<error-code>404</error-code>
-		<location>/htdocs/error/404error.html</location>
+		<location>/error/404error.html</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
-		<location>/htdocs/error/500error.html</location>
+		<location>/error/500error.html</location>
 	</error-page>
 	<error-page>
 	<error-code>503</error-code>
-		<location>/htdocs/error/503error.html</location>
+		<location>/error/503error.html</location>
 	</error-page>
 
 	<welcome-file-list>

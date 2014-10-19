@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @since   JDK1.7
  */
 @Controller
-@RequestMapping("/index")
 public class IndexController extends AbstractBaseController {
 
 	final Logger logger = LoggerFactory.getLogger(IndexController.class);

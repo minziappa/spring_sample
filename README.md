@@ -21,6 +21,7 @@ kim_woongjoon@cyberagent.co.jp
 
 Create the settings.xml and Settings Details
 /Users/kim_woongjoon/.m2/settings.xml
+Change the loccalhost for the server IP address.
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.0.0"
@@ -41,12 +42,12 @@ Create the settings.xml and Settings Details
           </snapshots>
           <id>central</id>
           <name>libs-releases</name>
-          <url>http://172.28.238.69:8081/artifactory/libs-releases</url>
+          <url>http://localhost:8081/artifactory/libs-releases</url>
         </repository>
         <repository>
           <id>snapshots</id>
           <name>libs-snapshots</name>
-          <url>http://172.28.238.69:8081/artifactory/libs-snapshots</url>
+          <url>http://localhost:8081/artifactory/libs-snapshots</url>
         </repository>
         <repository>
             <id>maven3-repository.dev.java.net</id>
@@ -62,6 +63,36 @@ Create the settings.xml and Settings Details
     <activeProfile>artifactory</activeProfile>
   </activeProfiles>
 </settings>
+```
+
+If you like to use a private repository, you have to set like the following. 
+Change the loccalhost for the server IP address.
+```
+	<repositories>
+		<repository>
+			<id>public</id>
+			<name>Internal Repository</name>
+			<url>http://localhost:8081/nexus/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>stg-common-mvn01</id>
+			<name>stg-common-mvn01-releases</name>
+			<url>http://localhost1:8081/artifactory/libs-releases-local</url>
+		</repository>
+	</repositories>
+
+ 	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>Internal Release Repository</name>
+			<url>http://localhost:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Internal Snapshot Repository</name>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 ```
 
 ## Get started

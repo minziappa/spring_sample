@@ -11,10 +11,10 @@
   </appender>
 
   <appender name="SAMPLE_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
-	<file>/Users/kim_woongjoon/tomcat/logs/sample.log</file>
+	<file>logs/sample.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 		<!-- daily rollover -->
-		<fileNamePattern>/Users/kim_woongjoon/tomcat/logs/sample.log.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+		<fileNamePattern>logs/sample.log.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
 		<!-- keep 90 days' worth of history -->
 		<maxHistory>90</maxHistory>
     </rollingPolicy>

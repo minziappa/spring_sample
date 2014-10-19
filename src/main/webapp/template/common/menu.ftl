@@ -7,8 +7,8 @@
 					<li><a href="/sample/user/user.do">User Page</a></li>
 					<li><a href="/sample/file/uploadFiles.do">Upload files</a></li>
 					<li><a href="/sample/file/downloadFiles.do">Download files</a></li>
-					<li><a href="/sample/index/vali.do">Validate</a></li>
-					<li><a href="/sample/index/layout.do">layout</a></li>
+					<li><a href="/sample/vali.do">Validate</a></li>
+					<li><a href="/sample/layout.do">layout</a></li>
 				</ul>
       </div>
     </div>

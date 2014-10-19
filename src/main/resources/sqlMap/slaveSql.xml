@@ -36,10 +36,42 @@
 			sample_user
 		WHERE
 			user_name = #{userName}
-		Limit 1
+	</select>
+
+	<select id="selectSampleList" parameterType="map" 
+		resultType="io.sample.bean.model.UserModel">
+		SELECT
+			user_id,
+			user_name,
+			user_pwd,
+			user_status,
+			user_age,
+			user_img,
+			insert_date,
+			update_date
+		FROM
+			sample_user
 	</select>
 
 	<select id="selectSampleListByName" parameterType="map" 
+		resultType="io.sample.bean.model.UserModel">
+		SELECT
+			user_id,
+			user_name,
+			user_pwd,
+			user_status,
+			user_age,
+			user_img,
+			insert_date,
+			update_date
+		FROM
+			sample_user
+		WHERE
+			user_name = #{userName}
+		Limit 1
+	</select>
+
+	<select id="selectSampleListByDate" parameterType="map" 
 		resultType="io.sample.bean.model.UserModel">
 		SELECT
 			user_id,

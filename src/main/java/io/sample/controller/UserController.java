@@ -58,6 +58,14 @@ public class UserController extends AbstractBaseController {
      */
 	@RequestMapping(value = {"user.do"})
 	public String user(ModelMap model) throws Exception {
+
+		SampleModel sampleModel = new SampleModel();
+
+		// Execute the transaction
+		sampleModel.setSampleList(sampleService.selectSampleList());
+
+		model.addAttribute("model", sampleModel);
+
 		return "sample/user";
 	}
 

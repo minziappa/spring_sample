@@ -22,47 +22,27 @@
 </#if>
 
 		          </b>
-							<table style="border-collapse: collapse;">
-								<tr>
-									<td style="padding: 3px;">A date</td>
-									<td style="padding: 3px;"><input type="text" name="userData" size="10" maxlength="14"></td>
-									<td style="padding: 3px;">Example) 2014-07-01</td>
-								</tr>
-								<tr>
-									<td style="padding: 3px;">User Name</td>
-									<td style="padding: 3px;"><input type="text" name="aaName.aa" size="10" maxlength="14"></td>
-									<td style="padding: 3px;"> aaName.aa </td>
-								</tr>
-								<tr>
-									<td style="padding: 3px;">User Name</td>
-									<td style="padding: 3px;"><input type="text" name="aaName.aa" size="10" maxlength="14"></td>
-									<td style="padding: 3px;"> aaName.aa </td>
-								</tr>
-								<tr>
-									<td style="padding: 3px;">User Name</td>
-									<td style="padding: 3px;"><input type="text" name="bbName.bb" size="10" maxlength="14"></td>
-									<td style="padding: 3px;"> bbName.bb </td>
-								</tr>
-								<tr>
-									<td style="padding: 3px;">User Name</td>
-									<td style="padding: 3px;"><input type="text" name="bbName.bb" size="10" maxlength="14"></td>
-									<td style="padding: 3px;"> bbName.bb </td>
-								</tr>
-								<tr>
-									<td style="padding: 3px;">Phone Number</td>
-									<td style="padding: 3px;"><input type="text" name="phoneNumber" size="20" maxlength="20"></td>
-									<td style="padding: 3px;"> 81-080-1234-6789 </td>
-								</tr>
-								<tr>
-									<td style="padding: 3px;"><input class="btn btn-sm btn-primary" type="submit" value="Search"/></td>
-									<td style="padding: 3px;"></td>
-									<td style="padding: 3px;"></td>
-								</tr>
-							</table>
+						<table style="border-collapse: collapse;">
+							<tr>
+								<td style="padding: 3px;">A name</td>
+								<td style="padding: 3px;"><input type="text" name="userName" size="10" maxlength="14"></td>
+								<td style="padding: 3px;">Example)test1</td>
+							</tr>
+							<tr>
+								<td style="padding: 3px;">A date</td>
+								<td style="padding: 3px;"><input type="text" name="userData" size="10" maxlength="14"></td>
+								<td style="padding: 3px;">Example)2014-07-01</td>
+							</tr>
+							<tr>
+								<td style="padding: 3px;"><input class="btn btn-sm btn-primary" type="submit" value="Search"/></td>
+								<td style="padding: 3px;"></td>
+								<td style="padding: 3px;"></td>
+							</tr>
+						</table>
 						</form>
 					</div>
 				</div> <!-- /panel panel-primary -->
-				<table class="table table-striped">
+		<table class="table table-striped">
           <thead>
             <tr>
               <th>#</th>

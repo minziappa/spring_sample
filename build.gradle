@@ -15,7 +15,6 @@ jar {
 }
 
 repositories {
-	mavenLocal()
     mavenCentral()
 }
 
@@ -25,8 +24,6 @@ configurations {
 }
 
 dependencies {
-	provided "org.apache.tomcat:servlet-api:6.0.33"
-	testCompile "junit:junit:4.+"
 	compile "commons-beanutils:commons-beanutils:1.8.3"
 	compile "commons-codec:commons-codec:1.4"
 	compile "commons-configuration:commons-configuration:1.9"
@@ -59,6 +56,9 @@ dependencies {
 	compile "org.mybatis:mybatis-spring:1.2.0"
 	compile "org.springmodules:spring-modules-jakarta-commons:0.8"
 	compile "org.apache.pdfbox:pdfbox:1.8.6"
+	provided "org.apache.tomcat:servlet-api:6.0.33"
+	//provided "org.apache.tomcat:tomcat-servlet-api:7.0.56"
+	testCompile "junit:junit:4.+"
 }
 
 jettyRun {

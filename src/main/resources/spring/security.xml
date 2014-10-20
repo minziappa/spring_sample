@@ -17,11 +17,11 @@
 			<intercept-url pattern="/sample/file/**" access="hasRole('ROLE_USER')" />
 			<intercept-url pattern="/sample/user/**" access="hasRole('ROLE_USER')" />
 
-	    <logout logout-url="/sample/auth/logout" logout-success-url="/sample/index/"/>
+	    <logout logout-url="/sample/auth/logout" logout-success-url="/sample/"/>
 	    <form-login
             login-page="/sample/login/login.do"
             authentication-failure-url="/sample/login/login.do?error=true"
-            default-target-url="/sample/index/"/>
+            default-target-url="/sample/"/>
 	</http>
 
 	<!--  

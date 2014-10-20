@@ -98,7 +98,6 @@ public class SampleServiceImpl implements SampleService {
 
 		} catch (IOException e) {
 			logger.error("Exception error", e);
-			// masterBatchDao.rollback();
 		} finally {
 			if(bfReader != null) {
 				bfReader.close();
@@ -131,7 +130,7 @@ public class SampleServiceImpl implements SampleService {
 		}
 
 	}
-	
+
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	@Override
 	public boolean insertSample(InsertUserPara insertUserPara) throws Exception {
@@ -327,7 +326,7 @@ public class SampleServiceImpl implements SampleService {
 		// Save the results in memory
 		document.save(output);
 		document.close();
-		
+
 		return output.toByteArray();
 	}
 

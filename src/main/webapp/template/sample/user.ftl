@@ -61,7 +61,7 @@
               <td>${sample.userModel.userName?if_exists}</td>
               <td>${sample.userModel.userStatus?if_exists}</td>
               <td>${sample.userModel.userAge?if_exists}</td>
-              <td><img alt="user image" src="${sample.userImage}" /></td>
+              <td><img alt="user image" src="${sample.userImage?if_exists}" /></td>
             </tr>
     </#list>
 	<#else>

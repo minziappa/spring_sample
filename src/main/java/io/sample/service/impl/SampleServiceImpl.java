@@ -16,12 +16,14 @@ import io.sample.bean.model.UserModel;
 import io.sample.bean.para.CsvFilePara;
 import io.sample.bean.para.InsertUserPara;
 import io.sample.bean.para.SelectUserPara;
+import io.sample.bean.para.UserPara;
 import io.sample.dao.MasterDao;
 import io.sample.dao.SlaveDao;
 import io.sample.service.SampleService;
 import io.sample.utility.DateUtility;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.configuration.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -50,6 +52,8 @@ public class SampleServiceImpl implements SampleService {
 	private SqlSession masterBatchDao;
 	@Autowired
 	private SqlSession slaveDao;
+	@Autowired
+    private Configuration configuration;
 	@Autowired
 	private Md5PasswordEncoder passwordEncoder;
 
@@ -169,13 +173,38 @@ public class SampleServiceImpl implements SampleService {
 	}
 
 	@Override
-	public List<SampleBean> selectSampleList() throws Exception {
+	public int getSampleListSum() throws Exception {
+
+		int sum = 0;
+
+		try {
+			sum = slaveDao.getMapper(SlaveDao.class).selectSampleListSum();
+		} catch (Exception e) {
+			logger.error("Exception error", e);
+		}
+
+		return sum;
+	}
+
+	@Override
+	public List<SampleBean> selectSampleList(UserPara userPara) throws Exception {
 
 		List<UserModel> userList = new ArrayList<UserModel>();
 		List<SampleBean> sampleList = new ArrayList<SampleBean>();
 
+		int nowPage = userPara.getNowPage();
+
+		// Check a nowPage
+		if(nowPage <= 0){
+			nowPage = 1;
+		}
+
+		Map<String, Object> mapSelect = new HashMap<String, Object>();
+		mapSelect.put("nowPage", (nowPage - 1) * configuration.getInt("row.cnt"));
+		mapSelect.put("row", configuration.getInt("row.cnt"));
+
 		try {
-			userList = slaveDao.getMapper(SlaveDao.class).selectSampleList();
+			userList = slaveDao.getMapper(SlaveDao.class).selectSampleList(mapSelect);
 		} catch (Exception e) {
 			logger.error("Exception error", e);
 		}

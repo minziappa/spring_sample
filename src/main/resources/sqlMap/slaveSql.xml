@@ -21,6 +21,13 @@
 			user_id = #{userId}
 	</select>
 
+	<select id="selectSampleListSum" resultType="java.lang.Integer">
+		SELECT
+			COUNT(user_id) as cnt
+		FROM
+			sample_user
+	</select>
+
 	<select id="selectSampleByName" parameterType="map" 
 		resultType="io.sample.bean.model.UserModel">
 		SELECT
@@ -51,6 +58,8 @@
 			update_date
 		FROM
 			sample_user
+		LIMIT
+			#{nowPage}, #{row}
 	</select>
 
 	<select id="selectSampleListByName" parameterType="map" 

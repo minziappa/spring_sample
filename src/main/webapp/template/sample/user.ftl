@@ -7,13 +7,13 @@
 
     <div class="container">
 
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">Select Data</h3>
-					</div>
-					<div class="panel-body">
-						<form action="/sample/user/selectUser.do" method="POST">
-		          <b style="color:red" >
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Select Data</h3>
+			</div>
+			<div class="panel-body">
+				<form action="/sample/user/selectUser.do" method="POST">
+          <b style="color:red" >
 
 <#if errorMessage??>
 	<#list errorMessage?keys as key>
@@ -23,25 +23,26 @@
 
 		          </b>
 						<table style="border-collapse: collapse;">
-							<tr>
-								<td style="padding: 3px;">A name</td>
-								<td style="padding: 3px;"><input type="text" name="userName" size="10" maxlength="14"></td>
-								<td style="padding: 3px;">Example)test1</td>
-							</tr>
-							<tr>
-								<td style="padding: 3px;">A date</td>
-								<td style="padding: 3px;"><input type="text" name="userData" size="10" maxlength="14"></td>
-								<td style="padding: 3px;">Example)2014-07-01</td>
-							</tr>
-							<tr>
-								<td style="padding: 3px;"><input class="btn btn-sm btn-primary" type="submit" value="Search"/></td>
-								<td style="padding: 3px;"></td>
-								<td style="padding: 3px;"></td>
-							</tr>
-						</table>
-						</form>
-					</div>
-				</div> <!-- /panel panel-primary -->
+					<tr>
+						<td style="padding: 3px;">A name</td>
+						<td style="padding: 3px;"><input type="text" name="userName" size="10" maxlength="14"></td>
+						<td style="padding: 3px;">Example)test1</td>
+					</tr>
+					<tr>
+						<td style="padding: 3px;">A date</td>
+						<td style="padding: 3px;"><input type="text" name="userData" size="10" maxlength="14"></td>
+						<td style="padding: 3px;">Example)2014-07-01</td>
+					</tr>
+					<tr>
+						<td style="padding: 3px;"><input class="btn btn-sm btn-primary" type="submit" value="Search"/></td>
+						<td style="padding: 3px;"></td>
+						<td style="padding: 3px;"></td>
+					</tr>
+				</table>
+				</form>
+			</div>
+		</div> <!-- /panel panel-primary -->
+
 		<table class="table table-striped">
           <thead>
             <tr>
@@ -72,8 +73,38 @@
 </#if>
           </tbody>
         </table>
-
       </div>
+
+      <br/>
+
+      <div>
+      <#if model?exists>
+      	<#if model.paging?exists>
+			<#if model.paging.prevPage?exists>
+				<a href="/sample/user/user.do?nowPage=${model.paging.prevPage.nowPage}&allCount=${model.paging.allCount?c}" title="前のページへ" accesskey="*"><span class="next">Previous</span></a>
+			</#if>
+			<#if model.paging.pagingInfoList?has_content>
+				<#list model.paging.pagingInfoList as pageList>
+					<#if model.paging.nowPage?if_exists == pageList.pageNumber?if_exists>
+						${pageList.pageNumber}
+					<#else>
+						<a href="/sample/user/user.do?nowPage=${pageList.pageNumber}&allCount=${model.paging.allCount?c}">${pageList.pageNumber}</a>
+					</#if>
+				</#list>
+			</#if>
+			<#if model.paging.nextPage?exists>
+				<a href="/sample/user/user.do?nowPage=${model.paging.nextPage.nowPage}&allCount=${model.paging.allCount?c}" accesskey="#" title="次のページへ"><span class="next">Next</span></a>
+			</#if>
+		</#if>
+	  </#if>
+	  </div>
+
+	</div>
+	<!-- end #content -->
+
+        
+        
+
 <#include "../common/foot.ftl">
     </div> <!-- /container -->
 

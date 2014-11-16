@@ -2,8 +2,11 @@ package io.sample.controller;
 
 import java.util.Map;
 
+import io.paging.Paging;
+import io.paging.bean.PagingBean;
 import io.sample.bean.model.SampleModel;
 import io.sample.bean.para.SelectUserPara;
+import io.sample.bean.para.UserPara;
 import io.sample.service.SampleService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -57,12 +60,22 @@ public class UserController extends AbstractBaseController {
      * @since  1.7
      */
 	@RequestMapping(value = {"user.do"})
-	public String user(ModelMap model) throws Exception {
+	public String user(@Valid UserPara userPara, ModelMap model) throws Exception {
 
 		SampleModel sampleModel = new SampleModel();
 
+		PagingBean paging = new PagingBean();
+		// Set Paging list
+		if(userPara.getAllCount() <= 0) {
+			paging.setAllCount(sampleService.getSampleListSum());
+		} else {
+			paging.setAllCount(userPara.getAllCount());
+		}
+		Paging.linkPaging(paging, userPara.getNowPage());
+		sampleModel.setPaging(paging);
+
 		// Execute the transaction
-		sampleModel.setSampleList(sampleService.selectSampleList());
+		sampleModel.setSampleList(sampleService.selectSampleList(userPara));
 
 		model.addAttribute("model", sampleModel);
 

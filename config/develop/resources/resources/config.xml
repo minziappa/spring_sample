@@ -4,5 +4,8 @@
 	<slavedb>
 		<cnt>2</cnt>
 	</slavedb>
+	<row>
+		<cnt>5</cnt>
+	</row>
 
 </config>

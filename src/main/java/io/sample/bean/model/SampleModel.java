@@ -2,6 +2,7 @@ package io.sample.bean.model;
 
 import java.util.List;
 
+import io.paging.bean.PagingBean;
 import io.sample.bean.SampleBean;
 
 public class SampleModel {
@@ -11,7 +12,8 @@ public class SampleModel {
 	private UserModel userModel;
 	private String filePath;
 	private String navi;
-
+	/** Paging **/
+    private PagingBean paging;
     /** Show the message to page.**/
     private String errorMessage;
 
@@ -61,6 +63,14 @@ public class SampleModel {
 
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
+	}
+
+	public PagingBean getPaging() {
+		return paging;
+	}
+
+	public void setPaging(PagingBean paging) {
+		this.paging = paging;
 	}
 
 }

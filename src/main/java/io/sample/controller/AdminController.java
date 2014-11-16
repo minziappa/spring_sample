@@ -107,7 +107,7 @@ public class AdminController extends AbstractBaseController {
 			return "sample/admin";
 		}
 
-		return "redirect:/sample/index.do";
+		return "redirect:/sample/user/user.do";
 	}
 
 }

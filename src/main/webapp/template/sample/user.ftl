@@ -77,33 +77,32 @@
 
       <br/>
 
-      <div>
+      <nav class="text-center">
+	    <ul class="pagination">
       <#if model?exists>
       	<#if model.paging?exists>
 			<#if model.paging.prevPage?exists>
-				<a href="/sample/user/user.do?nowPage=${model.paging.prevPage.nowPage}&allCount=${model.paging.allCount?c}" title="前のページへ" accesskey="*"><span class="next">Previous</span></a>
+			<li><a href="/sample/user/user.do?nowPage=${model.paging.prevPage.nowPage}&allCount=${model.paging.allCount?c}" title="Prev" accesskey="*">Prev</span></a></li>
 			</#if>
 			<#if model.paging.pagingInfoList?has_content>
 				<#list model.paging.pagingInfoList as pageList>
 					<#if model.paging.nowPage?if_exists == pageList.pageNumber?if_exists>
-						${pageList.pageNumber}
+					<li class="active"><a href="#">${pageList.pageNumber} <span class="sr-only">(current)</span></a></li>
 					<#else>
-						<a href="/sample/user/user.do?nowPage=${pageList.pageNumber}&allCount=${model.paging.allCount?c}">${pageList.pageNumber}</a>
+					<li><a href="/sample/user/user.do?nowPage=${pageList.pageNumber}&allCount=${model.paging.allCount?c}">${pageList.pageNumber}</a></li>
 					</#if>
 				</#list>
 			</#if>
 			<#if model.paging.nextPage?exists>
-				<a href="/sample/user/user.do?nowPage=${model.paging.nextPage.nowPage}&allCount=${model.paging.allCount?c}" accesskey="#" title="次のページへ"><span class="next">Next</span></a>
+			<li><a href="/sample/user/user.do?nowPage=${model.paging.nextPage.nowPage}&allCount=${model.paging.allCount?c}" accesskey="#" title="Next">Next</a></li>
 			</#if>
 		</#if>
 	  </#if>
-	  </div>
+      	</ul>
+      </nav><!-- end #nav -->
 
 	</div>
 	<!-- end #content -->
-
-        
-        
 
 <#include "../common/foot.ftl">
     </div> <!-- /container -->

@@ -57,6 +57,7 @@ dependencies {
 	compile "org.mybatis:mybatis-spring:1.2.0"
 	compile "org.springmodules:spring-modules-jakarta-commons:0.8"
 	compile "org.apache.pdfbox:pdfbox:1.8.6"
+	compile "io.utility:utility:0.3"
 	compile "io.paging:paging:0.1"
 	provided "org.apache.tomcat:servlet-api:6.0.33"
 	//provided "org.apache.tomcat:tomcat-servlet-api:7.0.56"

@@ -6,6 +6,7 @@ import io.paging.Paging;
 import io.paging.bean.PagingBean;
 import io.sample.bean.model.SampleModel;
 import io.sample.bean.para.SelectUserPara;
+import io.sample.bean.para.UserDetailPara;
 import io.sample.bean.para.UserPara;
 import io.sample.service.SampleService;
 
@@ -59,8 +60,8 @@ public class UserController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"user.do"})
-	public String user(@Valid UserPara userPara, ModelMap model) throws Exception {
+	@RequestMapping(value = {"userList.do"})
+	public String userList(@Valid UserPara userPara, ModelMap model) throws Exception {
 
 		SampleModel sampleModel = new SampleModel();
 
@@ -79,7 +80,52 @@ public class UserController extends AbstractBaseController {
 
 		model.addAttribute("model", sampleModel);
 
-		return "sample/user";
+		return "sample/userList";
+	}
+
+    /**
+     * Select some data from the Mysql.
+     * 
+     * @param  SelectUserPara 
+     *         a user name
+     * @param  BindingResult 
+     *         bindingResult
+     * @param  ModelMap 
+     *         model
+     * @param  HttpServletResponse 
+     *         response
+     *         
+     * @throws  Exception
+     *          If a error occur, ...
+     *
+     * @return String
+     * 		   a file name of FTL.
+     * 
+     * @since  1.7
+     */
+	@RequestMapping(value = {"userDetail.do"})
+	public String userDetail(@Valid UserDetailPara userDetailPara, BindingResult bindingResult, 
+			ModelMap model, HttpServletResponse response) throws Exception {
+
+		SampleModel sampleModel = new SampleModel();
+
+		// Custom Validate
+		new UserValidator().validate(userDetailPara, bindingResult);
+		// If it occurs a error, set the default value.
+		if (bindingResult.hasErrors()) {
+			logger.error("userDetail.do - it is occured a parameter error.");
+			Map<String, String> mapErrorMessage = this.handleErrorMessages(bindingResult.getAllErrors());
+			response.setStatus(400);
+			model.addAttribute("errorMessage", mapErrorMessage);
+			return "sample/userList";
+		}
+
+		// Select name's data from User
+		sampleModel.setUserModel(sampleService.selectSampleByName(userDetailPara.getUserName()));
+
+		model.addAttribute("model", sampleModel);
+
+		return "sample/userDetail";
 	}
 
     /**
@@ -117,7 +163,7 @@ public class UserController extends AbstractBaseController {
 			Map<String, String> mapErrorMessage = this.handleErrorMessages(bindingResult.getAllErrors());
 			response.setStatus(400);
 			model.addAttribute("errorMessage", mapErrorMessage);
-			return "sample/user";
+			return "sample/userList";
 		}
 
 		// Execute the transaction
@@ -125,7 +171,7 @@ public class UserController extends AbstractBaseController {
 
 		model.addAttribute("model", sampleModel);
 
-		return "sample/user";
+		return "sample/userDetail";
 	}
 
 }

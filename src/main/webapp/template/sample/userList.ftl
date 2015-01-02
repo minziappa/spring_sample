@@ -59,7 +59,7 @@
 		<#list model.sampleList as sample>
             <tr>
               <td>${sample.userModel.userId?if_exists}</td>
-              <td>${sample.userModel.userName?if_exists}</td>
+              <td><a href="/sample/user/userDetail.do?userName=${sample.userModel.userName?if_exists}">${sample.userModel.userName?if_exists}</a></td>
               <td>${sample.userModel.userStatus?if_exists}</td>
               <td>${sample.userModel.userAge?if_exists}</td>
               <td><img alt="user image" src="${sample.userImage?if_exists}" /></td>
@@ -82,19 +82,19 @@
       <#if model?exists>
       	<#if model.paging?exists>
 			<#if model.paging.prevPage?exists>
-			<li><a href="/sample/user/user.do?nowPage=${model.paging.prevPage.nowPage}&allCount=${model.paging.allCount?c}" title="Prev" accesskey="*">Prev</span></a></li>
+			<li><a href="/sample/user/userList.do?nowPage=${model.paging.prevPage.nowPage}&allCount=${model.paging.allCount?c}" title="Prev" accesskey="*">Prev</span></a></li>
 			</#if>
 			<#if model.paging.pagingInfoList?has_content>
 				<#list model.paging.pagingInfoList as pageList>
 					<#if model.paging.nowPage?if_exists == pageList.pageNumber?if_exists>
 					<li class="active"><a href="#">${pageList.pageNumber} <span class="sr-only">(current)</span></a></li>
 					<#else>
-					<li><a href="/sample/user/user.do?nowPage=${pageList.pageNumber}&allCount=${model.paging.allCount?c}">${pageList.pageNumber}</a></li>
+					<li><a href="/sample/user/userList.do?nowPage=${pageList.pageNumber}&allCount=${model.paging.allCount?c}">${pageList.pageNumber}</a></li>
 					</#if>
 				</#list>
 			</#if>
 			<#if model.paging.nextPage?exists>
-			<li><a href="/sample/user/user.do?nowPage=${model.paging.nextPage.nowPage}&allCount=${model.paging.allCount?c}" accesskey="#" title="Next">Next</a></li>
+			<li><a href="/sample/user/userList.do?nowPage=${model.paging.nextPage.nowPage}&allCount=${model.paging.allCount?c}" accesskey="#" title="Next">Next</a></li>
 			</#if>
 		</#if>
 	  </#if>

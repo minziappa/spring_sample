@@ -1,6 +1,7 @@
 package io.sample.controller;
 
 import io.sample.bean.para.SelectUserPara;
+import io.sample.bean.para.UserDetailPara;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,14 +27,29 @@ public class UserValidator implements Validator {
 			SelectUserPara selectUserPara = (SelectUserPara) object;
 
 	        if(selectUserPara != null) {
-	    		if(selectUserPara.getUserData() == null){
+	    		if(selectUserPara.getUserName() == null){
 					errors.rejectValue("validate", "sample.parameter.error.message");
-					logger.warn("the start date is error.");
+					logger.warn("the name is error.");
 					// If you want to set the default value, remove the comment
 	    			// selectUserPara.setUserName("user");
 	    		}
 	        }
+
+		} else if(object instanceof UserDetailPara) {
+			UserDetailPara userDetailPara = (UserDetailPara) object;
+
+	        if(userDetailPara != null) {
+	    		if(userDetailPara.getUserName() == null){
+					errors.rejectValue("validate", "sample.parameter.error.message");
+					logger.warn("the name is error.");
+					// If you want to set the default value, remove the comment
+	    			// selectUserPara.setUserName("user");
+	    		}
+	        }
+
 		}
+		
+		
 	}
 
 }

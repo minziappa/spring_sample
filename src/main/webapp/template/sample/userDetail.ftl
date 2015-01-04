@@ -3,9 +3,10 @@
 <#include "../common/head.ftl">
 	<body>
 <#include "../common/navi.ftl">
-<#include "../common/menu.ftl">
 
     <div class="container">
+    	<div class="jumbotron">
+<#include "../common/menu.ftl">
 
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -47,6 +48,7 @@
 	</div>
 	<!-- end #content -->
 
+		</div> <!-- /jumbotron -->
 <#include "../common/foot.ftl">
     </div> <!-- /container -->
 

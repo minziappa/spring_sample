@@ -3,16 +3,17 @@
 <#include "../common/head.ftl">
 	<body>
 <#include "../common/navi.ftl">
-<#include "../common/menu.ftl">
 
     <div class="container">
+		<div class="jumbotron">
+<#include "../common/menu.ftl">
 
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">Annotation Validate</h3>
 					</div>
 					<div class="panel-body">
-						<form action="/sample/index/validator.do" method="POST">
+						<form action="/sample/validator.do" method="POST">
 		          <b style="color:red" >
 
 <#if errorMessage??>
@@ -64,6 +65,7 @@
 				</div> <!-- /panel panel-primary -->
 
       </div>
+	</div> <!-- /jumbotron -->
 <#include "../common/foot.ftl">
     </div> <!-- /container -->
 

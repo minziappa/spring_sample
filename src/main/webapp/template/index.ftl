@@ -3,15 +3,16 @@
 <#include "common/head.ftl">
 	<body>
 <#include "common/navi.ftl">
-<#include "common/menu.ftl">
 
     <div class="container">
-      <!-- Example row of columns -->
-			<div class="jumbotron">
+	  <div class="jumbotron">
+
+<#include "common/menu.ftl">
+
         <h1>Welcome to Sample Project</h1>
         <p class="lead">This is a sample for quick start project.</p>
         <p><a role="button" href="https://github.com/minziappa/spring_sample" class="btn btn-lg btn-success">Go to Github</a></p>
-      </div>
+      </div> <!-- /jumbotron -->
 <#include "common/foot.ftl">
     </div> <!-- /container -->
 

@@ -7,7 +7,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Sample name</a>
+        <a class="navbar-brand" href="/sample/">Sample name</a>
       </div>
 <#if user??>
   	<#include "naviLogin.ftl">

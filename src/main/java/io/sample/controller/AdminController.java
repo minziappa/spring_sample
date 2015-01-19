@@ -110,4 +110,23 @@ public class AdminController extends AbstractBaseController {
 		return "redirect:/sample/user/user.do";
 	}
 
+    /**
+     * Admin Index
+     * 
+     * @param  ModelMap 
+     *         model
+     *         
+     * @throws  Exception
+     *          If a error occur, ...
+     *
+     * @return String
+     * 		   a file name of FTL.
+     * 
+     * @since  1.7
+     */
+	@RequestMapping(value = {"/", "index"})
+	public String index(ModelMap model) throws Exception {
+		return "Admin/index";
+	}
+
 }

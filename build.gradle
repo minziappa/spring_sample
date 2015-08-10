@@ -15,8 +15,8 @@ jar {
 }
 
 repositories {
-	mavenLocal()
     mavenCentral()
+    mavenLocal()
 }
 
 // For provided jars

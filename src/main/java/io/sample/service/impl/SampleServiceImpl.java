@@ -20,7 +20,7 @@ import io.sample.bean.para.UserPara;
 import io.sample.dao.MasterDao;
 import io.sample.dao.SlaveDao;
 import io.sample.service.SampleService;
-import io.sample.utility.DateUtility;
+import io.utility.utile.DateUtility;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.configuration.Configuration;

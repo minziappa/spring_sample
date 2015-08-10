@@ -1,5 +1,7 @@
 # The sample for quick start project
 
+[![Build Status](https://travis-ci.org/minziappa/spring_sample.svg?branch=master)](https://travis-ci.org/minziappa/spring_sample.svg)
+
 By Kim woong joon
 kim_woongjoon@cyberagent.co.jp
 
@@ -31,7 +33,7 @@ repositories {
 
 You have to install on your local system.
 ```
-compile "io.utility:utility:0.3"
+compile "io.utility:utility:0.5"
 compile "io.paging:paging:0.1"
 ```
 [utility](https://github.com/minziappa/utility)

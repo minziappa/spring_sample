@@ -1,21 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<#include "../common/head.ftl">
-	<body>
-<#include "../common/navi.ftl">
-
-    <div class="container">
-    	<div class="jumbotron">
-		<ul role="tablist" class="nav nav-tabs">
-		<li><a href="/">Welcome to Sample Project</a></li>
-		<li><a href="/admin/admin.do">Admin Page</a></li>
-		<li class="active"><a href="/user/userList.do">User Page</a></li>
-		<li><a href="/file/uploadFiles.do">Upload files</a></li>
-		<li><a href="/file/downloadFiles.do">Download files</a></li>
-		<li><a href="/vali.do">Validate</a></li>
-		<li><a href="/layout.do">layout</a></li>
-		</ul>
-
+<#import "layout/defaultLayout.ftl" as layout>
+<@layout.myLayout>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">Select Data</h3>
@@ -51,14 +35,4 @@
 		  
 			</div>
 		</div> <!-- /panel panel-primary -->
-
-
-	</div>
-	<!-- end #content -->
-
-		</div> <!-- /jumbotron -->
-<#include "../common/foot.ftl">
-    </div> <!-- /container -->
-
-	</body>
-</html>
+</@layout.myLayout>

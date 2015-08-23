@@ -8,4 +8,8 @@
 		<cnt>5</cnt>
 	</row>
 
+	<system>
+		<environment>Develop</environment>
+	</system>
+
 </config>

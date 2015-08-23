@@ -1,16 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<#include "../common/head.ftl">
-	<body>
-<#include "../common/navi.ftl">
-<#include "../common/menu.ftl">
-
-    <div class="container">
-      <!-- Example row of columns -->
-<#include "../common/login.ftl">
-
-<#include "../common/foot.ftl">
-    </div> <!-- /container -->
-
-</body>
-</html>
+<#import "../layout/defaultLayout.ftl" as layout>
+<@layout.myLayout>
+      <form class="form-signin" role="form" action="/j_spring_security_check" name="sform" id="sform" method="POST">
+        <h2 class="form-signin-heading">Please sign ina</h2>
+        <input  type="text" name="j_username" class="form-control" placeholder="Email address" required autofocus>
+        <input type="password" name="j_password" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+</@layout.myLayout>

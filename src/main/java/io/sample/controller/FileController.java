@@ -56,9 +56,9 @@ public class FileController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"uploadFiles.do"})
+	@RequestMapping(value = {"uploadFiles"})
 	public String uploadFiles() throws Exception {
-		return "sample/uploadFiles";
+		return "file/uploadFiles";
 	}
 
     /**
@@ -81,11 +81,11 @@ public class FileController extends AbstractBaseController {
 	 * 
 	 * @since  1.7
 	 */
-	@RequestMapping(value = {"handleUploadFiles.do"})
+	@RequestMapping(value = {"handleUploadFiles"})
 	public String handleUploadFiles(@Valid CsvFilePara csvFilePara, 
 			BindingResult bindingResult, ModelMap model, 
 			HttpServletResponse response, RedirectAttributes redirect) throws Exception {
-	
+
 		SampleModel sampleModel = new SampleModel();
 
 		// If it occurs a error, set the default value.
@@ -95,7 +95,7 @@ public class FileController extends AbstractBaseController {
 			handleValidator(bindingResult.getAllErrors());
 			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
 			model.addAttribute("model", sampleModel);
-			return "sample/uploadFiles";
+			return "file/uploadFiles";
 		}
 
 		if (csvFilePara.getOption().equals("0")) {
@@ -107,14 +107,14 @@ public class FileController extends AbstractBaseController {
 			if(!sampleService.syncSaveCsvFile(csvFilePara)) {
 				model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
 				model.addAttribute("model", sampleModel);
-				return "sample/uploadFiles";
+				return "file/uploadFiles";
 			}
 		}
 
 		// Add parameter for Redirect URL
 		redirect.addFlashAttribute("errorMessage", message.getMessage("sample.parameter.insert.ok.message", null, LOCALE));
 
-		return "redirect:/sample/file/uploadFiles.do";
+		return "redirect:/file/uploadFiles";
 	}
 
 	/**
@@ -128,9 +128,9 @@ public class FileController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"downloadFiles.do"})
+	@RequestMapping(value = {"downloadFiles"})
 	public String downloadFiles() throws Exception {
-		return "sample/downloadFiles";
+		return "file/downloadFiles";
 	}
 
     /**
@@ -149,7 +149,7 @@ public class FileController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"downloadCsvFile.do"})
+	@RequestMapping(value = {"downloadCsvFile"})
 	public void downloadCsvFile(@Valid DownLoadFilePara downLoadFilePara,
 			HttpServletResponse response, HttpServletRequest request, 
 			RedirectAttributes redirect) throws Exception {
@@ -184,7 +184,7 @@ public class FileController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"downloadPdfFile.do"})
+	@RequestMapping(value = {"downloadPdfFile"})
 	public void downloadPdfFile(@Valid DownLoadFilePara downLoadFilePara,
 			HttpServletResponse response, HttpServletRequest request, 
 			RedirectAttributes redirect) throws Exception {

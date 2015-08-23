@@ -20,6 +20,7 @@
 	<import resource="classpath:spring/security.xml"/>
 	<import resource="classpath:spring/common.xml"/>
 	<import resource="classpath:spring/db.xml"/>
+	<import resource="classpath:spring/mappingDb.xml"/>
 	<import resource="classpath:spring/dao.xml"/>
 	<import resource="classpath:spring/fileUpload.xml"/>
 	<import resource="classpath:spring/service.xml"/>

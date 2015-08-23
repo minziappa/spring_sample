@@ -37,10 +37,10 @@ public class LoginController extends AbstractBaseController {
 	@Autowired
 	private MessageSource message;
 
-	@RequestMapping(value = {"login.do"})
+	@RequestMapping(value = {"login"})
 	public String login(@RequestParam(value="error", required=false) boolean error, ModelMap model, HttpSession session) throws Exception {
 
-		logger.info("this is login.do");
+		logger.info("this is login");
 
 		if (error == true) {
 			model.put("error", "You have entered an invalid username or password!");
@@ -51,7 +51,7 @@ public class LoginController extends AbstractBaseController {
 		return "login/login";
 	}
 
-	@RequestMapping(value = {"logout.do"})
+	@RequestMapping(value = {"logout"})
 	public String logout(ModelMap model, SessionStatus sessionStatus) throws Exception {
 
 		SampleModel hadoopModel = new SampleModel();
@@ -65,7 +65,7 @@ public class LoginController extends AbstractBaseController {
 		return "redirect:/sample/index/";
 	}
 
-	@RequestMapping(value = {"denied.do"})
+	@RequestMapping(value = {"denied"})
 	public String denied(ModelMap model, HttpSession session) throws Exception {
 
 		return "login/denied";

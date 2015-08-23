@@ -11,13 +11,13 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<util:map id="selectedSlaveDb">
-		<entry key="0" value-ref="slave00"/>
-		<!-- <entry key="1" value-ref="slave01"/>  -->
+	<util:map id="mappingDb">
+		<entry key="0" value-ref="mysqlSlave00"/>
+		<entry key="1" value-ref="mysqlSlave01"/>
 	</util:map>
 
 	<bean id="slaveDbMappingBean" class="io.sample.bean.SlaveDbMappingBean">
-		<property name="selectedSlaveDb" ref="selectedSlaveDb" />
+		<property name="selectedSlaveDb" ref="mappingDb" />
     </bean>
 
 </beans>

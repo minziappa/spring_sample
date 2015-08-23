@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class InsertUserPara {
+public class InputUserPara {
 
     @NotNull(message = "userName")
     @Size(min = 1, max = 45 ,message = "userName must not exceed {max} characters")

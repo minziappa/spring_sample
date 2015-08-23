@@ -7,12 +7,12 @@ kim_woongjoon@cyberagent.co.jp
 
 ## About
 1. More [information](http://freemarker.org) about Freemarker.
-2. More [information](http://projects.spring.io/spring-framework) about Spring3.
+2. More [information](http://projects.spring.io/spring-framework) about Spring4.
 3. More [information](http://blog.mybatis.org) about Mybatis3
 4. More [information](https://www.gradle.org) about Gradle.
 
 * Freemarker
-* Spring3-MVC
+* Spring4-MVC
 * Mybatis3
 * Gradle
 

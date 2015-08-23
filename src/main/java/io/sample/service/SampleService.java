@@ -5,13 +5,13 @@ import java.util.List;
 import io.sample.bean.SampleBean;
 import io.sample.bean.model.UserModel;
 import io.sample.bean.para.CsvFilePara;
-import io.sample.bean.para.InsertUserPara;
+import io.sample.bean.para.InputUserPara;
 import io.sample.bean.para.SelectUserPara;
 import io.sample.bean.para.UserPara;
 
 public interface SampleService {
 
-	public boolean insertSample(InsertUserPara insertUserPara) throws Exception;
+	public boolean insertSample(InputUserPara inputUserPara) throws Exception;
 	public List<SampleBean> selectSampleList(UserPara userPara) throws Exception;
 	public int getSampleListSum() throws Exception;
 	public UserModel selectSampleByName(String name) throws Exception;

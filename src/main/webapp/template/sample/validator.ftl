@@ -7,13 +7,13 @@
     <div class="container">
 		<div class="jumbotron">
 			<ul role="tablist" class="nav nav-tabs">
-			<li><a href="/sample/">Welcome to Sample Project</a></li>
-			<li><a href="/sample/admin/admin.do">Admin Page</a></li>
-			<li><a href="/sample/user/userList.do">User Page</a></li>
-			<li><a href="/sample/file/uploadFiles.do">Upload files</a></li>
-			<li><a href="/sample/file/downloadFiles.do">Download files</a></li>
-			<li class="active"><a href="/sample/vali.do">Validate</a></li>
-			<li><a href="/sample/layout.do">layout</a></li>
+			<li><a href="/">Welcome to Sample Project</a></li>
+			<li><a href="/admin/admin.do">Admin Page</a></li>
+			<li><a href="/user/userList.do">User Page</a></li>
+			<li><a href="/file/uploadFiles.do">Upload files</a></li>
+			<li><a href="/file/downloadFiles.do">Download files</a></li>
+			<li class="active"><a href="/vali.do">Validate</a></li>
+			<li><a href="/layout.do">layout</a></li>
 			</ul>
 
 			<div class="panel panel-primary">
@@ -21,7 +21,7 @@
 					<h3 class="panel-title">Annotation Validate</h3>
 				</div>
 				<div class="panel-body">
-					<form action="/sample/validator.do" method="POST">
+					<form action="/validator.do" method="POST">
 	          <b style="color:red" >
 
 <#if errorMessage??>

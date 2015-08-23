@@ -2,12 +2,9 @@ package io.sample.provider;
 
 import io.sample.bean.ExtendUser;
 import io.sample.bean.model.UserModel;
-import io.sample.dao.SlaveDao;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -20,7 +17,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -35,9 +31,10 @@ public class DefaultAuthenticationProvider implements AuthenticationProvider {
 	@Override
 	public Authentication authenticate(Authentication authentication)
 		throws AuthenticationException {
-
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		Object userName = authentication.getPrincipal();
 		Object userPwd = authentication.getCredentials();
+		logger.info(" >>>>>>>>>>>> Auth start >>>>>>>>>>>>>>");
 
 		UsernamePasswordAuthenticationToken upat = null;
 		ExtendUser user = null;
@@ -48,19 +45,23 @@ public class DefaultAuthenticationProvider implements AuthenticationProvider {
 
 			/////////////// You can make another authentication/////////////
 
-			// Get a user information form DB.
-			Map<String, Object> mapSelect = new HashMap<String, Object>();
-			mapSelect.put("userName", userName);
-
-			try {
-				userModel = slaveDao.getMapper(SlaveDao.class).selectSampleByName(mapSelect);
-			} catch (Exception e) {
-				logger.error("Exception error", e);
-			}
-
-			if(userModel == null) {
-				throw new UsernameNotFoundException( userName + " is not found." );
-			}
+//			// Get a user information form DB.
+//			Map<String, Object> mapSelect = new HashMap<String, Object>();
+//			mapSelect.put("userName", userName);
+//
+//			try {
+//				userModel = slaveDao.getMapper(SlaveDao.class).selectSampleByName(mapSelect);
+//			} catch (Exception e) {
+//				logger.error("Exception error", e);
+//			}
+			userModel = new UserModel();
+			userModel.setUserName("admin");
+			userModel.setUserPwd(passwordEncoder.encodePassword("test", null));
+			userModel.setUserStatus("1");
+//
+//			if(userModel == null) {
+//				throw new UsernameNotFoundException( userName + " is not found." );
+//			}
 
 	        Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 	        // For java1.6

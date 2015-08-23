@@ -1,1 +1,4 @@
-<div><h1>this is the footer</h1></div>
+      <hr>
+      <footer>
+        <p>&copy; Company 2014</p>
+      </footer>

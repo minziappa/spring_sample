@@ -55,28 +55,8 @@ public class IndexController extends AbstractBaseController {
 	public String index(HttpSession session, ModelMap model) throws Exception {
 
     	this.handleLogin(session);
-    	logger.info("index >>>>>>> ");
 
 		return "index";
-	}
-
-    /**
-     * Check several annotation validate for ......
-     * 
-     * @param  ModelMap 
-     *         model
-     *         
-     * @throws  Exception
-     *          If a error occur, ...
-     *
-     * @return String
-     * 		   a file name of FTL.
-     * 
-     * @since  1.7
-     */
-    @RequestMapping(value = {"vali.do"})
-	public String vali() throws Exception {
-		return "sample/validator";
 	}
 
     /**
@@ -96,8 +76,6 @@ public class IndexController extends AbstractBaseController {
     @RequestMapping(value = {"validator.do"})
 	public String validator(@Valid ValidatorPara validatorPara, BindingResult bindingResult, 
 			ModelMap model) throws Exception {
-
-    	// logger.info("date >>> " + validatorPara.getUserData());
 
 		// If it occurs a error, set the default value.
 		if (bindingResult.hasErrors()) {

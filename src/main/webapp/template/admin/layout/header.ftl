@@ -12,12 +12,12 @@
     <link href="/css/signin.css" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/bootstrap-3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/bootstrap-3.3.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/js/lib/bootstrap-3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/js/lib/bootstrap-3.3.1/css/bootstrap-theme.min.css">
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
-	<script src="/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+	<script src="/js/lib/bootstrap-3.3.1/js/bootstrap.min.js"></script>
 
 </head>

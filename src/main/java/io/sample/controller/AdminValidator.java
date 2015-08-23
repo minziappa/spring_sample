@@ -1,7 +1,7 @@
 package io.sample.controller;
 
 import io.sample.bean.para.CsvFilePara;
-import io.sample.bean.para.InsertUserPara;
+import io.sample.bean.para.InputUserPara;
 import io.sample.bean.para.SelectUserPara;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class AdminValidator implements Validator, BaseValidator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		if(InsertUserPara.class.equals(clazz)) {
+		if(InputUserPara.class.equals(clazz)) {
 			return true;
 		} else {
 			return false;

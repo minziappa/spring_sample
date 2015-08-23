@@ -3,7 +3,7 @@ package io.sample.controller;
 import java.util.Map;
 
 import io.sample.bean.model.SampleModel;
-import io.sample.bean.para.InsertUserPara;
+import io.sample.bean.para.InputUserPara;
 import io.sample.service.SampleService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +44,25 @@ public class AdminController extends AbstractBaseController {
     private SampleService sampleService;
 
     /**
+	 * Admin Index
+	 * 
+	 * @param  ModelMap 
+	 *         model
+	 *         
+	 * @throws  Exception
+	 *          If a error occur, ...
+	 *
+	 * @return String
+	 * 		   a file name of FTL.
+	 * 
+	 * @since  1.7
+	 */
+	@RequestMapping(value = {"/", "index"})
+	public String index(ModelMap model) throws Exception {
+		return "admin/index";
+	}
+
+	/**
      * Admin Page
      * 
      * @param  ModelMap 
@@ -57,9 +76,9 @@ public class AdminController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"admin.do"})
+	@RequestMapping(value = {"admin"})
 	public String admin(ModelMap model) throws Exception {
-		return "sample/admin";
+		return "admin/admin";
 	}
 
     /**
@@ -82,8 +101,8 @@ public class AdminController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"insertUser.do"})
-	public String insertUser(@Valid InsertUserPara insertUserPara, 
+	@RequestMapping(value = {"inputUser"})
+	public String inputUser(@Valid InputUserPara inputUserPara, 
 			BindingResult bindingResult, ModelMap model, 
 			HttpServletResponse response, HttpServletRequest request) throws Exception {
 
@@ -97,36 +116,17 @@ public class AdminController extends AbstractBaseController {
 			Map<String, String> mapErrorMessage = this.handleErrorMessages(bindingResult.getAllErrors());
 			model.addAttribute("errorMessage",  mapErrorMessage);
 			model.addAttribute("model", sampleModel);
-			return "sample/admin";
+			return "admin/admin";
 		}
 
 		// Execute the transaction
-		if(!sampleService.insertSample(insertUserPara)) {
+		if(!sampleService.insertSample(inputUserPara)) {
 			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
 			model.addAttribute("model", sampleModel);
-			return "sample/admin";
+			return "admin/admin";
 		}
 
-		return "redirect:/sample/user/user.do";
-	}
-
-    /**
-     * Admin Index
-     * 
-     * @param  ModelMap 
-     *         model
-     *         
-     * @throws  Exception
-     *          If a error occur, ...
-     *
-     * @return String
-     * 		   a file name of FTL.
-     * 
-     * @since  1.7
-     */
-	@RequestMapping(value = {"/", "index"})
-	public String index(ModelMap model) throws Exception {
-		return "Admin/index";
+		return "redirect:/user/userList";
 	}
 
 }

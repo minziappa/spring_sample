@@ -11,6 +11,10 @@
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
 
+	<mvc:resources location="/img/" mapping="/img/**"/>
+	<mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/js/" mapping="/js/**"/>
+
 	<!-- Set The template Path -->
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">

@@ -1,36 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<#include "../common/head.ftl">
-	<body>
-<#include "../common/navi.ftl">
-
-    <div class="container">
-    	<div class="jumbotron">
-			<ul role="tablist" class="nav nav-tabs">
-			<li><a href="/sample/">Welcome to Sample Project</a></li>
-			<li><a href="/sample/admin/admin.do">Admin Page</a></li>
-			<li class="active"><a href="/sample/user/userList.do">User Page</a></li>
-			<li><a href="/sample/file/uploadFiles.do">Upload files</a></li>
-			<li><a href="/sample/file/downloadFiles.do">Download files</a></li>
-			<li><a href="/sample/vali.do">Validate</a></li>
-			<li><a href="/sample/layout.do">layout</a></li>
-			</ul>
-
+<#import "../layout/defaultLayout.ftl" as layout>
+<@layout.myLayout>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">Select Data</h3>
 			</div>
 			<div class="panel-body">
-				<form action="/sample/user/selectUser.do" method="POST">
-          <b style="color:red" >
-
+				<form action="/user/selectUser" method="POST">
+				<b style="color:red" >
 <#if errorMessage??>
 	<#list errorMessage?keys as key>
 	    ${errorMessage[key]} <br/>
 	</#list>
 </#if>
-
-		          </b>
+				</b>
 						<table style="border-collapse: collapse;">
 					<tr>
 						<td style="padding: 3px;">A name</td>
@@ -68,7 +50,7 @@
 		<#list model.sampleList as sample>
             <tr>
               <td>${sample.userModel.userId?if_exists}</td>
-              <td><a href="/sample/user/userDetail.do?userName=${sample.userModel.userName?if_exists}">${sample.userModel.userName?if_exists}</a></td>
+              <td><a href="/user/userDetail?userName=${sample.userModel.userName?if_exists}">${sample.userModel.userName?if_exists}</a></td>
               <td>${sample.userModel.userStatus?if_exists}</td>
               <td>${sample.userModel.userAge?if_exists}</td>
               <td><img alt="user image" src="${sample.userImage?if_exists}" /></td>
@@ -91,19 +73,19 @@
       <#if model?exists>
       	<#if model.paging?exists>
 			<#if model.paging.prevPage?exists>
-			<li><a href="/sample/user/userList.do?nowPage=${model.paging.prevPage.nowPage}&allCount=${model.paging.allCount?c}" title="Prev" accesskey="*">Prev</span></a></li>
+			<li><a href="/user/userList.do?nowPage=${model.paging.prevPage.nowPage}&allCount=${model.paging.allCount?c}" title="Prev" accesskey="*">Prev</span></a></li>
 			</#if>
 			<#if model.paging.pagingInfoList?has_content>
 				<#list model.paging.pagingInfoList as pageList>
 					<#if model.paging.nowPage?if_exists == pageList.pageNumber?if_exists>
 					<li class="active"><a href="#">${pageList.pageNumber} <span class="sr-only">(current)</span></a></li>
 					<#else>
-					<li><a href="/sample/user/userList.do?nowPage=${pageList.pageNumber}&allCount=${model.paging.allCount?c}">${pageList.pageNumber}</a></li>
+					<li><a href="/user/userList.do?nowPage=${pageList.pageNumber}&allCount=${model.paging.allCount?c}">${pageList.pageNumber}</a></li>
 					</#if>
 				</#list>
 			</#if>
 			<#if model.paging.nextPage?exists>
-			<li><a href="/sample/user/userList.do?nowPage=${model.paging.nextPage.nowPage}&allCount=${model.paging.allCount?c}" accesskey="#" title="Next">Next</a></li>
+			<li><a href="/user/userList.do?nowPage=${model.paging.nextPage.nowPage}&allCount=${model.paging.allCount?c}" accesskey="#" title="Next">Next</a></li>
 			</#if>
 		</#if>
 	  </#if>
@@ -113,9 +95,4 @@
 	</div>
 	<!-- end #content -->
 
-	</div> <!-- /jumbotron -->
-<#include "../common/foot.ftl">
-    </div> <!-- /container -->
-
-	</body>
-</html>
+</@layout.myLayout>

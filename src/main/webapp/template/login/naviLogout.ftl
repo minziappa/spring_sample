@@ -1,5 +1,5 @@
 <div id="navbar" class="navbar-collapse collapse">
-  <form class="navbar-form navbar-right" action="/sample/j_spring_security_check" name="sform" id="sform" method="POST" role="form">
+  <form class="navbar-form navbar-right" action="/j_spring_security_check" name="sform" id="sform" method="POST" role="form">
     <div class="form-group">
       <input type="text" placeholder="Email" class="form-control" name="j_username" value="">
     </div>

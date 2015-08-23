@@ -14,11 +14,12 @@ import java.util.Map;
 import io.sample.bean.SampleBean;
 import io.sample.bean.model.UserModel;
 import io.sample.bean.para.CsvFilePara;
-import io.sample.bean.para.InsertUserPara;
+import io.sample.bean.para.InputUserPara;
 import io.sample.bean.para.SelectUserPara;
 import io.sample.bean.para.UserPara;
 import io.sample.dao.MasterDao;
 import io.sample.dao.SlaveDao;
+import io.sample.service.AbstractService;
 import io.sample.service.SampleService;
 import io.utility.utile.DateUtility;
 
@@ -42,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class SampleServiceImpl implements SampleService {
+public class SampleServiceImpl extends AbstractService implements SampleService {
 
 	final Logger logger = LoggerFactory.getLogger(SampleServiceImpl.class);
 
@@ -88,6 +89,7 @@ public class SampleServiceImpl implements SampleService {
 			while((strReadResult = bfReader.readLine()) != null) {
 
 				String [] strCell = strReadResult.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+
 				Map<String, Object> mapData = new HashMap<String, Object>();
 
 				mapData.put("dataTitle", file.getOriginalFilename());
@@ -137,12 +139,12 @@ public class SampleServiceImpl implements SampleService {
 
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	@Override
-	public boolean insertSample(InsertUserPara insertUserPara) throws Exception {
+	public boolean insertSample(InputUserPara inputUserPara) throws Exception {
 
 		int intResult = 0;
 		byte[] byteName = null;
 
-		MultipartFile file = insertUserPara.getUserImg();
+		MultipartFile file = inputUserPara.getUserImg();
 
 		if(file != null) {
 			String strName = file.getOriginalFilename();
@@ -150,13 +152,13 @@ public class SampleServiceImpl implements SampleService {
 			byteName = file.getBytes();			
 		}
 
-		String encodedPwd = passwordEncoder.encodePassword(insertUserPara.getUserPwd(), null);
+		String encodedPwd = passwordEncoder.encodePassword(inputUserPara.getUserPwd(), null);
 
 		Map<String, Object> mapSample = new HashMap<String, Object>();
-		mapSample.put("userName", insertUserPara.getUserName());
+		mapSample.put("userName", inputUserPara.getUserName());
 		mapSample.put("userPwd", encodedPwd);
-		mapSample.put("userStatus", insertUserPara.getUserStatus());
-		mapSample.put("userAge", insertUserPara.getUserAge());
+		mapSample.put("userStatus", inputUserPara.getUserStatus());
+		mapSample.put("userAge", inputUserPara.getUserAge());
 		mapSample.put("userImg", byteName);
 
 		try {
@@ -165,7 +167,7 @@ public class SampleServiceImpl implements SampleService {
 			logger.error("Exception error", e);
 		}
 		if(intResult < 1) {
-			logger.error("insertSample error, userName={}", insertUserPara.getUserName());
+			logger.error("insertSample error, userName={}", inputUserPara.getUserName());
 			return false;
 		}
 
@@ -204,6 +206,7 @@ public class SampleServiceImpl implements SampleService {
 		mapSelect.put("row", configuration.getInt("row.cnt"));
 
 		try {
+			sqlSessionSlaveFactory.setDataSource(getDispersionDb());
 			userList = slaveDao.getMapper(SlaveDao.class).selectSampleList(mapSelect);
 		} catch (Exception e) {
 			logger.error("Exception error", e);
@@ -223,6 +226,7 @@ public class SampleServiceImpl implements SampleService {
 		mapSelect.put("userName", name);
 
 		try {
+			sqlSessionSlaveFactory.setDataSource(getDispersionDb());
 			user = slaveDao.getMapper(SlaveDao.class).selectSampleByName(mapSelect);
 		} catch (Exception e) {
 			logger.error("Exception error", e);
@@ -241,6 +245,7 @@ public class SampleServiceImpl implements SampleService {
 		mapSelect.put("userName", selectUserPara.getUserName());
 
 		try {
+			sqlSessionSlaveFactory.setDataSource(getDispersionDb());
 			userList = slaveDao.getMapper(SlaveDao.class).selectSampleListByName(mapSelect);
 		} catch (Exception e) {
 			logger.error("Exception error", e);
@@ -266,6 +271,7 @@ public class SampleServiceImpl implements SampleService {
 		mapSelect.put("insertDate", userDate);
 
 		try {
+			sqlSessionSlaveFactory.setDataSource(getDispersionDb());
 			userList = slaveDao.getMapper(SlaveDao.class).selectSampleListByDate(mapSelect);
 		} catch (Exception e) {
 			logger.error("Exception error", e);

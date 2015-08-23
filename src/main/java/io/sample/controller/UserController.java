@@ -60,7 +60,7 @@ public class UserController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"userList.do"})
+	@RequestMapping(value = {"userList"})
 	public String userList(@Valid UserPara userPara, ModelMap model) throws Exception {
 
 		SampleModel sampleModel = new SampleModel();
@@ -80,7 +80,7 @@ public class UserController extends AbstractBaseController {
 
 		model.addAttribute("model", sampleModel);
 
-		return "sample/userList";
+		return "user/userList";
 	}
 
     /**
@@ -103,7 +103,7 @@ public class UserController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"userDetail.do"})
+	@RequestMapping(value = {"userDetail"})
 	public String userDetail(@Valid UserDetailPara userDetailPara, BindingResult bindingResult, 
 			ModelMap model, HttpServletResponse response) throws Exception {
 
@@ -125,7 +125,7 @@ public class UserController extends AbstractBaseController {
 
 		model.addAttribute("model", sampleModel);
 
-		return "sample/userDetail";
+		return "user/detailUser";
 	}
 
     /**
@@ -148,7 +148,7 @@ public class UserController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"selectUser.do"})
+	@RequestMapping(value = {"selectUser"})
 	public String selectUser(@Valid SelectUserPara selectUserPara, BindingResult bindingResult, 
 			ModelMap model, HttpServletResponse response) throws Exception {
 
@@ -163,7 +163,7 @@ public class UserController extends AbstractBaseController {
 			Map<String, String> mapErrorMessage = this.handleErrorMessages(bindingResult.getAllErrors());
 			response.setStatus(400);
 			model.addAttribute("errorMessage", mapErrorMessage);
-			return "sample/userList";
+			return "user/userList";
 		}
 
 		// Execute the transaction
@@ -171,7 +171,7 @@ public class UserController extends AbstractBaseController {
 
 		model.addAttribute("model", sampleModel);
 
-		return "sample/userDetail";
+		return "user/detailUser";
 	}
 
 }

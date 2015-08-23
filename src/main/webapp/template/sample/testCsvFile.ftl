@@ -13,7 +13,7 @@
 						<h3 class="panel-title">CSV File</h3>
 					</div>
 					<div class="panel-body">
-						<form action="/sample/file/testHandleCsvFile.do" enctype="multipart/form-data" method="POST">
+						<form action="/file/testHandleCsvFile.do" enctype="multipart/form-data" method="POST">
               <b style="color:red" >${errorMessage?if_exists}</b>
 							<table style="border-collapse: collapse;">
 								<tr>

@@ -49,20 +49,20 @@
 				<div>
 <table>
 		<tr>
-			<td><h2><a href="/sample/index/">Welcome to Spring Security Test</a></h2></td>
+			<td><h2><a href="/index/">Welcome to Spring Security Test</a></h2></td>
 			<td></td>
 		</tr>
 		<tr>
-			<td><a href="/sample/admin/admin.do">Admin Page</a></td>
-			<td><a href="/sample/user/user.do">User Page</a></td>
+			<td><a href="/admin/admin.do">Admin Page</a></td>
+			<td><a href="/user/user.do">User Page</a></td>
 		</tr>
 		<tr>
-			<td><a href="/sample/auth/logout">logout</a></td>
+			<td><a href="/auth/logout">logout</a></td>
 			<td></td>
 		</tr>
 	</table>
 
-					<form action="/sample/sample/service/selectUser.do" method="POST">
+					<form action="/service/selectUser.do" method="POST">
 	            <fieldset>
 	                <legend>Select Data</legend>
 	                <b style="color:red" >${errorMessage?if_exists}</b>
@@ -93,7 +93,7 @@
 				</h1>
 				<hr/>
 				<div>
-					<form action="/sample/sample/service/insertUser.do" enctype="multipart/form-data" method="POST">
+					<form action="/service/insertUser.do" enctype="multipart/form-data" method="POST">
 		            <fieldset>
 	                <legend>Insert Data</legend>
 	                <b style="color:red" >${errorMessage?if_exists}</b>

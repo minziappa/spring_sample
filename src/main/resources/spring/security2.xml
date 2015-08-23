@@ -8,22 +8,10 @@
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-<!-- 
-	<http disable-url-rewriting="false">
-		<headers disabled="true"/>
-		<csrf disabled="true"/>
-
-		<intercept-url pattern="/login" access="permitAll"/>
-		<intercept-url pattern="/**" access="hasRole('USER')"/>
-		<form-login login-page="/login"/>
-		<logout logout-url="/j_spring_security_logout"/>
-	</http>
- -->
+	<http pattern="/login/**" security="none"/>
 
 	<http auto-config='true' use-expressions="true">
-		<headers disabled="true"/>
-		<csrf disabled="true"/>
-		<intercept-url pattern="/login/**" access="permitAll"/>
+		<access-denied-handler error-page="/login/denied" />
 	    <!-- You can add the Intercept-Url like the following this -->
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/user/**" access="hasRole('ROLE_ADMIN')" />
@@ -32,18 +20,31 @@
 		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/validator/**" access="hasRole('ROLE_USER')" />
 
-	    <logout logout-url="/j_spring_security_logout" logout-success-url="/"/>
+	    <logout logout-url="/auth/logout" logout-success-url="/"/>
 	    <form-login
-            login-page="/login/login" login-processing-url="/j_spring_security_check"
+            login-page="/login/login"
             authentication-failure-url="/login/login?error=true"
             default-target-url="/"/>
-        <access-denied-handler error-page="/login/denied" />
 	</http>
-	
-<!-- <global-method-security pre-post-annotations="enabled"/>  -->
+
+	<beans:bean id="daoAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<beans:property name="userDetailsService" ref="userDetailsService"/>
+	</beans:bean>
+
+	<beans:bean id="authenticationManager"
+		class="org.springframework.security.authentication.ProviderManager">
+		<beans:property name="providers">
+			<beans:list>
+				<beans:ref local="daoAuthenticationProvider" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
 
 	<authentication-manager>
-	  <authentication-provider ref="defaultAuthenticationProvider"/>
+		<authentication-provider user-service-ref="userDetailsService">
+			<password-encoder ref="passwordEncoder"/>
+		</authentication-provider>
 	</authentication-manager>
 
 </beans:beans>

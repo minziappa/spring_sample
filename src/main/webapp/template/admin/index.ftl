@@ -1,9 +1,6 @@
 <#import "layout/defaultLayout.ftl" as layout>
 <@layout.myLayout>
 
-<div class="row row-offcanvas row-offcanvas-right">
-    <#include "common/sideMenu.ftl"/>
-
     <div class="col-xs-12 col-sm-9">
       <p class="pull-right visible-xs">
         <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
@@ -35,7 +32,5 @@
         </div><!--/.col-xs-6.col-lg-4-->
       </div><!--/row-->
     </div><!--/.col-xs-12.col-sm-9-->
-    
 
-</div>
 </@layout.myLayout>

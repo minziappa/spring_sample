@@ -6,28 +6,22 @@ By Kim woong joon
 kim_woongjoon@cyberagent.co.jp
 
 ## About
-1. More [information](http://freemarker.org) about Freemarker.
-2. More [information](http://projects.spring.io/spring-framework) about Spring4.
-3. More [information](http://blog.mybatis.org) about Mybatis3
-4. More [information](https://www.gradle.org) about Gradle.
-
-* Freemarker
-* Spring4-MVC
-* Mybatis3
-* Gradle
+* More [information](http://freemarker.org) about Freemarker.
+* More [information](http://projects.spring.io/spring-framework) about Spring4.
+* More [information](http://blog.mybatis.org) about Mybatis3
+* More [information](https://www.gradle.org) about Gradle.
 
 ## Requirements environment 
 
 * [Java7](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-* [Tomcat7](http://tomcat.apache.org/download-70.cgi)
 * [Maven3](http://maven.apache.org/docs/3.2.2/release-notes.html)
 * [Gradle](https://services.gradle.org/distributions/gradle-2.3-all.zip)
 
 Using your local repositories
 ```
 repositories {
-   mavenLocal()
    mavenCentral()
+   mavenLocal()
 }
 ```
 
@@ -41,9 +35,16 @@ compile "io.paging:paging:0.1"
 
 ## Get started
 
-Change the path of Log like the following:
+Make the database
 ```
-/Users/[user account]/tomcat/logs/sample.log
+document/make_table.ddl
+document/make_data.ddl
+```
+Make an account on mysql
+```
+GRANT ALL PRIVILEGES ON sample_db.* TO admin@localhost IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON sample_db.* TO admin@'172.0.%' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
 ```
 Change a project name like the following:
 ```
@@ -51,8 +52,7 @@ sample -> project name
 ```
 
 ## Deploy
-Gradle
-Run on your local system.
+Run this on your local system.
 ```
 gradle jettyRun
 ```

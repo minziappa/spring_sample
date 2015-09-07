@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import io.sample.bean.SampleBean;
-import io.sample.bean.para.InsertUserPara;
+import io.sample.bean.para.InputUserPara;
 import io.sample.bean.para.SelectUserPara;
 import io.sample.service.SampleService;
 
@@ -36,11 +36,11 @@ public class SampleServiceImplTest {
 
 	@Test
 	public void testInsertSample() throws Exception {
-		InsertUserPara insertUserPara = new InsertUserPara();
-		insertUserPara.setUserAge("20");
-		insertUserPara.setUserName("TestName");
+		InputUserPara inputUserPara = new InputUserPara();
+		inputUserPara.setUserAge("20");
+		inputUserPara.setUserName("TestName");
 
-		assertTrue(sampleService.insertSample(insertUserPara));
+		assertTrue(sampleService.insertSample(inputUserPara));
 	}
 
 	@Test

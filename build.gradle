@@ -1,17 +1,46 @@
 apply plugin: 'java'
+apply plugin: 'org.sonarqube'
+apply plugin: 'jacoco'
 apply plugin: 'eclipse'
+apply plugin: 'maven'
 apply plugin: 'war'
 apply plugin: 'jetty'
 
 sourceCompatibility = '1.7'
 targetCompatibility = '1.7'
 
+//./gradlew sonarqube
+//./gradlew sonarqube -x test
+sonarqube {
+    properties {
+        property "sonar.projectName", "Java :: Spring sample Project :: Gradle"
+        property "sonar.projectKey", "$project.group:$project.name"
+        property "sonar.language", "java"
+        property "sonar.sources", "src"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.junit.reportsPath", "${project.buildDir}/test-results"
+        property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+    }
+}
+buildscript {
+	repositories { 
+		mavenCentral()
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+	dependencies { 
+      classpath 'org.ajoberstar:gradle-jacoco:0.1.0'
+      classpath 'org.sonarqube.gradle:gradle-sonarqube-plugin:1.0'
+	}
+}
+
 version = '1.0'
 
 jar {
-    manifest {
-        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
-    }
+	manifest {
+		attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+	}
 }
 
 repositories {
@@ -70,7 +99,7 @@ dependencies {
 }
 
 jettyRun {
-	httpPort = 8080
+	httpPort = 9001
 	reload = 'automatic'
 	scanIntervalSeconds = 2
 	/* Change context path (base url). otherwise defaults to name of project */

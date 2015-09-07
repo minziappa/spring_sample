@@ -15,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
+import org.springframework.web.servlet.view.RedirectView;
 
 public class OauthInterceptor implements HandlerInterceptor {
 
@@ -45,8 +47,17 @@ public class OauthInterceptor implements HandlerInterceptor {
 //				session.setAttribute("user", extendUser.getUsername());
 //				logger.info("There is ExtendUser, user = " + extendUser.getUsername());
 //				session.setMaxInactiveInterval(100*60);
+//			} else {
+//				RedirectView redirectView = new RedirectView();
+//				redirectView.setUrl("https://test.io/redirect");
+//				redirectView.addStaticAttribute("para1", "value1");
+//				redirectView.addStaticAttribute("para2", "value2");
+//		
+//				ModelAndView mv = new ModelAndView(redirectView);
+//				
+//				ModelAndViewDefiningException mvde = new ModelAndViewDefiningException(mv);
+//				throw mvde;
 //			}
-//
 //		}
 
 		return true;

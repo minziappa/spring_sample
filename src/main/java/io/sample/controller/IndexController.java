@@ -51,7 +51,7 @@ public class IndexController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-    @RequestMapping(value = {"/", "", "index.do"}, method=RequestMethod.GET)
+    @RequestMapping(value = {"/", "", "index"}, method=RequestMethod.GET)
 	public String index(HttpSession session, ModelMap model) throws Exception {
 
     	this.handleLogin(session);
@@ -73,7 +73,7 @@ public class IndexController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-    @RequestMapping(value = {"validator.do"})
+    @RequestMapping(value = {"validator"})
 	public String validator(@Valid ValidatorPara validatorPara, BindingResult bindingResult, 
 			ModelMap model) throws Exception {
 

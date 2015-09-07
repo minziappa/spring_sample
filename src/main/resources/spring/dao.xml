@@ -10,19 +10,17 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<!-- start-############be setted Dao Class################## -->
-	<bean id="masterDao" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="masterDao" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<constructor-arg index="0" ref="sqlSessionMasterFactory" />
 	</bean>
 
-	<bean id="masterBatchDao" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="masterBatchDao" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<constructor-arg index="0" ref="sqlSessionMasterFactory" />
 		<constructor-arg index="1" value="BATCH" />
 	</bean>
 
-	<bean id="slaveDao" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="slaveDao" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<constructor-arg index="0" ref="sqlSessionSlaveFactory" />
 	</bean>
-
-<!-- <bean id="hBaseDAO" class="jp.ameba.ns.admin.dao.HBaseDAO" />  -->
 
 </beans>

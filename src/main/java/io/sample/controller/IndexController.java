@@ -2,6 +2,7 @@ package io.sample.controller;
 
 import java.util.Map;
 
+import io.sample.bean.model.SampleModel;
 import io.sample.bean.para.ValidatorPara;
 
 import javax.servlet.http.HttpSession;
@@ -54,8 +55,11 @@ public class IndexController extends AbstractBaseController {
     @RequestMapping(value = {"/", "", "index"}, method=RequestMethod.GET)
 	public String index(HttpSession session, ModelMap model) throws Exception {
 
+    	SampleModel sample = new SampleModel();
+    	sample.setNavi("index");
     	this.handleLogin(session);
 
+    	model.addAttribute("model", sample);
 		return "index";
 	}
 
@@ -77,6 +81,10 @@ public class IndexController extends AbstractBaseController {
 	public String validator(@Valid ValidatorPara validatorPara, BindingResult bindingResult, 
 			ModelMap model) throws Exception {
 
+    	SampleModel sample = new SampleModel();
+    	sample.setNavi("index");
+    	model.addAttribute("model", sample);
+
 		// If it occurs a error, set the default value.
 		if (bindingResult.hasErrors()) {
 			logger.error("validate.do - it is occured a parameter error.");
@@ -88,7 +96,7 @@ public class IndexController extends AbstractBaseController {
 		return "sample/validator";
 	}
 
-    @RequestMapping(value = {"layout.do"})
+    @RequestMapping(value = {"layout"})
 	public String layout() throws Exception {
 		return "layout/home";
 	}

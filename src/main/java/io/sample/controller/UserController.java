@@ -63,8 +63,8 @@ public class UserController extends AbstractBaseController {
 	@RequestMapping(value = {"userList"})
 	public String userList(@Valid UserPara userPara, ModelMap model) throws Exception {
 
-		SampleModel sampleModel = new SampleModel();
-
+		SampleModel sample = new SampleModel();
+		sample.setNavi("user");
 		PagingBean paging = new PagingBean();
 		// Set Paging list
 		if(userPara.getAllCount() <= 0) {
@@ -73,12 +73,12 @@ public class UserController extends AbstractBaseController {
 			paging.setAllCount(userPara.getAllCount());
 		}
 		Paging.linkPaging(paging, userPara.getNowPage());
-		sampleModel.setPaging(paging);
+		sample.setPaging(paging);
 
 		// Execute the transaction
-		sampleModel.setSampleList(sampleService.selectSampleList(userPara));
+		sample.setSampleList(sampleService.selectSampleList(userPara));
 
-		model.addAttribute("model", sampleModel);
+		model.addAttribute("model", sample);
 
 		return "user/userList";
 	}
@@ -107,8 +107,8 @@ public class UserController extends AbstractBaseController {
 	public String userDetail(@Valid UserDetailPara userDetailPara, BindingResult bindingResult, 
 			ModelMap model, HttpServletResponse response) throws Exception {
 
-		SampleModel sampleModel = new SampleModel();
-
+		SampleModel sample = new SampleModel();
+		sample.setNavi("user");
 		// Custom Validate
 		new UserValidator().validate(userDetailPara, bindingResult);
 		// If it occurs a error, set the default value.
@@ -121,9 +121,9 @@ public class UserController extends AbstractBaseController {
 		}
 
 		// Select name's data from User
-		sampleModel.setUserModel(sampleService.selectSampleByName(userDetailPara.getUserName()));
+		sample.setUserModel(sampleService.selectSampleByName(userDetailPara.getUserName()));
 
-		model.addAttribute("model", sampleModel);
+		model.addAttribute("model", sample);
 
 		return "user/detailUser";
 	}
@@ -152,8 +152,8 @@ public class UserController extends AbstractBaseController {
 	public String selectUser(@Valid SelectUserPara selectUserPara, BindingResult bindingResult, 
 			ModelMap model, HttpServletResponse response) throws Exception {
 
-		SampleModel sampleModel = new SampleModel();
-
+		SampleModel sample = new SampleModel();
+		sample.setNavi("user");
 		// Custom Validate
 		new UserValidator().validate(selectUserPara, bindingResult);
 
@@ -167,9 +167,9 @@ public class UserController extends AbstractBaseController {
 		}
 
 		// Execute the transaction
-		sampleModel.setSampleList(sampleService.selectSampleByName(selectUserPara));
+		sample.setSampleList(sampleService.selectSampleByName(selectUserPara));
 
-		model.addAttribute("model", sampleModel);
+		model.addAttribute("model", sample);
 
 		return "user/detailUser";
 	}

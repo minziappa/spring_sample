@@ -55,7 +55,7 @@
               <td>${sample.userModel.userAge?if_exists}</td>
               <td><img alt="user image" src="${sample.userImage?if_exists}" /></td>
             </tr>
-    </#list>
+    	</#list>
 	<#else>
 	 No data
 	</#if>

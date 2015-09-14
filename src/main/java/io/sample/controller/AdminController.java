@@ -59,6 +59,10 @@ public class AdminController extends AbstractBaseController {
 	 */
 	@RequestMapping(value = {"/", "index"})
 	public String index(ModelMap model) throws Exception {
+    	SampleModel sample = new SampleModel();
+    	sample.setNavi("admin");
+    	model.addAttribute("model", sample);
+
 		return "admin/index";
 	}
 
@@ -78,6 +82,10 @@ public class AdminController extends AbstractBaseController {
      */
 	@RequestMapping(value = {"admin"})
 	public String admin(ModelMap model) throws Exception {
+    	SampleModel sample = new SampleModel();
+    	sample.setNavi("admin");
+    	model.addAttribute("model", sample);
+
 		return "admin/admin";
 	}
 
@@ -106,7 +114,8 @@ public class AdminController extends AbstractBaseController {
 			BindingResult bindingResult, ModelMap model, 
 			HttpServletResponse response, HttpServletRequest request) throws Exception {
 
-		SampleModel sampleModel = new SampleModel();
+		SampleModel sample = new SampleModel();
+    	sample.setNavi("admin");
 
 		// If it occurs a error, set the default value.
 		if (bindingResult.hasErrors()) {
@@ -115,16 +124,18 @@ public class AdminController extends AbstractBaseController {
 
 			Map<String, String> mapErrorMessage = this.handleErrorMessages(bindingResult.getAllErrors());
 			model.addAttribute("errorMessage",  mapErrorMessage);
-			model.addAttribute("model", sampleModel);
+			model.addAttribute("model", sample);
 			return "admin/admin";
 		}
 
 		// Execute the transaction
 		if(!sampleService.insertSample(inputUserPara)) {
 			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
-			model.addAttribute("model", sampleModel);
+			model.addAttribute("model", sample);
 			return "admin/admin";
 		}
+
+    	model.addAttribute("model", sample);
 
 		return "redirect:/user/userList";
 	}

@@ -1,36 +1,45 @@
-<#import "layout/defaultLayout.ftl" as layout>
+<#import "layout/indexLayout.ftl" as layout>
 <@layout.myLayout>
 
-    <div class="col-xs-12 col-sm-9">
-      <p class="pull-right visible-xs">
-        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-      </p>
-      <div class="jumbotron">
-        <h1>This is a management employees!</h1>
-        <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
-      </div>
-      <div class="row">
-        <div class="col-xs-6 col-lg-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
-        </div><!--/.col-xs-6.col-lg-4-->
-        <div class="col-xs-6 col-lg-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
-        </div><!--/.col-xs-6.col-lg-4-->
-        <div class="col-xs-6 col-lg-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
-        </div><!--/.col-xs-6.col-lg-4-->
-        <div class="col-xs-6 col-lg-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
-        </div><!--/.col-xs-6.col-lg-4-->
-      </div><!--/row-->
-    </div><!--/.col-xs-12.col-sm-9-->
+<script>
+function changeColor(x) {
+	if(x.className == "box1") {
+	    x.style.backgroundColor = "#ffb0b0";
+	} else if(x.className == "box2") {
+	    x.style.backgroundColor = "#bccdff";
+	} else if(x.className == "box3") {
+	    x.style.backgroundColor = "#c8ffdb";
+	} else if(x.className == "box4") {
+	    x.style.backgroundColor = "#cece14";
+	}
+}
+
+function normalColor(x) {
+    x.style.backgroundColor = "#ffffff";
+}
+</script>
+
+<div class="row">
+	<div class="col-md-6">
+	  	<div class="box1" onmouseover="changeColor(this)" onmouseout="normalColor(this)">
+	  		This a option1
+	  	</div>
+	</div>
+	<div class="col-md-6">
+	  	<div class="box2" onmouseover="changeColor(this)" onmouseout="normalColor(this)">
+			This a option2
+	  	</div> 
+	</div>
+	<div class="col-md-6">
+	  	<div class="box3" onmouseover="changeColor(this)" onmouseout="normalColor(this)">
+	  		This a option3
+	  	</div>
+	</div>
+	<div class="col-md-6">
+	  	<div class="box4" onmouseover="changeColor(this)" onmouseout="normalColor(this)">
+			This a option4
+	  	</div> 
+	</div>
+</div>
 
 </@layout.myLayout>

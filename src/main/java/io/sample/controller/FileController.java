@@ -58,6 +58,8 @@ public class FileController extends AbstractBaseController {
      */
 	@RequestMapping(value = {"uploadFiles"})
 	public String uploadFiles() throws Exception {
+		SampleModel sample = new SampleModel();
+		sample.setNavi("file");
 		return "file/uploadFiles";
 	}
 
@@ -86,15 +88,15 @@ public class FileController extends AbstractBaseController {
 			BindingResult bindingResult, ModelMap model, 
 			HttpServletResponse response, RedirectAttributes redirect) throws Exception {
 
-		SampleModel sampleModel = new SampleModel();
-
+		SampleModel sample = new SampleModel();
+		sample.setNavi("file");
 		// If it occurs a error, set the default value.
 		if (bindingResult.hasErrors()) {
 			logger.error("handleUploadFiles.sp - it is occured a parameter error.");
 			response.setStatus(400);
 			handleValidator(bindingResult.getAllErrors());
 			model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
-			model.addAttribute("model", sampleModel);
+			model.addAttribute("model", sample);
 			return "file/uploadFiles";
 		}
 
@@ -106,7 +108,7 @@ public class FileController extends AbstractBaseController {
 			// Execute the transaction
 			if(!sampleService.syncSaveCsvFile(csvFilePara)) {
 				model.addAttribute("errorMessage", message.getMessage("sample.parameter.error.message", null, LOCALE));
-				model.addAttribute("model", sampleModel);
+				model.addAttribute("model", sample);
 				return "file/uploadFiles";
 			}
 		}
@@ -129,7 +131,10 @@ public class FileController extends AbstractBaseController {
      * @since  1.7
      */
 	@RequestMapping(value = {"downloadFiles"})
-	public String downloadFiles() throws Exception {
+	public String downloadFiles(ModelMap model) throws Exception {
+		SampleModel sample = new SampleModel();
+		sample.setNavi("file");
+		model.addAttribute("model", sample);
 		return "file/downloadFiles";
 	}
 
@@ -152,7 +157,9 @@ public class FileController extends AbstractBaseController {
 	@RequestMapping(value = {"downloadCsvFile"})
 	public void downloadCsvFile(@Valid DownLoadFilePara downLoadFilePara,
 			HttpServletResponse response, HttpServletRequest request, 
-			RedirectAttributes redirect) throws Exception {
+			RedirectAttributes redirect, ModelMap model) throws Exception {
+		SampleModel sample = new SampleModel();
+		sample.setNavi("file");
 
 		String realPath  = null;
 		if(downLoadFilePara.getOption() == null || downLoadFilePara.getOption().equals("0")) {
@@ -162,7 +169,7 @@ public class FileController extends AbstractBaseController {
 			realPath  = request.getSession().getServletContext().getRealPath("/");
 			this.handleFileSave(downLoadFilePara.getFileName(), "csv", sampleService.makeCsvFile(), realPath);			
 		}
-
+		model.addAttribute("model", sample);
 		// Add parameter for Redirect URL
 		// redirect.addFlashAttribute("filePath", "/" + downLoadFilePara.getFileName());
 		//return "redirect:/sample/file/downloadFiles.do";
@@ -187,8 +194,11 @@ public class FileController extends AbstractBaseController {
 	@RequestMapping(value = {"downloadPdfFile"})
 	public void downloadPdfFile(@Valid DownLoadFilePara downLoadFilePara,
 			HttpServletResponse response, HttpServletRequest request, 
-			RedirectAttributes redirect) throws Exception {
+			RedirectAttributes redirect, ModelMap model) throws Exception {
 
+		SampleModel sample = new SampleModel();
+		sample.setNavi("file");
+		
 		String realPath  = null;
 		if(downLoadFilePara.getOption() == null || downLoadFilePara.getOption().equals("0")) {
 			// Down Load file
@@ -197,7 +207,7 @@ public class FileController extends AbstractBaseController {
 			realPath  = request.getSession().getServletContext().getRealPath("/");
 			this.handleFileSave(downLoadFilePara.getFileName(), "pdf", sampleService.makePdfFile(), realPath);			
 		}
-
+		model.addAttribute("model", sample);
 	}
 
 //	@RequestMapping(value = {"filesample.do"})

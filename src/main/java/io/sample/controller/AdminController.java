@@ -2,8 +2,12 @@ package io.sample.controller;
 
 import java.util.Map;
 
+import io.paging.Paging;
+import io.paging.bean.PagingBean;
 import io.sample.bean.model.SampleModel;
 import io.sample.bean.para.InputUserPara;
+import io.sample.bean.para.UserDetailPara;
+import io.sample.bean.para.UserPara;
 import io.sample.service.SampleService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -80,13 +84,13 @@ public class AdminController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"admin"})
-	public String admin(ModelMap model) throws Exception {
+	@RequestMapping(value = {"inputUser"})
+	public String inputUser(ModelMap model) throws Exception {
     	SampleModel sample = new SampleModel();
-    	sample.setNavi("admin");
+    	sample.setNavi("inputUser");
     	model.addAttribute("model", sample);
 
-		return "admin/admin";
+		return "admin/inputUser";
 	}
 
     /**
@@ -109,8 +113,8 @@ public class AdminController extends AbstractBaseController {
      * 
      * @since  1.7
      */
-	@RequestMapping(value = {"inputUser"})
-	public String inputUser(@Valid InputUserPara inputUserPara, 
+	@RequestMapping(value = {"inputUserCompleted"})
+	public String inputUserCompleted(@Valid InputUserPara inputUserPara, 
 			BindingResult bindingResult, ModelMap model, 
 			HttpServletResponse response, HttpServletRequest request) throws Exception {
 
@@ -137,7 +141,55 @@ public class AdminController extends AbstractBaseController {
 
     	model.addAttribute("model", sample);
 
-		return "redirect:/user/userList";
+		return "redirect:/admin/userList";
+	}
+
+	@RequestMapping(value = {"userList"})
+	public String userList(@Valid UserPara userPara, ModelMap model) throws Exception {
+
+		SampleModel sample = new SampleModel();
+		sample.setNavi("userList");
+		PagingBean paging = new PagingBean();
+		// Set Paging list
+		if(userPara.getAllCount() <= 0) {
+			paging.setAllCount(sampleService.getSampleListSum());
+		} else {
+			paging.setAllCount(userPara.getAllCount());
+		}
+		Paging.linkPaging(paging, userPara.getNowPage());
+		sample.setPaging(paging);
+
+		// Execute the transaction
+		sample.setSampleList(sampleService.selectSampleList(userPara));
+
+		model.addAttribute("model", sample);
+
+		return "admin/userList";
+	}
+
+	@RequestMapping(value = {"userDetail"})
+	public String userDetail(@Valid UserDetailPara userDetailPara, BindingResult bindingResult, 
+			ModelMap model, HttpServletResponse response) throws Exception {
+
+		SampleModel sample = new SampleModel();
+		sample.setNavi("userDetail");
+		// Custom Validate
+		new AdminValidator().validate(userDetailPara, bindingResult);
+		// If it occurs a error, set the default value.
+		if (bindingResult.hasErrors()) {
+			logger.error("userDetail.do - it is occured a parameter error.");
+			Map<String, String> mapErrorMessage = this.handleErrorMessages(bindingResult.getAllErrors());
+			response.setStatus(400);
+			model.addAttribute("errorMessage", mapErrorMessage);
+			return "admin/userList";
+		}
+
+		// Select name's data from User
+		sample.setUserModel(sampleService.selectSampleByName(userDetailPara.getUserName()));
+
+		model.addAttribute("model", sample);
+
+		return "admin/userDetail";
 	}
 
 }

@@ -1,4 +1,4 @@
-<#import "../layout/defaultLayout.ftl" as layout>
+<#import "../layout/desgin1/layout.ftl" as layout>
 <@layout.myLayout>
 			<div>
 				<table>

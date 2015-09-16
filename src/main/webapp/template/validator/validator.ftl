@@ -1,11 +1,11 @@
-<#import "../layout/defaultLayout.ftl" as layout>
+<#import "../layout/desgin1/layout.ftl" as layout>
 <@layout.myLayout>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">Annotation Validate</h3>
 				</div>
 				<div class="panel-body">
-					<form action="/validator.do" method="POST">
+					<form action="/validator/validator" method="POST">
 					<b style="color:red" >
 
 <#if errorMessage??>

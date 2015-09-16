@@ -22,22 +22,22 @@ function normalColor(x) {
 <div class="row">
 	<div class="col-md-6">
 	  	<div class="box1" onmouseover="changeColor(this)" onmouseout="normalColor(this)">
-	  		This a option1
+	  		<a href="/admin/inputUser">Input a user information.</a>
 	  	</div>
 	</div>
 	<div class="col-md-6">
 	  	<div class="box2" onmouseover="changeColor(this)" onmouseout="normalColor(this)">
-			This a option2
+	  		<a href="/admin/userList">Input a user information.</a>
 	  	</div> 
 	</div>
 	<div class="col-md-6">
 	  	<div class="box3" onmouseover="changeColor(this)" onmouseout="normalColor(this)">
-	  		This a option3
+	  		<a href="/admin/inputUser">Input a user information.</a>
 	  	</div>
 	</div>
 	<div class="col-md-6">
 	  	<div class="box4" onmouseover="changeColor(this)" onmouseout="normalColor(this)">
-			This a option4
+	  	<a href="/admin/userList">Input a user information.</a>
 	  	</div> 
 	</div>
 </div>

@@ -1,4 +1,4 @@
-<#import "../layout/defaultLayout.ftl" as layout>
+<#import "layout/adminLayout.ftl" as layout>
 <@layout.myLayout>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -50,7 +50,7 @@
 		<#list model.sampleList as sample>
             <tr>
               <td>${sample.userModel.userId?if_exists}</td>
-              <td><a href="/user/userDetail?userName=${sample.userModel.userName?if_exists}">${sample.userModel.userName?if_exists}</a></td>
+              <td><a href="/admin/userDetail?userName=${sample.userModel.userName?if_exists}">${sample.userModel.userName?if_exists}</a></td>
               <td>${sample.userModel.userStatus?if_exists}</td>
               <td>${sample.userModel.userAge?if_exists}</td>
               <td><img alt="user image" src="${sample.userImage?if_exists}" /></td>

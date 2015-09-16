@@ -8,19 +8,19 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Manage Employees</a>
+      <a class="navbar-brand" href="/admin/">Joonkey</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Admin<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Employee</a></li>
+        <li><a href="/">Sample</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Help <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Admin</a></li>
-            <li><a href="#">Employee</a></li>
+            <li><a href="/admin/">Admin</a></li>
+            <li><a href="/">Sample</a></li>
             <li class="divider"></li>
             <li><a href="#">ETC</a></li>
           </ul>

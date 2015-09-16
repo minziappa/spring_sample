@@ -1,13 +1,15 @@
 <#macro myLayout title="FreeMarker example">
 <html>
 <#include "header.ftl"/>
-	<body style="width:100%;height:100%">
+	<body>
+		<div id="wrapper">
 		<#include "navi.ftl"/>
-		<div class="row row-offcanvas row-offcanvas-right">
-    		<#include "sideMenu.ftl"/>
+		<div id="page-wrapper" style="min-height: 390px;">
 	    	<#nested/>
 		</div>
 		<#include "footer.ftl"/>
+		</div><!-- /.wrapper -->
+		<#include "bottom.ftl"/>
 	</body>
 </html>
 </#macro>

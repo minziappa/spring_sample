@@ -1,4 +1,4 @@
-<#import "layout/defaultLayout.ftl" as layout>
+<#import "layout/desgin1/layout.ftl" as layout>
 <@layout.myLayout>
         <h1>Welcome to Sample Project</h1>
         <p class="lead">This is a sample for quick start project.</p>

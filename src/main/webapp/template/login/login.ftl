@@ -1,4 +1,4 @@
-<#import "../layout/defaultLayout.ftl" as layout>
+<#import "../layout/desgin1/layout.ftl" as layout>
 <@layout.myLayout>
       <form class="form-signin" role="form" action="/j_spring_security_check" name="sform" id="sform" method="POST">
         <h2 class="form-signin-heading">Please sign ina</h2>

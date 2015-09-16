@@ -1,4 +1,4 @@
-<#import "layout/defaultLayout.ftl" as layout>
+<#import "layout/adminLayout.ftl" as layout>
 <@layout.myLayout>
 		<div class="panel panel-primary">
 			<div class="panel-heading">

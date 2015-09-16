@@ -1,4 +1,4 @@
-<#import "layout/defaultLayout.ftl" as layout>
+<#import "layout/adminLayout.ftl" as layout>
 <@layout.myLayout>
 
 				<div class="panel panel-primary">
@@ -6,7 +6,7 @@
 						<h3 class="panel-title">Insert Data</h3>
 					</div>
 					<div class="panel-body">
-						<form action="/admin/inputUser" enctype="multipart/form-data" method="POST">
+						<form action="/admin/inputUserCompleted" enctype="multipart/form-data" method="POST">
 						<b style="color:red" >
 
 <#if errorMessage??>

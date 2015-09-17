@@ -1,13 +1,18 @@
 package io.sample.bean.para;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import io.paging.bean.PagingPara;
 
-public class SelectUserPara extends PagingPara {
+public class SearchUserPara extends PagingPara {
 
+	@NotNull(message = "userName must be inputted.")
+	@Size(min = 2, max = 10 ,message = "userName")
 	private String userName;
 
-    private String userData;
-
+	private String userData;
+	
 	public String getUserName() {
 		return userName;
 	}

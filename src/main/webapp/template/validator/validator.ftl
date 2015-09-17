@@ -1,5 +1,6 @@
 <#import "../layout/desgin1/layout.ftl" as layout>
 <@layout.myLayout>
+			<br/>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">Annotation Validate</h3>

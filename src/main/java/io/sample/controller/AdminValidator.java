@@ -2,7 +2,7 @@ package io.sample.controller;
 
 import io.sample.bean.para.CsvFilePara;
 import io.sample.bean.para.InputUserPara;
-import io.sample.bean.para.SelectUserPara;
+import io.sample.bean.para.SearchUserPara;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -30,6 +30,8 @@ public class AdminValidator implements Validator, BaseValidator {
 	public boolean supports(Class<?> clazz) {
 		if(InputUserPara.class.equals(clazz)) {
 			return true;
+		} else if(SearchUserPara.class.equals(clazz)) {
+			return true;
 		} else {
 			return false;
 		}
@@ -37,6 +39,21 @@ public class AdminValidator implements Validator, BaseValidator {
 
 	@Override
 	public void validate(Object object, Errors errors) {
+		if (object instanceof InputUserPara) {
+
+		} else if(object instanceof SearchUserPara) {
+			SearchUserPara searchUserPara = (SearchUserPara) object;
+
+	        if(searchUserPara != null) {
+	    		if(searchUserPara.getUserName() == null){
+					errors.rejectValue("validate", "parameter.error.message");
+					logger.warn("the name is error.");
+					// If you want to set the default value, remove the comment
+	    			// selectUserPara.setUserName("user");
+	    		}
+	        }
+
+		}
 	}
 
 	@Override
@@ -45,12 +62,12 @@ public class AdminValidator implements Validator, BaseValidator {
 
 		Map<String, String> mapErrorMsg = new HashMap<String, String>();
 
-		if (object instanceof SelectUserPara) {
+		if (object instanceof SearchUserPara) {
 
 			for (Object objectError : errorList) {
 
 		        FieldError fieldError = (FieldError) objectError;
-				Field[] declaredFields = SelectUserPara.class.getDeclaredFields();
+				Field[] declaredFields = SearchUserPara.class.getDeclaredFields();
 
 		        for(Field fieldPara:declaredFields){
 		        	if(fieldError.getField().equals(fieldPara.getName())) {

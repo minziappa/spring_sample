@@ -167,12 +167,12 @@ public class FileController extends AbstractBaseController {
 			this.handleFileDownload(downLoadFilePara.getFileName(), "csv", sampleService.makeCsvFile(), response);			
 		} else {
 			realPath  = request.getSession().getServletContext().getRealPath("/");
-			this.handleFileSave(downLoadFilePara.getFileName(), "csv", sampleService.makeCsvFile(), realPath);			
+			this.handleFileSave(downLoadFilePara.getFileName(), "csv", sampleService.makeCsvFile(), realPath+"files/");			
 		}
 		model.addAttribute("model", sample);
 		// Add parameter for Redirect URL
 		// redirect.addFlashAttribute("filePath", "/" + downLoadFilePara.getFileName());
-		//return "redirect:/sample/file/downloadFiles.do";
+		// return "redirect:/sample/file/downloadFiles";
 	}
 
     /**

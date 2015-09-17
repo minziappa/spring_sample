@@ -28,7 +28,7 @@
 			sample_user
 	</select>
 
-	<select id="selectSampleByName" parameterType="map" 
+	<select id="selectUserByName" parameterType="map" 
 		resultType="io.sample.bean.model.UserModel">
 		SELECT
 			user_id,
@@ -45,7 +45,7 @@
 			user_name = #{userName}
 	</select>
 
-	<select id="selectSampleList" parameterType="map" 
+	<select id="selectUserList" parameterType="map" 
 		resultType="io.sample.bean.model.UserModel">
 		SELECT
 			user_id,
@@ -62,7 +62,7 @@
 			#{nowPage}, #{row}
 	</select>
 
-	<select id="selectSampleListByName" parameterType="map" 
+	<select id="selectUserListByName" parameterType="map" 
 		resultType="io.sample.bean.model.UserModel">
 		SELECT
 			user_id,
@@ -76,8 +76,7 @@
 		FROM
 			sample_user
 		WHERE
-			user_name = #{userName}
-		Limit 1
+			user_name like '%${userName}%'
 	</select>
 
 	<select id="selectSampleListByDate" parameterType="map" 

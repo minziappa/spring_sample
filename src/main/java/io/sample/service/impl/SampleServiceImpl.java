@@ -15,7 +15,7 @@ import io.sample.bean.SampleBean;
 import io.sample.bean.model.UserModel;
 import io.sample.bean.para.CsvFilePara;
 import io.sample.bean.para.InputUserPara;
-import io.sample.bean.para.SelectUserPara;
+import io.sample.bean.para.SearchUserPara;
 import io.sample.bean.para.UserPara;
 import io.sample.dao.MasterDao;
 import io.sample.dao.SlaveDao;
@@ -189,7 +189,7 @@ public class SampleServiceImpl extends AbstractService implements SampleService 
 	}
 
 	@Override
-	public List<SampleBean> selectSampleList(UserPara userPara) throws Exception {
+	public List<SampleBean> selectUserList(UserPara userPara) throws Exception {
 
 		List<UserModel> userList = new ArrayList<UserModel>();
 		List<SampleBean> sampleList = new ArrayList<SampleBean>();
@@ -207,7 +207,7 @@ public class SampleServiceImpl extends AbstractService implements SampleService 
 
 		try {
 			sqlSessionSlaveFactory.setDataSource(getDispersionDb());
-			userList = slaveDao.getMapper(SlaveDao.class).selectSampleList(mapSelect);
+			userList = slaveDao.getMapper(SlaveDao.class).selectUserList(mapSelect);
 		} catch (Exception e) {
 			logger.error("Exception error", e);
 		}
@@ -218,7 +218,7 @@ public class SampleServiceImpl extends AbstractService implements SampleService 
 	}
 
 	@Override
-	public UserModel selectSampleByName(String name) throws Exception {
+	public UserModel selectUserByName(String name) throws Exception {
 
 		UserModel user = new UserModel();
 
@@ -227,7 +227,7 @@ public class SampleServiceImpl extends AbstractService implements SampleService 
 
 		try {
 			sqlSessionSlaveFactory.setDataSource(getDispersionDb());
-			user = slaveDao.getMapper(SlaveDao.class).selectSampleByName(mapSelect);
+			user = slaveDao.getMapper(SlaveDao.class).selectUserByName(mapSelect);
 		} catch (Exception e) {
 			logger.error("Exception error", e);
 		}
@@ -236,17 +236,17 @@ public class SampleServiceImpl extends AbstractService implements SampleService 
 	}
 
 	@Override
-	public List<SampleBean> selectSampleByName(SelectUserPara selectUserPara) throws Exception {
+	public List<SampleBean> selectUserListByName(SearchUserPara searchUserPara) throws Exception {
 
 		List<UserModel> userList = new ArrayList<UserModel>();
 		List<SampleBean> sampleList = new ArrayList<SampleBean>();
 
 		Map<String, Object> mapSelect = new HashMap<String, Object>();
-		mapSelect.put("userName", selectUserPara.getUserName());
+		mapSelect.put("userName", searchUserPara.getUserName());
 
 		try {
 			sqlSessionSlaveFactory.setDataSource(getDispersionDb());
-			userList = slaveDao.getMapper(SlaveDao.class).selectSampleListByName(mapSelect);
+			userList = slaveDao.getMapper(SlaveDao.class).selectUserListByName(mapSelect);
 		} catch (Exception e) {
 			logger.error("Exception error", e);
 		}
@@ -257,13 +257,13 @@ public class SampleServiceImpl extends AbstractService implements SampleService 
 	}
 
 	@Override
-	public List<SampleBean> selectSampleByDate(SelectUserPara selectUserPara) throws Exception {
+	public List<SampleBean> selectSampleByDate(SearchUserPara searchUserPara) throws Exception {
 		SampleBean sample = null;
 		Date userDate = null;
 		List<UserModel> userList = new ArrayList<UserModel>();
 		List<SampleBean> sampleList = new ArrayList<SampleBean>();
 
-		String [] arrayDate = selectUserPara.getUserData().split("-");
+		String [] arrayDate = searchUserPara.getUserData().split("-");
 		userDate = DateUtility.getEndToday(Integer.parseInt(arrayDate[0]), 
 				Integer.parseInt(arrayDate[1]), Integer.parseInt(arrayDate[2]), 0);
 

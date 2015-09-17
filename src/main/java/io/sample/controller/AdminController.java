@@ -6,6 +6,7 @@ import io.paging.Paging;
 import io.paging.bean.PagingBean;
 import io.sample.bean.model.SampleModel;
 import io.sample.bean.para.InputUserPara;
+import io.sample.bean.para.SearchUserPara;
 import io.sample.bean.para.UserDetailPara;
 import io.sample.bean.para.UserPara;
 import io.sample.service.SampleService;
@@ -160,7 +161,32 @@ public class AdminController extends AbstractBaseController {
 		sample.setPaging(paging);
 
 		// Execute the transaction
-		sample.setSampleList(sampleService.selectSampleList(userPara));
+		sample.setSampleList(sampleService.selectUserList(userPara));
+
+		model.addAttribute("model", sample);
+
+		return "admin/userList";
+	}
+
+	@RequestMapping(value = {"searchUser"})
+	public String searchUser(@Valid SearchUserPara searchUserPara, BindingResult bindingResult, 
+			ModelMap model, HttpServletResponse response) throws Exception {
+	
+		SampleModel sample = new SampleModel();
+		sample.setNavi("userList");
+		// Custom Validate
+		new AdminValidator().validate(searchUserPara, bindingResult);
+		// If it occurs a error, set the default value.
+		if (bindingResult.hasErrors()) {
+			logger.error("userDetail.do - it is occured a parameter error.");
+			Map<String, String> mapErrorMessage = this.handleErrorMessages(bindingResult.getAllErrors());
+			response.setStatus(400);
+			model.addAttribute("errorMessage", mapErrorMessage);
+			return "admin/userList";
+		}
+	
+		// Select name's data from User
+		sample.setSampleList(sampleService.selectUserListByName(searchUserPara));
 
 		model.addAttribute("model", sample);
 
@@ -185,7 +211,7 @@ public class AdminController extends AbstractBaseController {
 		}
 
 		// Select name's data from User
-		sample.setUserModel(sampleService.selectSampleByName(userDetailPara.getUserName()));
+		sample.setUserModel(sampleService.selectUserByName(userDetailPara.getUserName()));
 
 		model.addAttribute("model", sample);
 

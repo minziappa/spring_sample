@@ -12,13 +12,16 @@
     <!-- Latest compiled and minified JavaScript -->
 	<script src="/js/lib/bootstrap-3.3.1/js/bootstrap.min.js"></script>
 
-    <!-- ================================================== -->
-	<!-- Custom styles for this template -->
-    <link href="/css/signin.css" rel="stylesheet">
-	<link href="/css/cDiv.css" rel="stylesheet">
-
     <!-- CSS -->
     <link rel="stylesheet" href="/js/lib/bootstrap-3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/js/lib/bootstrap-3.3.1/css/bootstrap-theme.min.css">
+
+    <!-- ================================================== -->
+	<!-- Custom styles for this template -->
+    <link href="/css/signin.css" rel="stylesheet">
+	<link href="/css/cusDiv.css" rel="stylesheet">
+	<link href="/css/cusGlyphicon.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.min.css">
 
 </head>

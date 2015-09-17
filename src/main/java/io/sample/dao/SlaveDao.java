@@ -9,10 +9,10 @@ import java.util.Map;
 public interface SlaveDao {
 
 	public UserModel selectSample(Map<String, Object> map) throws SQLException;
-	public UserModel selectSampleByName(Map<String, Object> map) throws SQLException;
-	public List<UserModel> selectSampleList(Map<String, Object> map) throws SQLException;
+	public UserModel selectUserByName(Map<String, Object> map) throws SQLException;
+	public List<UserModel> selectUserList(Map<String, Object> map) throws SQLException;
 	public int selectSampleListSum() throws SQLException;
-	public List<UserModel> selectSampleListByName(Map<String, Object> map) throws SQLException;
+	public List<UserModel> selectUserListByName(Map<String, Object> map) throws SQLException;
 	public List<UserModel> selectSampleListByDate(Map<String, Object> map) throws SQLException;
 
 }

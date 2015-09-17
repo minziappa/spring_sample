@@ -48,7 +48,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			mapSelect.put("userName", userName);
 
 			try {
-				userModel = slaveDao.getMapper(SlaveDao.class).selectSampleByName(mapSelect);
+				userModel = slaveDao.getMapper(SlaveDao.class).selectUserByName(mapSelect);
 			} catch (Exception e) {
 				logger.error("Exception error", e);
 			}

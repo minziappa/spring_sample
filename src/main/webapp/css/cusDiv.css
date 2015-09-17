@@ -1,9 +1,9 @@
 div.box1 {
 	
 	border-style: solid;
-	border-color: #ffb0b0;
-/*	background-color: #ffffff"; */
-	border-width: 1px;
+	border-color: #385b7f;
+	background-color: #297ACC;
+	border-width: 0px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -17,8 +17,9 @@ div.box1 {
 div.box2 {
 	
 	border-style: solid;
-	border-color: #bccdff;
-	border-width: 1px;
+	border-color: #34a834;
+	background-color: #70DB70;
+	border-width: 0px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -32,8 +33,9 @@ div.box2 {
 div.box3 {
 	
 	border-style: solid;
-	border-color: #c8ffdb;
-	border-width: 1px;
+	border-color: #d8a131;
+	background-color: #FFCC66;
+	border-width: 0px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -47,8 +49,9 @@ div.box3 {
 div.box4 {
 	
 	border-style: solid;
-	border-color: #cece14;
-	border-width: 1px;
+	border-color: #c63d3d;
+	background-color: #E64848;
+	border-width: 0px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	border-bottom-left-radius: 5px;

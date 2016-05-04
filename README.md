@@ -2,8 +2,7 @@
 
 [![Build Status](https://travis-ci.org/minziappa/spring_sample.svg?branch=master)](https://travis-ci.org/minziappa/spring_sample.svg)
 
-By Kim woong joon
-kim_woongjoon@cyberagent.co.jp
+By Kim joon
 
 ## About
 * More [information](http://freemarker.org) about Freemarker.

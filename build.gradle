@@ -92,14 +92,13 @@ dependencies {
 	compile "org.apache.pdfbox:pdfbox:1.8.6"
 	compile "io.utility:utility:0.5"
 	compile "io.paging:paging:0.1"
-	provided "org.apache.tomcat:servlet-api:6.0.33"
-	//provided "org.apache.tomcat:tomcat-servlet-api:7.0.56"
+	provided "org.apache.tomcat:tomcat-servlet-api:8.5.5"
 	compile 'org.httpunit:httpunit:1.7.2'
 	testCompile "junit:junit:4.+"
 }
 
 jettyRun {
-	httpPort = 9001
+	httpPort = 9000
 	reload = 'automatic'
 	scanIntervalSeconds = 2
 	/* Change context path (base url). otherwise defaults to name of project */

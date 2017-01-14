@@ -1,12 +1,6 @@
 package io.sample.controller;
 
-import java.util.Map;
-
-import io.sample.bean.model.SampleModel;
-import io.sample.bean.para.ValidatorPara;
-
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import io.sample.bean.model.SampleModel;
 
 /***
  * The <code>IndexController</code> class represents action controller.

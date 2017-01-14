@@ -4,9 +4,15 @@
 	<slavedb>
 		<cnt>2</cnt>
 	</slavedb>
-	<row>
-		<cnt>5</cnt>
-	</row>
+	<paging>
+		<row>
+			<cnt>5</cnt>
+		</row>
+		<limit>
+			<total>2000</total>
+		</limit>
+	</paging>
+
 	<system>
 		<environment>Develop</environment>
 	</system>

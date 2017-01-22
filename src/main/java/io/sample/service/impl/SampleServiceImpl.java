@@ -21,7 +21,7 @@ import io.sample.dao.MasterDao;
 import io.sample.dao.SlaveDao;
 import io.sample.service.AbstractService;
 import io.sample.service.SampleService;
-import io.utility.utile.DateUtility;
+import io.utility.letter.DateUtility;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.configuration.Configuration;
